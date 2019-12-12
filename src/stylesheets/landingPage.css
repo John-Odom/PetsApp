@@ -1,0 +1,38 @@
+#landing-page {
+    width: 100%;
+    height: auto;
+    padding: 0px 3em 3em 3em;
+ }
+ 
+ #landing-container {
+    display: flex;
+    padding: 3em 2em 2em 2em;  
+    margin-bottom: 2em;
+    flex-direction: column;
+    background-image: url('../images/colorful_paws.jpg');
+    background-size: cover;
+    width: auto;
+ }
+ 
+ #landing-header {
+    font-size: 100px;
+    letter-spacing: 3px;
+    text-align: center;
+    font-family: 'Righteous', cursive;
+    text-shadow: 2px 2px 4px white
+ }
+ 
+ #card-content {
+    padding: 8px;
+    text-align: center;
+    font-size: 15px;
+    padding-bottom: 10px
+ }
+ 
+ #dog-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ } 
+
+ .ui.card{
+   width: 25%;
+ }

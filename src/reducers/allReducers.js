@@ -1,22 +1,32 @@
 let initialState = {
-    // landingMovies: [],
     currentUser: null,
+    landingDogs: [],
+    chosenDog: null
   }
 
   export default (state=initialState, action) => {
     switch (action.type) {
   
-        // case 'LAND_MOVIES':
-        //   return {
-        //     ...state,
-        //     landingMovies: action.data
-        //   } 
-  
           case 'SET_CURRENT_USER':
-          return {
+            return {
+             ...state,
+             currentUser: action.user_id
+            }
+          case 'LAND_DOGS':
+            return {
             ...state,
-            currentUser: action.user_id
-          } 
+            landingDogs: action.data
+            }  
+          case 'LAND_MORE_DOGS':
+            return {
+            ...state,
+            landingDogs: [...state.landingDogs, ...action.data]
+            } 
+          case 'CLICK_DOG':
+            return {
+            ...state,
+            chosenDog: action.data
+            }   
           
       default:
         return state;

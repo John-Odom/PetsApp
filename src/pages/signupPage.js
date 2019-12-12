@@ -1,5 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom';
+import { setCurrentUser, landDogs } from '../actions/allActions'
+import { handleNewUser, getAuthToken, getDogs } from '../actions/fetches'
 
 
 class Signup extends React.Component {
@@ -11,24 +14,78 @@ class Signup extends React.Component {
     }
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-    fetch("http://localhost:3000/users", {
-      method: "POST", 
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({      
-        user: this.state
-      })
-
-    }).then(res=> res.json())
-    .then(data => {
-      localStorage.setItem("jwt", data.jwt)
+  handleSubmit = (event) => {
+    event.preventDefault()
+    handleNewUser(this.state)
+      .then(data => {
+        if (data.error) {
+          alert("sorry, username has already been taken") 
+        }
+        else{
+          // localStorage.setItem("jwt", data.jwt)
+          // this.props.setCurrentUser(data.user.id)
+          getAuthToken(this.state)
+          .then(payload => {
+             localStorage.setItem('jwt', payload.jwt)
+             this.props.setCurrentUser(payload.user.id)
+            //  this.props.history.push('/loading')
+             getDogs()
+             .then((data) => {
+               console.log(data)
+               this.props.landDogs(data)
+              })
+             .then(() => this.props.history.push(`/welcome`))
+             })
+          .then(this.setState({
+             username: '',
+             password: ''
+          }))
+        }
     }
       )
-  }
+    // .then(res => {
+    //    if (res.errors) {
+    //     console.log("in if statement")
+    //       alert("sorry, username has already been taken") 
+    //    } else {
+    //      console.log("in else statement")
+    //       getAuthToken({ username: this.state.username, password: this.state.password})
+    //       .then(payload => {
+    //          localStorage.setItem('token', payload.jwt)
+    //          this.props.history.push('/cinepop')
+    //          this.props.setCurrentUser(payload.user.id)
+    //          getDogs()
+    //          .then((data) => {this.props.landDogs(data.results)})
+    //          .then(() => this.props.history.push(`/welcome`))
+    //          })
+    //       .then(this.setState({
+    //          username: '',
+    //          password: ''
+    //       }))
+    //    }
+    // })
+ } 
+
+  // handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   fetch("http://localhost:3000/users", {
+  //     method: "POST", 
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "Accept": "application/json"
+  //     },
+  //     body: JSON.stringify({      
+  //       user: this.state
+  //     })
+
+  //   }).then(res=> res.json())
+  //   .then(data => {
+  //     localStorage.setItem("jwt", data.jwt)
+  //     console.log(data.user)
+  //     this.props.setCurrentUser(data.user.id)
+  //   }
+  //     )
+  // }
 
   handleChange = (e) => {
     this.setState({
@@ -48,8 +105,11 @@ class Signup extends React.Component {
   );
 }}
 
-const mapDispatchToProps = () =>{
-  
+
+const mapStatetoProps = state => {
+  return ({
+   start: state.start
+  })
 }
 
-export default connect(null, mapDispatchToProps)(Signup);
+export default withRouter(connect(mapStatetoProps, { setCurrentUser, landDogs })(Signup));

@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class Login extends React.Component {
   constructor(props){
@@ -25,6 +26,11 @@ class Login extends React.Component {
     }).then(res=> res.json())
     .then(data => {
       localStorage.setItem("jwt", data.jwt)
+      this.props.history.push('/loading')
+				// this.props.setCurrentUser(payload.user.id)
+				// getMovies()
+				// .then((data) => {this.props.landMovies(data.results)})
+				// .then(() => this.props.history.push(`/welcome`))
     }
       )
   }
@@ -47,4 +53,4 @@ class Login extends React.Component {
   );
 }}
 
-export default Login;
+export default withRouter(connect(null)(Login));
