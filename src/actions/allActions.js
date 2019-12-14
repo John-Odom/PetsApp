@@ -1,27 +1,13 @@
-export const setCurrentUser = (userId) => {
-    return {
-       type: 'SET_CURRENT_USER',
-       userId
-    }
- } 
- 
- export const landDogs = (data) => {
-   return {
-      type: 'LAND_DOGS',
-      data
-   }
-} 
- export const landMoreDogs = (data) => {
-   return {
-      type: 'LAND_MORE_DOGS',
-      data
-   }
-}
-export const clickDog = (data) => {
-   return {
-      type: 'CLICK_DOG',
-      data
-   }
-}
-
-
+  export const logout = (obj) => {
+    localStorage.clear()
+    obj.props.history.push('/login')
+  } 
+  export const homeClick = (obj) => {
+    obj.props.history.push('/welcome')
+  } 
+  export const faveClick = (obj) => {
+    obj.props.history.push('/favorites')
+  } 
+  export const profClick = (obj) => {
+    obj.props.history.push('/profile')
+  } 

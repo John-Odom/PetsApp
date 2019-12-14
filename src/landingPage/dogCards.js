@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import DogCard from '../landingPage/dogCard' 
 import { Card } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { landDogs, landMoreDogs } from '../actions/allActions'
+import { landDogs, landMoreDogs } from '../actions/reducerActions'
 import { getDogs } from '../actions/fetches'
 
 // import { getMoreMovies, getMoreFilteredMovies } from '../sofetch/services'

@@ -14,7 +14,7 @@ let initialState = {
             }
           case 'LAND_DOGS':
             return {
-            ...state,
+            ...state, 
             landingDogs: action.data
             }  
           case 'LAND_MORE_DOGS':
@@ -27,6 +27,11 @@ let initialState = {
             ...state,
             chosenDog: action.data
             }   
+          case 'TOGGLE_FILTER':
+            return {
+            ...state, 
+            filter: action.source
+        } 
           
       default:
         return state;

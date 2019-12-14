@@ -1,23 +1,35 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 // import '../stylesheets/moviePage.css';
-// import MovieBar from '../moviePage/movieBar';
+import DogBar from '../dogPage/dogBar';
 // import MovieInfo from '../moviePage/movieInfo';
 // import Sources from '../moviePage/sources';
 // import Trailer from '../moviePage/trailer';
 // import MovieCast from '../moviePage/movieCast';
 import { Container, Divider, Grid } from 'semantic-ui-react';
-// import NavBar from '../navBar'
+import NavBar from '../dogPage/dogPageNavBar'
+import {findDog} from '../actions/fetches';
+import { connect } from 'react-redux';
+
 
 class DogPage extends Component {
+    state={
+        dog:""
+    }
+
+    componentDidMount() {
+        findDog()
+        .then( dog =>{
+            this.props.clickDog
+        })
+    }
 
    render() {
-
       return(
          <div id="movie-background">
-            {/* <NavBar /> */}
+            <NavBar />
             <Container id='movie-pg-container'>
-               {/* <MovieBar /> */}
+               <DogBar />
                <Divider />
                <Grid columns={2} >
                   {/* <MovieInfo />
@@ -31,4 +43,4 @@ class DogPage extends Component {
    }
 } 
 
-export default withRouter(DogPage);
+export default withRouter(connect(null, {clickDog} )(DogPage));

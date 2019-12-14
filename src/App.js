@@ -8,29 +8,23 @@ import ProfilePage from './pages/profilePage';
 import LandingPage from './pages/landingPage';
 import LoadingPage from './pages/loadingPage';
 import DogPage from './pages/dogPage';
+import FavoritesPage from './pages/favoritesPage';
+
 
 
 class App extends Component {
 
   getRoutes = () => {
-    if(localStorage.jwt)
       return (
         <Switch>
+          <Route exact path='/login' component={LoginPage} />
+          <Route exact path='/signup' component={SignUpPage} />
           <Route exact path='/profile' component={ProfilePage} />
           <Route exact path='/welcome' component={LandingPage} />
           <Route exact path='/loading' component={LoadingPage} />
           <Route exact path='/dogs/:id' component={DogPage} />
-          {/* <Redirect to='/profile' /> */}
-        </Switch>
-      )
-    else
-      return (
-      <Switch>
-        <Route exact path='/login' component={LoginPage} />
-        <Route exact path='/signup' component={SignUpPage} />
-        <Route exact path='/welcome' component={LandingPage} />
-        <Route exact path='/loading' component={LoadingPage} />
-        <Redirect to='/signup' />
+          <Route exact path='/favorites' component={FavoritesPage} />
+          <Redirect to='/signup' />
       </Switch>
     )
   }

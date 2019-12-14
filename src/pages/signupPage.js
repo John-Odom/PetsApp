@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
-import { setCurrentUser, landDogs } from '../actions/allActions'
+import { setCurrentUser, landDogs } from '../actions/reducerActions'
 import { handleNewUser, getAuthToken, getDogs } from '../actions/fetches'
 
 

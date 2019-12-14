@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Card, Icon, Image } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { clickDog } from '../actions/allActions'
-import { getDogInfo } from '../actions/fetches'
+import { clickDog } from '../actions/reducerActions'
+import { findDog } from '../actions/fetches'
 
 
 class DogCard extends Component {
 
    handleClick = (dogId) => {
-      getDogInfo(dogId)
+      findDog(dogId)
       .then((data) => {this.props.clickDog(data)})
       .then(() => this.props.history.push(`/dogs/${dogId}`))
    }
