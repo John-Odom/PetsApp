@@ -9,9 +9,7 @@ import { findDog } from '../actions/fetches'
 class DogCard extends Component {
 
    handleClick = (dogId) => {
-      findDog(dogId)
-      .then((data) => {this.props.clickDog(data)})
-      .then(() => this.props.history.push(`/dogs/${dogId}`))
+     this.props.history.push(`/dogs/${dogId}`)
    }
 
    render() {

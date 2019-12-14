@@ -9,20 +9,24 @@ import DogBar from '../dogPage/dogBar';
 import { Container, Divider, Grid } from 'semantic-ui-react';
 import NavBar from '../dogPage/dogPageNavBar'
 import {findDog} from '../actions/fetches';
+import {clickDog} from '../actions/reducerActions';
 import { connect } from 'react-redux';
 
 
 class DogPage extends Component {
-    state={
-        dog:""
-    }
 
-    componentDidMount() {
-        findDog()
-        .then( dog =>{
-            this.props.clickDog
-        })
-    }
+    // componentDidMount() {
+    //     findDog()
+    //     .then( dog =>{
+    //         this.props.clickDog()
+    //     })
+    // }
+    componentDidMount () {
+        const dogId = this.props.match.params.id
+
+        findDog(dogId)
+        .then((dog) => {this.props.clickDog(dog)})
+      }
 
    render() {
       return(
