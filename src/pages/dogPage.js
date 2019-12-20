@@ -2,10 +2,9 @@ import { withRouter } from 'react-router-dom';
 // // import '../stylesheets/moviePage.css';
 // import DogBar from '../dogPage/dogBar';
 // import NavBar from '../dogPage/dogPageNavBar'
-import {findDog} from '../actions/fetches';
+import {findDog, findDogInApi} from '../actions/fetches';
 import {clickDog} from '../actions/reducerActions';
 import { connect } from 'react-redux';
-import {getWidth} from '../actions/allActions'
 import '../stylesheets/dogPage.css';
 
 
@@ -77,15 +76,23 @@ ResponsiveContainer.propTypes = {
   children: PropTypes.node,
 }
 
+
 class DogPage extends Component {
+   DOG = null
        componentDidMount () {
         const dogId = this.props.match.params.id
         findDog(dogId)
-        .then((dog) => {this.props.clickDog(dog)})
+        .then((dog) => {
+           this.DOG = dog
+           this.props.clickDog(dog);
+           findDogInApi(dog)
+         .then(dog =>{
+            console.log(dog)
+         })
+         })
       }
    
       render(){   
-         console.log(this.props)
          return(
          <ResponsiveContainer>
            <Segment style={{ padding: '8em 0em' }} vertical>
@@ -158,7 +165,7 @@ class DogPage extends Component {
                  horizontal
                  style={{ margin: '3em 0em', textTransform: 'uppercase' }}
                >
-                 <a href='#'>Case Studies</a>
+                 {/* <a href='#'>Case Studies</a> */}
                </Divider>
                <Header as='h3' style={{ fontSize: '2em' }}>
                  Did We Tell You About Our Bananas?
