@@ -1,3 +1,5 @@
+  import {Responsive} from 'semantic-ui-react'
+  
   export const logout = (obj) => {
     localStorage.clear()
     obj.props.history.push('/login')
@@ -11,3 +13,8 @@
   export const profClick = (obj) => {
     obj.props.history.push('/profile')
   } 
+  export const getWidth = () => {
+    const isSSR = typeof window === 'undefined'
+  
+    return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth
+  }

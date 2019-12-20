@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Card, Icon, Image } from 'semantic-ui-react';
+import { Card, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { clickDog } from '../actions/reducerActions'
-import { findDog } from '../actions/fetches'
+// import { findDog } from '../actions/fetches'
+import '../stylesheets/landingPage.css';
 
 
 class DogCard extends Component {
@@ -24,7 +25,7 @@ class DogCard extends Component {
       onClick={() => this.handleClick(this.props.dogId)}
         //  id='dog-card'
       >
-      <Image src={this.props.dog.image} wrapped ui={false} />
+      <img id='dogcard-image' alt='Doggo' src={this.props.dog.image} size='medium' />
       <Card.Content>
         <Card.Header>{this.props.dog.name}</Card.Header>
         <Card.Meta>

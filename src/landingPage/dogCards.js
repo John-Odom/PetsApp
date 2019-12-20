@@ -5,9 +5,6 @@ import { connect } from 'react-redux';
 import { landDogs, landMoreDogs } from '../actions/reducerActions'
 import { getDogs } from '../actions/fetches'
 
-// import { getMoreMovies, getMoreFilteredMovies } from '../sofetch/services'
-
-
 class DogCards extends Component {
    constructor() {
       super() 
@@ -21,27 +18,11 @@ class DogCards extends Component {
              .then((data) => this.props.landDogs(data))
     window.addEventListener('scroll', this.onScroll, false);
    }
-  
-//    componentWillUnmount() {
-//       window.removeEventListener('scroll', this.onScroll, false);
-//    }
-  
-//    onScroll = () => {
-//       if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight) && !this.props.landingdogs.isLoading) 
-//          {this.onPaginatedSearch()}
-//    } 
 
    onPaginatedSearch = () => {
          this.setState({
             start: this.state.start + 56
          })
-        //  if (this.props.filter === 'all') {
-        //     return getMoreMovies(this.state.start)
-        //     .then((data) => {this.props.landMoreMovies(data.results)})
-        //  } else {
-        //     return getMoreFilteredMovies(this.state.start, this.props.filter)
-        //     .then((data) => {this.props.landMoreMovies(data.results)})
-        //  }
       }
 
    render() {
