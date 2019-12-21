@@ -1,12 +1,22 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import {
     Container,
     Grid,
     Segment,
-    Header
+    Header,
+    Button
   } from 'semantic-ui-react'
+  import {addToFavorites} from '../actions/fetches'
+
+  
+  
 const HomepageHeading = (props,{ mobile }) => {
+  const add = (e) => {
+    addToFavorites(e)
+    .then(() => props.history.push(`/favorites`))
+  }
     return(
     <Container text>
       <Header
@@ -38,6 +48,14 @@ const HomepageHeading = (props,{ mobile }) => {
         </Segment>
       </Grid.Column>
     </Grid.Row>
+    <Grid.Row>
+      <Grid.Column>
+        <Button data-id={props.chosenDog ? props.chosenDog.id : null} 
+        onClick={(e)=>add(e)}>
+          Add To Favorites
+        </Button>
+      </Grid.Column>
+    </Grid.Row>
   </Grid>
     </Container>
   )}
@@ -49,4 +67,4 @@ const HomepageHeading = (props,{ mobile }) => {
  }
 
 
-  export default connect(mapStatetoProps)(HomepageHeading)
+  export default withRouter(connect(mapStatetoProps)(HomepageHeading))

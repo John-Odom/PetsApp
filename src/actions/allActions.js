@@ -18,3 +18,4 @@
   
     return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth
   }
+  

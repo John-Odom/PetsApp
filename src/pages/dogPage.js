@@ -78,14 +78,16 @@ ResponsiveContainer.propTypes = {
 
 
 class DogPage extends Component {
-   DOG = null
+   state = {
+      dog:null
+   }
        componentDidMount () {
         const dogId = this.props.match.params.id
         findDog(dogId)
         .then((dog) => {
-           this.DOG = dog
+           this.setState({dog})
            this.props.clickDog(dog);
-           findDogInApi(dog)
+         findDogInApi(dog)
          .then(dog =>{
             console.log(dog)
          })
@@ -93,30 +95,22 @@ class DogPage extends Component {
       }
    
       render(){   
+         console.log(this.state.dog ? this.state.dog.image2 : null)
          return(
          <ResponsiveContainer>
            <Segment style={{ padding: '8em 0em' }} vertical>
-             <Grid container stackable verticalAlign='middle'>
+             <Grid container stackable verticalAlign='middle'> 
                <Grid.Row>
                  <Grid.Column width={8}>
-                   <Header as='h3' style={{ fontSize: '2em' }}>
-                     We Help Companies and Companions
-                   </Header>
-                   <p style={{ fontSize: '1.33em' }}>
-                     We can give your company superpowers to do things that they never thought possible.
-                     Let us delight your customers and empower your needs... through pure data analytics.
-                   </p>
-                   <Header as='h3' style={{ fontSize: '2em' }}>
-                     We Make Bananas That Can Dance
-                   </Header>
-                   <p style={{ fontSize: '1.33em' }}>
-                     Yes that's right, you thought it was the stuff of dreams, but even bananas can be
-                     bioengineered.
-                   </p>
+                 <Image bordered rounded size='large' src={this.state.dog ? this.state.dog.image2 : null} />
                  </Grid.Column>
-                 <Grid.Column floated='right' width={6}>
-                   <Image bordered rounded size='large' src='/images/wireframe/white-image.png' />
+                 <Grid.Column width={8}>
+                 <Image bordered rounded size='large' src={this.state.dog ? this.state.dog.image3 : null} />
                  </Grid.Column>
+                 {this.state.dog && this.state.dog.image4 ? 
+                 <Grid.Column width={5}>
+                  <Image bordered rounded size='large' src={this.state.dog ? this.state.dog.image4 : null} />
+                 </Grid.Column> : null }
                </Grid.Row>
                <Grid.Row>
                  <Grid.Column textAlign='center'>
@@ -125,7 +119,7 @@ class DogPage extends Component {
                </Grid.Row>
              </Grid>
            </Segment>
-           <Segment style={{ padding: '0em' }} vertical>
+           {/* <Segment style={{ padding: '0em' }} vertical>
              <Grid celled='internally' columns='equal' stackable>
                <Grid.Row textAlign='center'>
                  <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
@@ -145,8 +139,8 @@ class DogPage extends Component {
                  </Grid.Column>
                </Grid.Row>
              </Grid>
-           </Segment>
-           <Segment style={{ padding: '8em 0em' }} vertical>
+           </Segment> */}
+           {/* <Segment style={{ padding: '8em 0em' }} vertical>
              <Container text>
                <Header as='h3' style={{ fontSize: '2em' }}>
                  Breaking The Grid, Grabs Your Attention
@@ -165,7 +159,7 @@ class DogPage extends Component {
                  horizontal
                  style={{ margin: '3em 0em', textTransform: 'uppercase' }}
                >
-                 {/* <a href='#'>Case Studies</a> */}
+                <a href='#'>Case Studies</a>
                </Divider>
                <Header as='h3' style={{ fontSize: '2em' }}>
                  Did We Tell You About Our Bananas?
@@ -179,8 +173,8 @@ class DogPage extends Component {
                  I'm Still Quite Interested
                </Button>
              </Container>
-           </Segment>
-           <Segment inverted vertical style={{ padding: '5em 0em' }}>
+           </Segment> */}
+           {/* <Segment inverted vertical style={{ padding: '5em 0em' }}>
              <Container>
                <Grid divided inverted stackable>
                  <Grid.Row>
@@ -213,7 +207,7 @@ class DogPage extends Component {
                  </Grid.Row>
                </Grid>
              </Container>
-           </Segment>
+           </Segment> */}
          </ResponsiveContainer>
 )}}
 

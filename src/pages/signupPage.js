@@ -22,13 +22,11 @@ class Signup extends React.Component {
           alert("sorry, username has already been taken") 
         }
         else{
-          // localStorage.setItem("jwt", data.jwt)
-          // this.props.setCurrentUser(data.user.id)
           getAuthToken(this.state)
           .then(payload => {
              localStorage.setItem('jwt', payload.jwt)
+             localStorage.setItem('user_id', payload.user.id)
              this.props.setCurrentUser(payload.user.id)
-            //  this.props.history.push('/loading')
              getDogs()
              .then((data) => {
                console.log(data)
