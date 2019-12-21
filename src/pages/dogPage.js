@@ -104,9 +104,10 @@ class DogPage extends Component {
                  <Grid.Column width={8}>
                  <Image bordered rounded size='large' src={this.state.dog ? this.state.dog.image2 : null} />
                  </Grid.Column>
+                 {this.state.dog && this.state.dog.image3 ?
                  <Grid.Column width={8}>
                  <Image bordered rounded size='large' src={this.state.dog ? this.state.dog.image3 : null} />
-                 </Grid.Column>
+                 </Grid.Column>: null }
                  {this.state.dog && this.state.dog.image4 ? 
                  <Grid.Column width={5}>
                   <Image bordered rounded size='large' src={this.state.dog ? this.state.dog.image4 : null} />
