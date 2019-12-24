@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import {findDog, findDogInApi} from '../actions/fetches';
 import {clickDog} from '../actions/reducerActions';
 import { connect } from 'react-redux';
+import  Description  from '../dogPage/description'
 import '../stylesheets/dogPage.css';
 
 
@@ -39,13 +40,9 @@ import '../stylesheets/dogPage.css';
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import {
-  Button,
   Container,
-  Divider,
   Grid,
-  Header,
   Image,
-  List,
   Segment,
 } from 'semantic-ui-react'
 import MobileContainer from '../dogPage/mobileContainer'
@@ -114,10 +111,17 @@ class DogPage extends Component {
                  </Grid.Column> : null }
                </Grid.Row>
                <Grid.Row>
+                  <Grid.Column textAlign='center'>
+                     <Container text>
+                        <Description />
+                     </Container>
+                  </Grid.Column>
+               </Grid.Row>
+               {/* <Grid.Row>
                  <Grid.Column textAlign='center'>
                    <Button size='huge'>Check Them Out</Button>
                  </Grid.Column>
-               </Grid.Row>
+               </Grid.Row> */}
              </Grid>
            </Segment>
            {/* <Segment style={{ padding: '0em' }} vertical>

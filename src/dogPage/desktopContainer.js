@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import {
-    Button,
-    Container,
-    Menu,
     Responsive,
     Segment,
     Visibility,
   } from 'semantic-ui-react'
   import HomepageHeading from './homePageHeading'
   import {getWidth} from '../actions/allActions'
-  import {logout, homeClick, faveClick, profClick} from '../actions/allActions'
   import { withRouter } from 'react-router-dom'
+  import NavBar from '../navBar'
 
 
 class DesktopContainer extends Component {
@@ -21,7 +18,6 @@ class DesktopContainer extends Component {
   
     render() {
       const { children } = this.props
-      const { fixed } = this.state
   
       return (
         <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
@@ -36,26 +32,7 @@ class DesktopContainer extends Component {
               style={{ minHeight: 700, padding: '1em 0em' }}
               vertical
             >
-              <Menu
-                fixed={fixed ? 'top' : null}
-                inverted={!fixed}
-                pointing={!fixed}
-                secondary={!fixed}
-                size='large'
-              >
-                <Container>
-                  <Menu.Item onClick={()=>homeClick(this)} as='a' active>
-                    Home
-                  </Menu.Item>
-                  <Menu.Item onClick={()=>faveClick(this)} as='a'>Favorites</Menu.Item>
-                  <Menu.Item onClick={()=>profClick(this)} as='a'>Profile</Menu.Item>
-                  <Menu.Item position='right'>
-                    <Button onClick={()=>logout(this)} as='a' inverted={!fixed}>
-                      Log Out
-                    </Button>
-                  </Menu.Item>
-                </Container>
-              </Menu>
+              <NavBar history={this.props.history}/>
               <HomepageHeading />
             </Segment>
           </Visibility>

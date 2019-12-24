@@ -9,6 +9,7 @@ import {
     Button
   } from 'semantic-ui-react'
   import {addToFavorites} from '../actions/fetches'
+  import orgClick from '../actions/allActions'
 
   
   
@@ -53,6 +54,10 @@ const HomepageHeading = (props,{ mobile }) => {
         <Button data-id={props.chosenDog ? props.chosenDog.id : null} 
         onClick={(e)=>add(e)}>
           Add To Favorites
+        </Button>
+        <Button data-id={props.chosenDog ? props.chosenDog.id : null} 
+        onClick={(e)=>add(e)}>
+          View Organization
         </Button>
       </Grid.Column>
     </Grid.Row>

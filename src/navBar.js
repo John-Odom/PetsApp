@@ -1,0 +1,37 @@
+import React, { Component } from 'react';
+import {logout, homeClick, faveClick, profClick, orgsClick} from './actions/allActions'
+import {
+    Button,
+    Container,
+    Menu,
+  } from 'semantic-ui-react'
+
+class navBar extends Component {
+    state={}
+    render() {
+        const { fixed } = this.state
+        return (
+            <Menu
+                fixed={fixed ? 'top' : null}
+                inverted={!fixed}
+                pointing={!fixed}
+                secondary={!fixed}
+                size='large'
+              >
+                <Container>
+                  <Menu.Item onClick={()=>homeClick(this)} as='a' active>Home</Menu.Item>
+                  <Menu.Item onClick={()=>orgsClick(this)} as='a'>Organizations</Menu.Item>
+                  <Menu.Item onClick={()=>faveClick(this)} as='a'>Favorites</Menu.Item>
+                  <Menu.Item onClick={()=>profClick(this)} as='a'>Profile</Menu.Item>
+                  <Menu.Item position='right'>
+                    <Button onClick={()=>logout(this)} as='a' inverted={!fixed}>
+                      Log Out
+                    </Button>
+                  </Menu.Item>
+                </Container>
+              </Menu>
+        );
+    }
+}
+
+export default navBar;

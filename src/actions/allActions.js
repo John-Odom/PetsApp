@@ -13,6 +13,12 @@
   export const profClick = (obj) => {
     obj.props.history.push('/profile')
   } 
+  export const orgsClick = (obj) => {
+    obj.props.history.push('/organizations')
+  } 
+  // export const orgClick = (obj) => {
+  //   obj.props.history.push('/organizations/:id')
+  // } 
   export const getWidth = () => {
     const isSSR = typeof window === 'undefined'
   
