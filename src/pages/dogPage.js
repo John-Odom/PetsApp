@@ -5,6 +5,7 @@ import {findDog} from '../actions/fetches';
 import {clickDog} from '../actions/reducerActions';
 import { connect } from 'react-redux';
 import  Description  from '../dogPage/contactOrg'
+import DogPics from '../dogPage/dogPics'
 import '../stylesheets/dogPage.css';
 
 
@@ -97,19 +98,7 @@ class DogPage extends Component {
          <ResponsiveContainer>
            <Segment style={{ padding: '8em 0em' }} vertical>
              <Grid container stackable verticalAlign='middle'> 
-               <Grid.Row>
-                 <Grid.Column width={8}>
-                 <Image bordered rounded size='large' src={this.state.dog ? this.state.dog.image2 : null} />
-                 </Grid.Column>
-                 {this.state.dog && this.state.dog.image3 ?
-                 <Grid.Column width={8}>
-                 <Image bordered rounded size='large' src={this.state.dog ? this.state.dog.image3 : null} />
-                 </Grid.Column>: null }
-                 {this.state.dog && this.state.dog.image4 ? 
-                 <Grid.Column width={5}>
-                  <Image bordered rounded size='large' src={this.state.dog ? this.state.dog.image4 : null} />
-                 </Grid.Column> : null }
-               </Grid.Row>
+               <DogPics />
                <Grid.Row>
                   <Grid.Column textAlign='center'>
                      <Container text>

@@ -5,7 +5,6 @@ import {
     Grid,
     Segment,
     Header,
-    Button
   } from 'semantic-ui-react'
 
 class ContactOrg extends Component {
@@ -15,36 +14,58 @@ class ContactOrg extends Component {
         if(this.props.chosenDog){
         return (
             <div>
-                <Header as='h3'>Contact Organization</Header>
                 <Container text>
                   <Grid columns='equal' divided inverted padded>
                     <Grid.Row color='black' textAlign='center'>
                         <Grid.Column>
+                          <Header
+                              as='h1'
+                              content='Organization Information'
+                              inverted
+                              style={{
+                                fontSize: '2em',
+                                fontWeight: 'normal',
+                                marginTop: '1.5em',
+                              }}
+                          />
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row color='black' textAlign='center'>
+                        <Grid.Column>
                             <Segment color='black' inverted>
-                            <p><b>Organization:</b></p> {dog.organization.name}
+                            <p><b>Organization:</b></p> <p><b>{dog.organization.name}</b></p>
                             </Segment>
                         </Grid.Column>
                         <Grid.Column>
                           <Segment color='black' inverted>
-                            <p><b>Phone:</b></p> {dog.organization.phone}
+                            <p><b>Phone:</b></p> <p><b>{dog.organization.phone ? dog.organization.phone : 'N/A'}</b></p>
                           </Segment>
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row color='black' textAlign='center'>
                         <Grid.Column>
                             <Segment color='black' inverted>
-                            <p><b>Website:</b></p> <a href={dog.organization.website}>{dog.organization.website}</a>
+                            <p><b>Website:</b></p> 
+                            {dog.organization.website ?
+                                <a href={dog.organization.website}>
+                                   {dog.organization.website? dog.organization.website : null}
+                                </a>
+                                : <p>N/A</p>}
                             </Segment>
                         </Grid.Column>
                         <Grid.Column>
                           <Segment color='black' inverted>
-                            <p><b>Email:</b></p> {dog.organization.email}
+                            <p><b>Email:</b></p> <p><a href={"mailto:" + dog.organization.email}>{dog.organization.email}</a></p>
                           </Segment>
                         </Grid.Column>
-                        <Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row color='black' textAlign='center'>
+                    <Grid.Column>
                           <Segment color='black' inverted>
-                            <p><b>Address:</b></p> 
-                            <p>{dog.organization.state}</p>
+                            <p><b>Location:</b></p> 
+                            <p>{dog.organization.street ? dog.organization.street: null}</p>
+                            <p>{dog.organization.city}, {dog.organization.state} 
+                            {dog.organization.zip}</p>
                           </Segment>
                         </Grid.Column>
                     </Grid.Row>
@@ -55,7 +76,7 @@ class ContactOrg extends Component {
         }
         else {
             return (
-                    <Header as='h3'>Contact Organization</Header>
+                    <Header as='h2'>Contact Organization</Header>
             );
         }
     }
