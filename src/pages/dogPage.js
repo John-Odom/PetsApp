@@ -1,11 +1,10 @@
 import { withRouter } from 'react-router-dom';
-// // import '../stylesheets/moviePage.css';
-// import DogBar from '../dogPage/dogBar';
-// import NavBar from '../dogPage/dogPageNavBar'
-import {findDog, findDogInApi} from '../actions/fetches';
+// import {findDog, findDogInApi} from '../actions/fetches';
+import {findDog} from '../actions/fetches';
+
 import {clickDog} from '../actions/reducerActions';
 import { connect } from 'react-redux';
-import  Description  from '../dogPage/description'
+import  Description  from '../dogPage/contactOrg'
 import '../stylesheets/dogPage.css';
 
 
@@ -84,10 +83,11 @@ class DogPage extends Component {
         .then((dog) => {
            this.setState({dog})
            this.props.clickDog(dog);
-         findDogInApi(dog)
-         .then(dog =>{
-            console.log(dog)
-         })
+           console.log(dog)
+         // findDogInApi(dog)
+         // .then(dog =>{
+         //    console.log(dog)
+         // })
          })
       }
    

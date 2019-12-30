@@ -49,6 +49,10 @@ export const getAuthToken = (user) => {
     return fetch(`${LOCAL}/dogs/${dogId}`)
     .then(res => res.json())
  } 
+ export const findOrg = (orgId) => {
+   return fetch(`${LOCAL}/organizations/${orgId}`)
+   .then(res => res.json())
+} 
 
  export const findDogInApi = (dog) =>{
     return fetch('https://api.petfinder.com/v2/animals/' + dog.api_dog_id, {
