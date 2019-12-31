@@ -9,7 +9,6 @@ import {
     Button
   } from 'semantic-ui-react'
   import {addToFavorites} from '../actions/fetches'
-  import orgClick from '../actions/allActions'
 
   
   

@@ -9,7 +9,6 @@ import {
     Button
   } from 'semantic-ui-react'
   import {addToFavorites} from '../actions/fetches'
-  import orgClick from '../actions/allActions'
 
   
   
@@ -22,7 +21,7 @@ const HomepageHeading = (props,{ mobile }) => {
     <Container text>
       <Header
         as='h1'
-        content={props.chosenDog ? props.chosenDog.name : null}
+        content={props.chosenOrg ? props.chosenOrg.name : null}
         inverted
         style={{
           fontSize: mobile ? '1em' : '2em',
@@ -30,44 +29,46 @@ const HomepageHeading = (props,{ mobile }) => {
           marginTop: mobile ? '.75em' : '1.5em',
         }}
       />
-      <img id="dog-page-image" alt="DOGGO" src={props.chosenDog ? props.chosenDog.image : null} />
+      <img id="dog-page-image" alt={props.chosenOrg ? props.chosenOrg.name: null} 
+      src={props.chosenOrg && props.chosenOrg.image ? props.chosenOrg.image : null} 
+      />
       <Grid columns='equal' divided inverted padded>
     <Grid.Row color='black' textAlign='center'>
       <Grid.Column>
         <Segment color='black' inverted>
-          <p><b>Age:</b></p> {props.chosenDog ? props.chosenDog.age : null}
+          <p><b>Age:</b></p> {props.chosenOrg ? props.chosenOrg.age : null}
         </Segment>
       </Grid.Column>
       <Grid.Column>
         <Segment color='black' inverted>
-          <p><b>Breed:</b></p> {props.chosenDog ? props.chosenDog.breed : null}
+          <p><b>Breed:</b></p> {props.chosenOrg ? props.chosenOrg.breed : null}
         </Segment>
       </Grid.Column>
       <Grid.Column>
         <Segment color='black' inverted>
-        <p><b>Size:</b> </p> {props.chosenDog ? props.chosenDog.size : null}
+        <p><b>Size:</b> </p> {props.chosenOrg ? props.chosenOrg.size : null}
         </Segment>
       </Grid.Column>
     </Grid.Row>
-    <Grid.Row>
+    {/* <Grid.Row>
       <Grid.Column>
-        <Button data-id={props.chosenDog ? props.chosenDog.id : null} 
+        <Button data-id={props.chosenOrg ? props.chosenOrg.id : null} 
         onClick={(e)=>add(e)}>
           Add To Favorites
         </Button>
-        <Button data-id={props.chosenDog ? props.chosenDog.id : null} 
+        <Button data-id={props.chosenOrg ? props.chosenOrg.id : null} 
         onClick={(e)=>add(e)}>
           View Organization
         </Button>
       </Grid.Column>
-    </Grid.Row>
+    </Grid.Row> */}
   </Grid>
     </Container>
   )}
 
   const mapStatetoProps = state => {
     return ({
-      chosenDog: state.chosenDog
+      chosenOrg: state.chosenOrg
     })
  }
 

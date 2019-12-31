@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Card, Icon, Image, Segment, Header, Divider } from 'semantic-ui-react';
+import { Card, Segment, Header, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { clickOrg } from '../actions/reducerActions'
 // import { findDog } from '../actions/fetches'
@@ -22,7 +22,7 @@ handleClick = (id) => {
       <Card 
       onClick={() => this.handleClick(this.props.org.id)}
         ><Segment>
-           <img id='orgCard' style={{ maxHeight: 300, maxWidth: 300 }} src={this.props.org.image} alt="no Image Available" />
+           <img id='orgCard' style={{ maxHeight: 300, maxWidth: 300 }} src={this.props.org.image} alt={this.props.org.name} />
         <Divider clearing />
         <Header
             as='h1'

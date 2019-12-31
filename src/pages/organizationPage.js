@@ -7,8 +7,7 @@ import { withRouter } from 'react-router-dom';
 import {
     Container,
     Grid,
-    Image,
-    Segment,
+    Segment
   } from 'semantic-ui-react'
   import PropTypes from 'prop-types'
   import MobileContainer from '../organizationPage/mobileContainer'

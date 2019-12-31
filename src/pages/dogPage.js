@@ -42,7 +42,6 @@ import React, { Component } from 'react'
 import {
   Container,
   Grid,
-  Image,
   Segment,
 } from 'semantic-ui-react'
 import MobileContainer from '../dogPage/mobileContainer'
