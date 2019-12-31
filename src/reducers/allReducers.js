@@ -1,7 +1,8 @@
 let initialState = {
     currentUser: null,
     landingDogs: [],
-    chosenDog: null
+    chosenDog: null,
+    chosenOrg: null
   }
 
   export default (state=initialState, action) => {
@@ -26,6 +27,11 @@ let initialState = {
             return {
             ...state,
             chosenDog: action.data
+            }  
+            case 'CLICK_ORG':
+            return {
+            ...state,
+            chosenOrg: action.data
             }   
           case 'TOGGLE_FILTER':
             return {

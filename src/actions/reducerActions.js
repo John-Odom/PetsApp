@@ -23,6 +23,12 @@ export const clickDog = (data) => {
       data
    }
 }
+export const clickOrg = (data) => {
+   return {
+      type: 'CLICK_ORG',
+      data
+   }
+}
 export const toggleFilter = (source) => {
    return {
       type: 'TOGGLE_FILTER',

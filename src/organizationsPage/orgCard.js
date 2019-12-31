@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Card, Icon, Image, Segment, Header, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { clickDog } from '../actions/reducerActions'
+import { clickOrg } from '../actions/reducerActions'
 // import { findDog } from '../actions/fetches'
 import '../stylesheets/landingPage.css';
 
@@ -12,12 +12,15 @@ class OrgCard extends Component {
 //    handleClick = (dogId) => {
 //      this.props.history.push(`/dogs/${dogId}`)
 //    }
+handleClick = (id) => {
+    this.props.history.push(`/organizations/${id}`)
+  }
 
    render() {
-       console.log(this.props.org)
+       console.log(this.props.org.id)
       return(
       <Card 
-        //  onClick={() => this.handleClick(this.props.movieId)}
+      onClick={() => this.handleClick(this.props.org.id)}
         ><Segment>
            <img id='orgCard' style={{ maxHeight: 300, maxWidth: 300 }} src={this.props.org.image} alt="no Image Available" />
         <Divider clearing />
@@ -67,7 +70,7 @@ class OrgCard extends Component {
 // }
 
 // export default DogCard
-export default withRouter(connect(null, {clickDog})(OrgCard));
+export default withRouter(connect(null, {clickOrg})(OrgCard));
 
    
 
