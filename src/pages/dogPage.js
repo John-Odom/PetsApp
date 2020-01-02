@@ -4,7 +4,7 @@ import {findDog} from '../actions/fetches';
 
 import {clickDog} from '../actions/reducerActions';
 import { connect } from 'react-redux';
-import  Description  from '../dogPage/contactOrg'
+import  OrgInfo  from '../dogPage/orgInfo'
 import DogPics from '../dogPage/dogPics'
 import '../stylesheets/dogPage.css';
 
@@ -101,7 +101,7 @@ class DogPage extends Component {
                <Grid.Row>
                   <Grid.Column textAlign='center'>
                      <Container text>
-                        <Description />
+                        <OrgInfo />
                      </Container>
                   </Grid.Column>
                </Grid.Row>
