@@ -57,12 +57,13 @@ class organizationPage extends Component {
                <Grid.Row>
                   <Grid.Column textAlign='center'>
                      <Container text>
-                       <OrgsDogs />
+                       
                      </Container>
                   </Grid.Column>
                </Grid.Row>
              </Grid>
            </Segment>
+           <OrgsDogs />
           </ResponsiveContainer>
         );
         } else {

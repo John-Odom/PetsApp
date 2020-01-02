@@ -8,34 +8,38 @@ import {
 
 const InfoBar = (props) => {
     return (
+      <Grid columns='equal' divided inverted padded>
         <Grid.Row color='black' textAlign='center'>
         <Grid.Column>
           <Segment color='black' inverted>
             <p><b>Website:</b></p> 
-            <p><a href={props.chosenOrg ? props.chosenOrg.website: null}>
-                {props.chosenOrg && props.chosenOrg.website ? props.chosenOrg.website : 'N/A'}
-            </a></p>
-          </Segment>
-        </Grid.Column>
-        <Grid.Column>
-          <Segment color='black' inverted>
-            <p><b>Email:</b></p> 
-            <p>{props.chosenOrg && props.chosenOrg.email ? props.chosenOrg.email : 'N/A'}</p>
+            <p><b><a href={props.chosenOrg ? props.chosenOrg.website: null}>
+              {props.chosenOrg && props.chosenOrg.website ? props.chosenOrg.website : 'N/A'}
+            </a></b></p>
           </Segment>
         </Grid.Column>
         <Grid.Column>
           <Segment color='black' inverted>
             <p><b>Phone:</b></p> 
-            <p>{props.chosenOrg && props.chosenOrg.phone ? props.chosenOrg.phone : 'N/A'}</p>
+            <p><b>{props.chosenOrg && props.chosenOrg.phone ? props.chosenOrg.phone : 'N/A'}</b></p>
+          </Segment>
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column>
+          <Segment color='black' inverted>
+            <p><b>Email:</b></p> 
+            <p><b>{props.chosenOrg && props.chosenOrg.email ? props.chosenOrg.email : 'N/A'}</b></p>
           </Segment>
         </Grid.Column>
         <Grid.Column>
           <Segment color='black' inverted>
           <p><b>Address:</b> </p> 
-          <p>{props.chosenOrg && props.chosenOrg.street ? props.chosenOrg.street : 'N/A'}</p>
+          <p><b>{props.chosenOrg && props.chosenOrg.street ? props.chosenOrg.street : 'N/A'}</b></p>
           </Segment>
         </Grid.Column>
-      </Grid.Row>
+        </Grid.Row>
+      </Grid>
     )
 }
 

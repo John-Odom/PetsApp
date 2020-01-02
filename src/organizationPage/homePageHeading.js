@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {
     Container,
-    Grid,
     Header
   } from 'semantic-ui-react'
   import InfoBar from './infoBar'
@@ -27,7 +26,7 @@ const HomepageHeading = (props,{ mobile }) => {
       <img id="orgCard" style={{ maxHeight: 300, maxWidth: 300 }} alt={props.chosenOrg ? props.chosenOrg.name: null} 
       src={props.chosenOrg && props.chosenOrg.image ? props.chosenOrg.image : noPhoto} 
       />
-      <Grid columns='equal' divided inverted padded>
+      
         <InfoBar />
     {/* <Grid.Row>
       <Grid.Column>
@@ -41,7 +40,7 @@ const HomepageHeading = (props,{ mobile }) => {
         </Button>
       </Grid.Column>
     </Grid.Row> */}
-  </Grid>
+
     </Container>
   )}
 
