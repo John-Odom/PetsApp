@@ -10,7 +10,7 @@ import '../stylesheets/landingPage.css';
 class DogCard extends Component {
 
    handleClick = (id) => {
-     this.props.history.push(`/dogs/${id}`)
+     this.props.history.push(`/dogs/${id}/`)
    }
 
    render() {

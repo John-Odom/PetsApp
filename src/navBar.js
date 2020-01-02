@@ -19,7 +19,7 @@ class navBar extends Component {
                 size='large'
               >
                 <Container>
-                  <Menu.Item onClick={()=>homeClick(this)} as='a' active>Home</Menu.Item>
+                  <Menu.Item onClick={()=>homeClick(this)} as='a' active>Dogs</Menu.Item>
                   <Menu.Item onClick={()=>orgsClick(this)} as='a'>Organizations</Menu.Item>
                   <Menu.Item onClick={()=>faveClick(this)} as='a'>Favorites</Menu.Item>
                   <Menu.Item onClick={()=>profClick(this)} as='a'>Profile</Menu.Item>
