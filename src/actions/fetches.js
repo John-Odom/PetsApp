@@ -45,6 +45,10 @@ export const getAuthToken = (user) => {
     return fetch(`${LOCAL}/dogs`).then(res => res.json())
  } 
 
+ export const getOrgsDogs = () => {
+   return fetch(`${LOCAL}/organizations/`).then(res => res.json())
+} 
+
  export const getOrgs = () => {
    return fetch(`${LOCAL}/organizations`).then(res => res.json())
 } 

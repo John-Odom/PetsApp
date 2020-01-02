@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { clickOrg } from '../actions/reducerActions'
 // import { findDog } from '../actions/fetches'
 import '../stylesheets/landingPage.css';
+import noPhotoPic from '../images/no-photo-business.jpg'
+
 
 
 class OrgCard extends Component {
@@ -22,7 +24,8 @@ handleClick = (id) => {
       <Card 
       onClick={() => this.handleClick(this.props.org.id)}
         ><Segment>
-           <img id='orgCard' style={{ maxHeight: 300, maxWidth: 300 }} src={this.props.org.image} alt={this.props.org.name} />
+           <img id='orgCard' style={{ maxHeight: 300, maxWidth: 300 }} 
+           src={this.props.org.image ? this.props.org.image: noPhotoPic} alt={this.props.org.name} />
         <Divider clearing />
         <Header
             as='h1'
