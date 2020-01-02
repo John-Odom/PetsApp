@@ -18,7 +18,7 @@ class navBar extends Component {
                 secondary={!fixed}
                 size='large'
               >
-                <Container>
+                <Container id='navBar'>
                   <Menu.Item onClick={()=>homeClick(this)} as='a' active>Dogs</Menu.Item>
                   <Menu.Item onClick={()=>orgsClick(this)} as='a'>Organizations</Menu.Item>
                   <Menu.Item onClick={()=>faveClick(this)} as='a'>Favorites</Menu.Item>

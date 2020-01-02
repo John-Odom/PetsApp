@@ -7,7 +7,6 @@ import DogCard from '../landingPage/dogCard'
 class OrgsDogs extends Component {
 
    render() {
-      console.log('in the dogcards component', this.props.chosenOrg.dogs)
       const mapDogs = this.props.chosenOrg.dogs.map((dog) => 
       <DogCard 
          key={dog.id}

@@ -62,8 +62,8 @@ class organizationPage extends Component {
                   </Grid.Column>
                </Grid.Row>
              </Grid>
+             <OrgsDogs />
            </Segment>
-           <OrgsDogs />
           </ResponsiveContainer>
         );
         } else {

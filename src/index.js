@@ -8,12 +8,15 @@ import * as serviceWorker from './serviceWorker';
 // import allReducers from './reducers/allReducers.js';
 import { BrowserRouter as Router } from 'react-router-dom';
 import store from './store'
+import ScrollToTop from './scrollToTop'
 // let store = createStore(allReducers)
 
 ReactDOM.render(
     <Provider store={store}>
       <Router>
-        <App />
+        <ScrollToTop>
+          <App />
+        </ScrollToTop>
       </Router>
     </Provider>,
     document.getElementById('root')

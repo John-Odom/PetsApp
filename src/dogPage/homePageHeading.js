@@ -17,11 +17,12 @@ const HomepageHeading = (props,{ mobile }) => {
     addToFavorites(e)
     .then(() => props.history.push(`/favorites`))
   }
+  if(props.chosenDog){
     return(
     <Container text>
       <Header
         as='h1'
-        content={props.chosenDog ? props.chosenDog.name : null}
+        content={props.chosenDog.name }
         inverted
         style={{
           fontSize: mobile ? '1em' : '2em',
@@ -29,40 +30,40 @@ const HomepageHeading = (props,{ mobile }) => {
           marginTop: mobile ? '.75em' : '1.5em',
         }}
       />
-      <img id="dog-page-image" alt="DOGGO" src={props.chosenDog ? props.chosenDog.image : null} />
+      <img id="dog-page-image" alt="DOGGO" src={props.chosenDog.image} />
       <Grid columns='equal' divided inverted padded>
     <Grid.Row color='black' textAlign='center'>
       <Grid.Column>
         <Segment color='black' inverted>
-          <p><b>Age:</b></p> {props.chosenDog ? props.chosenDog.age : null}
+          <p><b>Age:</b></p> {props.chosenDog.age}
         </Segment>
       </Grid.Column>
       <Grid.Column>
         <Segment color='black' inverted>
-          <p><b>Breed:</b></p> {props.chosenDog ? props.chosenDog.breed : null}
+          <p><b>Breed:</b></p> {props.chosenDog.breed }
         </Segment>
       </Grid.Column>
       <Grid.Column>
         <Segment color='black' inverted>
-        <p><b>Size:</b> </p> {props.chosenDog ? props.chosenDog.size : null}
+        <p><b>Size:</b> </p> {props.chosenDog.size }
         </Segment>
       </Grid.Column>
     </Grid.Row>
     <Grid.Row>
       <Grid.Column>
-        <Button data-id={props.chosenDog ? props.chosenDog.id : null} 
+        <Button data-id={props.chosenDog.id } 
         onClick={(e)=>add(e)}>
           Add To Favorites
         </Button>
-        <Button data-id={props.chosenDog ? props.chosenDog.id : null} 
-        onClick={(e)=>add(e)}>
-          View Organization
+        <Button data-id={ props.chosenDog.organization.id } 
+        onClick={()=>props.history.push(`/organizations/${props.chosenDog.organization.id}`)}>
+          View Organization - <i>{props.chosenDog.organization.name}</i>
         </Button>
       </Grid.Column>
     </Grid.Row>
   </Grid>
     </Container>
-  )}
+  )} else return null } 
 
   const mapStatetoProps = state => {
     return ({
