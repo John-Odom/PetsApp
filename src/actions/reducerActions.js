@@ -17,6 +17,13 @@ export const setCurrentUser = (userId) => {
       data
    }
 }
+export const filterDogs = (data) => {
+   return {
+      type: 'FILTER_DOGS',
+      data
+   }
+} 
+
 export const clickDog = (data) => {
    return {
       type: 'CLICK_DOG',
