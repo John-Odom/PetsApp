@@ -52,12 +52,12 @@ class organizationPage extends Component {
         if(this.props.chosenOrg){
         return (
           <ResponsiveContainer>
-           <Segment style={{ padding: '8em 0em' }} vertical>
+           <Segment style={{ padding: '2em 0em' }} vertical>
              <Grid container stackable verticalAlign='middle'> 
                <Grid.Row>
                   <Grid.Column textAlign='center'>
                      <Container text>
-                       
+                     <h1>{this.props.chosenOrg.name}'s Dogs</h1>
                      </Container>
                   </Grid.Column>
                </Grid.Row>
