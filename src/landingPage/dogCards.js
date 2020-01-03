@@ -11,7 +11,7 @@ class DogCards extends Component {
       super() 
       this.state = {
          start: 0,
-         // loaded: false
+         search: ''
       }
    }
 
@@ -29,28 +29,23 @@ class DogCards extends Component {
             start: this.state.start + 56
          })
       }
+
    getSearchValue = (value) => {
       this.setState({search: value})
       this.filterDogs(value)
    }
 
-   filterDogs = (value) => {
+   filterDogs = () => {
       let filteredDogs = this.props.landingDogs.filter (dog => {
-          return dog.name.toLowerCase().startsWith(value.toLowerCase())
+          return dog.name.toLowerCase().startsWith(this.state.search.toLowerCase())
       })
       console.log(filteredDogs)
       return filteredDogs
    }
 
-   callList = () => {
-      return this.props.filterDogs ? this.props.landingDogs : this.filterDogs()
-  }
-
    render() {
-      // if(this.state.allDogs){
-      //    console.log('filtered dogs', this.filterDogs())
-      // }
-      const mapDogs = this.props.landingDogs.map((dog) => 
+      console.log('filtered dogs', this.filterDogs())
+      const mapDogs = this.filterDogs().map((dog) => 
       <DogCard 
          key={dog.id}
          dogId={dog.id}
@@ -60,8 +55,8 @@ class DogCards extends Component {
       return(
          <div>
             <Search onSearchChange={(e)=>this.getSearchValue(e.target.value)} 
-                showNoResults={false} value={this.props.searchBar} className="searchbar"/>
-                
+                showNoResults={false} value={this.props.searchBar} id="dogs-page-searchbar"/>
+            
             <Card.Group itemsPerRow={4}>
                {mapDogs}
             </Card.Group>
