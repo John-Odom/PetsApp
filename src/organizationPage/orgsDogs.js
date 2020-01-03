@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { landDogs } from '../actions/reducerActions'
-import DogCard from '../landingPage/dogCard'
+import DogCard from '../dogsPage/dogCard'
 
 class OrgsDogs extends Component {
 

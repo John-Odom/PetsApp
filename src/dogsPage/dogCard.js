@@ -25,7 +25,9 @@ class DogCard extends Component {
       onClick={() => this.handleClick(this.props.dogId)}
         //  id='dog-card'
       >
-      <img id='dogcard-image' alt='Doggo' src={this.props.dog.image} size='medium' />
+      <img id='dogcard-image' alt='Doggo' src={this.props.dog.image} 
+      // size='medium' 
+      />
       <Card.Content>
         <Card.Header>{this.props.dog.name}</Card.Header>
         <Card.Meta>

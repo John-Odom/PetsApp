@@ -5,7 +5,7 @@
     obj.props.history.push('/login')
   } 
   export const homeClick = (obj) => {
-    obj.props.history.push('/welcome')
+    obj.props.history.push('/dogs')
   } 
   export const faveClick = (obj) => {
     obj.props.history.push('/favorites')

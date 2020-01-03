@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { setCurrentUser, landDogs } from '../actions/reducerActions'
 import { handleNewUser, getAuthToken, getDogs } from '../actions/fetches'
+import { homeClick } from '../actions/allActions'
+
 
 
 class Signup extends React.Component {
@@ -32,7 +34,7 @@ class Signup extends React.Component {
                console.log(data)
                this.props.landDogs(data)
               })
-             .then(() => this.props.history.push(`/welcome`))
+             .then(() => homeClick(this))
              })
           .then(this.setState({
              username: '',
@@ -41,49 +43,8 @@ class Signup extends React.Component {
         }
     }
       )
-    // .then(res => {
-    //    if (res.errors) {
-    //     console.log("in if statement")
-    //       alert("sorry, username has already been taken") 
-    //    } else {
-    //      console.log("in else statement")
-    //       getAuthToken({ username: this.state.username, password: this.state.password})
-    //       .then(payload => {
-    //          localStorage.setItem('token', payload.jwt)
-    //          this.props.history.push('/cinepop')
-    //          this.props.setCurrentUser(payload.user.id)
-    //          getDogs()
-    //          .then((data) => {this.props.landDogs(data.results)})
-    //          .then(() => this.props.history.push(`/welcome`))
-    //          })
-    //       .then(this.setState({
-    //          username: '',
-    //          password: ''
-    //       }))
-    //    }
-    // })
+
  } 
-
-  // handleSubmit = (e) => {
-  //   e.preventDefault()
-  //   fetch("http://localhost:3000/users", {
-  //     method: "POST", 
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json"
-  //     },
-  //     body: JSON.stringify({      
-  //       user: this.state
-  //     })
-
-  //   }).then(res=> res.json())
-  //   .then(data => {
-  //     localStorage.setItem("jwt", data.jwt)
-  //     console.log(data.user)
-  //     this.props.setCurrentUser(data.user.id)
-  //   }
-  //     )
-  // }
 
   handleChange = (e) => {
     this.setState({

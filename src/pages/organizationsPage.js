@@ -12,19 +12,6 @@ import {
 import DesktopContainer from '../organizationsPage/desktopContainer'
 import MobileContainer from '../organizationsPage/mobileContainer'
 
-// Heads up!
-// We using React Static to prerender our docs with server side rendering, this is a quite simple solution.
-// For more advanced usage please check Responsive docs under the "Usage" section.
-// const getWidth = () => {
-//   const isSSR = typeof window === 'undefined'
-
-//   return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth
-// }
-
-/* eslint-disable react/no-multi-comp */
-/* Heads up! OrgsHeading uses inline styling, however it's not the best practice. Use CSS or styled components for
- * such things.
- */
 const OrgsHeading = ({ mobile }) => (
   <Container text>
     <Header
@@ -58,12 +45,6 @@ const OrgsHeading = ({ mobile }) => (
 OrgsHeading.propTypes = {
   mobile: PropTypes.bool,
 }
-
-/* Heads up!
- * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
- * It can be more complicated, but you can create really flexible markup.
- */
-
 
 DesktopContainer.propTypes = {
   children: PropTypes.node,

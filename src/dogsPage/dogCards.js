@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DogCard from '../landingPage/dogCard' 
+import DogCard from './dogCard' 
 import { Card, Search } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { landDogs, landMoreDogs, filterDogs } from '../actions/reducerActions'
