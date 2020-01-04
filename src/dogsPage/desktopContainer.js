@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Responsive,Segment, Visibility, Card, Search} from 'semantic-ui-react'
+import { Responsive,Segment, Visibility, Card, Search, Dropdown} from 'semantic-ui-react'
 import {getWidth,filterPups} from '../actions/allActions'
 import { withRouter } from 'react-router-dom'
 import NavBar from '../navBar'
@@ -15,7 +15,10 @@ class DesktopContainer extends Component {
   
      componentDidMount() {
        this.props.landDogs([])
-      getDogs().then((data) => this.props.landDogs(data))
+      getDogs().then((data) => {
+        this.props.landDogs(data)
+      })
+    
      }
   
     hideFixedMenu = () => this.setState({ fixed: false })
@@ -25,6 +28,14 @@ class DesktopContainer extends Component {
       this.setState({search: value})
       filterPups(this.props.landingDogs, this.state.search)
     }
+
+    dogBreeds = []
+
+    // dropdownOptions = [
+    //   { key: 1, text: 'Choice 1', value: 1 },
+    //   { key: 2, text: 'Choice 2', value: 2 },
+    //   { key: 3, text: 'Choice 3', value: 3 },
+    // ]
   
     render() {
       const mapDogs = filterPups(this.props.landingDogs, this.state.search).map((dog) => 
@@ -52,6 +63,7 @@ class DesktopContainer extends Component {
               <NavBar history={this.props.history}/>
               <Search onSearchChange={(e)=>this.getSearchValue(e.target.value)} 
                 showNoResults={false} value={this.props.searchBar} id="dogs-page-searchbar"/>
+              {/* <Dropdown clearable options={this.dropdownOptions} selection /> */}
               <Card.Group itemsPerRow={4}> {mapDogs ? mapDogs : null} </Card.Group>
             </Segment>
           </Visibility>
