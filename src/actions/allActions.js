@@ -11,7 +11,7 @@
     obj.props.history.push('/favorites')
   } 
   export const profClick = (obj) => {
-    obj.props.history.push('/profile')
+    obj.history.push('/profile')
   } 
   export const orgsClick = (obj) => {
     obj.props.history.push('/organizations')
@@ -23,5 +23,13 @@
     const isSSR = typeof window === 'undefined'
   
     return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth
+  }
+  
+
+  export const filterPups = (dogs, searchValue) => {
+    let filteredDogs = dogs.filter (dog => {
+       return dog.name.toLowerCase().startsWith(searchValue.toLowerCase())
+    })
+    return filteredDogs
   }
   

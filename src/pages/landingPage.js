@@ -1,31 +1,8 @@
-import React, { Component } from 'react';
-// import DogCards from '../landingPage/dogCards'
-// import LandingBar from '../landingPage/landingBar'
-// import '../stylesheets/landingPage.css';
-
-// class landingPage extends Component {
-//     render(){
-//         return (
-//             <div>
-//                 <LandingBar />
-        
-//                 <DogCards />
-//             </div>
-//         );
-//     }
-// }
-
-// export default landingPage;
+import React from 'react';
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
-import {
-  Button,
-  Container,
-  Header,
-  Icon,
-  // Responsive,
-} from 'semantic-ui-react'
+import { Button, Container, Header, Icon } from 'semantic-ui-react'
 import DesktopContainer from '../dogsPage/desktopContainer'
 import MobileContainer from '../dogsPage/mobileContainer'
 

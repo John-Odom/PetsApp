@@ -22,7 +22,7 @@ class navBar extends Component {
                   <Menu.Item onClick={()=>homeClick(this)} as='a' active>Dogs</Menu.Item>
                   <Menu.Item onClick={()=>orgsClick(this)} as='a'>Organizations</Menu.Item>
                   <Menu.Item onClick={()=>faveClick(this)} as='a'>Favorites</Menu.Item>
-                  <Menu.Item onClick={()=>profClick(this)} as='a'>Profile</Menu.Item>
+                  <Menu.Item onClick={()=>profClick(this.props)} as='a'>Profile</Menu.Item>
                   <Menu.Item position='right'>
                     <Button onClick={()=>logout(this)} as='a' inverted={!fixed}>
                       Log Out

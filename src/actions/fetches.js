@@ -70,5 +70,19 @@ export const getAuthToken = (user) => {
       }
     })
    .then(res=>res.json())
-   
  }
+
+ export const fetchProfile = () => {
+   return fetch("http://localhost:3000/profile", {
+      headers: {
+        "Content-Type" : "application/json",
+        "Accept" : "application/json",
+        "Authorization": localStorage.getItem("jwt")
+      }
+    }).then(res => res.json())
+}
+
+export const getUsersDogs = (userId) => {
+   console.log(userId)
+   return fetch(`${LOCAL}/users/${userId}`).then(res => res.json())
+} 

@@ -11,7 +11,7 @@ let initialState = {
           case 'SET_CURRENT_USER':
             return {
              ...state,
-             currentUser: action.user_id
+             currentUser: action.user
             }
           case 'LAND_DOGS':
             return {

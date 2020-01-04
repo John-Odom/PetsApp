@@ -28,6 +28,7 @@ class Signup extends React.Component {
           .then(payload => {
              localStorage.setItem('jwt', payload.jwt)
              localStorage.setItem('user_id', payload.user.id)
+             console.log(payload.user.id)
              this.props.setCurrentUser(payload.user.id)
              getDogs()
              .then((data) => {

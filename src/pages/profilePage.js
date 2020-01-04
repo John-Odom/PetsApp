@@ -1,35 +1,72 @@
 import React from 'react'
-// import {connect} from 'react-redux'
+import {fetchProfile,getUsersDogs} from '../actions/fetches' 
+import { landDogs, setCurrentUser} from '../actions/reducerActions' 
+import PropTypes from 'prop-types'
+import { Container, Grid, Segment} from 'semantic-ui-react'
+import MobileContainer from '../profilePage/mobileContainer'
+import HomepageHeading from '../profilePage/homePageHeading'
+import DesktopContainer from '../profilePage/desktopContainer'
+import {connect} from 'react-redux'
+import UsersDogs from '../profilePage/usersDogs'
+
+HomepageHeading.propTypes = {mobile: PropTypes.bool}
+DesktopContainer.propTypes = {children: PropTypes.node}
+MobileContainer.propTypes = {children: PropTypes.node}
 
 
+const ResponsiveContainer = ({ children }) => (
+  <div>
+    <DesktopContainer>{children}</DesktopContainer>
+    <MobileContainer>{children}</MobileContainer>
+  </div>
+)
+ResponsiveContainer.propTypes = {children: PropTypes.node}
 
-export default class Profile extends React.Component {
+
+class Profile extends React.Component {
 
 state={
-    user:null
+    dogs:[]
 }
 
 componentDidMount () {
-    fetch("http://localhost:3000/profile", {
-      headers: {
-        "Content-Type" : "application/json",
-        "Accept" : "application/json",
-        "Authorization": localStorage.getItem("jwt")
-      }
-    }).then(res => res.json())
-    .then(data => {
-        this.setState({user:data.user})
-    }
-        )
+    let user=null
+    fetchProfile().then(data => {
+        user=data
+        this.props.setCurrentUser(data)
+        getUsersDogs(user.user.id).then(data => this.props.landDogs(data.dogs))
+    })
+
   }
 
   render() {
-      return(
-          <div>
-              <p>{this.state.user ? this.state.user.username : "Username should be here"}</p>
-              <p>{this.state.user ? this.state.user.bio : "bio goes here"}</p>
-          </div>
-      )
-  }
-
+      if(this.props.currentUser){
+        return(
+            <ResponsiveContainer>
+              <Segment style={{ padding: '8em 0em' }} vertical>
+                <Grid container stackable verticalAlign='middle'> 
+                  {/* <DogPics /> */}
+                  <Grid.Row>
+                     <Grid.Column textAlign='center'>
+                        <Container text>
+                           {/* <OrgInfo /> */}
+                        </Container>
+                     </Grid.Column>
+                  </Grid.Row>
+                </Grid>
+                <UsersDogs />
+              </Segment>
+            </ResponsiveContainer>
+        )
+  } else  {return null}
 }
+}
+
+const mapStatetoProps = state => {
+    return ({
+      currentUser : state.currentUser,
+      landingDogs : state.landingDogs
+    })
+ }
+
+export default connect(mapStatetoProps, {landDogs, setCurrentUser})(Profile)

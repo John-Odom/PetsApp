@@ -9,13 +9,14 @@ import {
     Button
   } from 'semantic-ui-react'
   import {addToFavorites} from '../actions/fetches'
+  import {profClick} from '../actions/allActions'
 
   
   
 const HomepageHeading = (props,{ mobile }) => {
   const add = (e) => {
     addToFavorites(e)
-    .then(() => props.history.push(`/favorites`))
+    .then(() => profClick(props))
   }
   if(props.chosenDog){
     return(

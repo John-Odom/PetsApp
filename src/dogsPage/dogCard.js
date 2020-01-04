@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Card, Icon } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import { clickDog } from '../actions/reducerActions'
-// import { findDog } from '../actions/fetches'
 import '../stylesheets/landingPage.css';
-
 
 class DogCard extends Component {
 
@@ -15,23 +11,15 @@ class DogCard extends Component {
 
    render() {
       return(
-    //   <Card 
-    //      onClick={() => this.handleClick(this.props.movieId)}
-    //      id='movie-card'
-    //      >
-    //      <Image src={this.props.dog.image} alt="no Image Available"/>
-    //   </Card>
       <Card
-      onClick={() => this.handleClick(this.props.dogId)}
-        //  id='dog-card'
+      onClick={() => this.handleClick(this.props.dog.id)}
       >
-      <img id='dogcard-image' alt='Doggo' src={this.props.dog.image} 
-      // size='medium' 
-      />
+      <img id='dogcard-image' alt='Doggo' src={this.props.dog.image} />
       <Card.Content>
         <Card.Header>{this.props.dog.name}</Card.Header>
         <Card.Meta>
-          <span className='date'>Age: {this.props.dog.age}</span>
+            <span className='date'><b>Age:</b> {this.props.dog.age}</span> | 
+            <span className='date'> <b>Breed:</b> {this.props.dog.breed}</span>
         </Card.Meta>
         <Card.Description>
           {this.props.dog.bio}
@@ -46,14 +34,4 @@ class DogCard extends Component {
    }
 } 
 
-// const mapStatetoProps = state => {
-// //    return ({
-// //      movieInfo: state.movieInfo
-// //    })
-// }
-
-// export default DogCard
-export default withRouter(connect(null, {clickDog})(DogCard));
-
-   
-
+export default withRouter(DogCard);
