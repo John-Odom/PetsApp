@@ -30,12 +30,12 @@ class Signup extends React.Component {
              localStorage.setItem('user_id', payload.user.id)
              console.log(payload.user.id)
              this.props.setCurrentUser(payload.user.id)
-             getDogs()
-             .then((data) => {
-               console.log(data)
-               this.props.landDogs(data)
-              })
-             .then(() => homeClick(this))
+            //  getDogs()
+            //  .then((data) => {
+            //    console.log(data)
+            //    this.props.landDogs(data)
+            //   })
+            //  .then(() => homeClick(this))
              })
           .then(this.setState({
              username: '',

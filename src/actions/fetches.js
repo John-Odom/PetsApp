@@ -41,9 +41,34 @@ export const getAuthToken = (user) => {
     }).then(res => res.json())
  }
 
- export const getDogs = () => {
-    return fetch(`${LOCAL}/dogs/`).then(res => res.json())
- } 
+ export const getPetFinderToken = () => {
+   const apiKey = "jNWSm5dXwyJJC4igJBvOue0yL6AFfZliXChD0OHRWoqDqr1xmG"
+   const apiSecret = "mdd46smECtcGndlPsXQTbM6YKO907s2uMQ0vvCtc"
+   return fetch ("https://api.petfinder.com/v2/oauth2/token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+         "client_id": apiKey,
+         "client_secret": apiSecret,
+         "grant_type": "client_credentials",
+    })
+   }).then(res => res.json())
+}
+   
+export const getDogs = (accessToken) => {
+      let page=1
+      return fetch('https://api.petfinder.com/v2/animals?location=atlanta, GA&distance=20&type=dog&limit=100&page='+page, {
+       method: "GET",
+       headers: {
+         "Content-Type": "application/json",
+         "Accept": "application/json",
+         "Authorization": `Bearer ${accessToken}`
+       }
+    }).then(res=>res.json())
+} 
 
  export const getOrgsDogs = () => {
    return fetch(`${LOCAL}/organizations/`).then(res => res.json())
@@ -83,6 +108,5 @@ export const getAuthToken = (user) => {
 }
 
 export const getUsersDogs = (userId) => {
-   console.log(userId)
    return fetch(`${LOCAL}/users/${userId}`).then(res => res.json())
 } 

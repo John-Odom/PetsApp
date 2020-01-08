@@ -3,7 +3,9 @@ import { Responsive,Segment, Visibility, Card, Search, Dropdown} from 'semantic-
 import {getWidth,filterPups} from '../actions/allActions'
 import { withRouter } from 'react-router-dom'
 import NavBar from '../navBar'
-import {getDogs} from '../actions/fetches'
+import {
+  getDogs,
+   getPetFinderToken} from '../actions/fetches'
 import DogCard from './dogCard'
 import { connect } from 'react-redux';
 import { landDogs, landMoreDogs, filterDogs } from '../actions/reducerActions'
@@ -15,10 +17,13 @@ class DesktopContainer extends Component {
   
      componentDidMount() {
        this.props.landDogs([])
-      getDogs().then((data) => {
-        this.props.landDogs(data)
+       getPetFinderToken().then((token) => {
+         getDogs(token.access_token)
+         .then(data=>{
+          this.props.landDogs(data.animals)
+         })
       })
-    
+      
      }
   
     hideFixedMenu = () => this.setState({ fixed: false })
