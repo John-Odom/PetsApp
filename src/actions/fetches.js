@@ -1,6 +1,6 @@
 const LOCAL = 'http://localhost:3000';
 const PETFINDERTOKEN = 'https://api.petfinder.com/v2/oauth2/token'
-const API_TOKEN = null
+let API_TOKEN = null
 
 export const addToFavorites = (e, props) =>{
    return fetch(LOCAL+'/favorites', {
@@ -25,7 +25,7 @@ export const addToFavorites = (e, props) =>{
         "Accept": "application/json"
        },
        body: JSON.stringify({
-          dog,
+          dog
        })
    })
    .then(res =>  res.json())
@@ -125,3 +125,16 @@ export const getDogs = (accessToken) => {
 export const getUsersDogs = (userId) => {
    return fetch(`${LOCAL}/users/${userId}`).then(res => res.json())
 } 
+
+export const fetchOrg = (id, accessToken) => {
+   console.log(id, accessToken)
+   return fetch(`https://api.petfinder.com/v2/organizations/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": `Bearer ${accessToken}`
+      }
+   })
+   .then(res=> res.json())
+}

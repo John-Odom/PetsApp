@@ -2,7 +2,8 @@ let initialState = {
     currentUser: null,
     landingDogs: [],
     chosenDog: null,
-    chosenOrg: null
+    chosenOrg: null,
+    apiToken: null,
   }
 
   export default (state=initialState, action) => {
@@ -42,7 +43,12 @@ let initialState = {
             return {
             ...state, 
             filter: action.source
-        } 
+          } 
+          case 'SET_TOKEN':
+            return {
+            ...state,
+            apiToken: action.source
+          }
           
       default:
         return state;

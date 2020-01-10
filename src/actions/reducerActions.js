@@ -43,5 +43,12 @@ export const toggleFilter = (source) => {
    }
 } 
 
+export const setToken = (source) => {
+   return {
+      type: 'SET_TOKEN',
+      source   
+   }
+} 
+
 
 

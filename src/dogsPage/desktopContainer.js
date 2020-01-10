@@ -8,7 +8,7 @@ import {
    getPetFinderToken} from '../actions/fetches'
 import DogCard from './dogCard'
 import { connect } from 'react-redux';
-import { landDogs, landMoreDogs, filterDogs } from '../actions/reducerActions'
+import { setToken, landDogs, landMoreDogs, filterDogs } from '../actions/reducerActions'
 
 class DesktopContainer extends Component {
         state = {
@@ -18,6 +18,7 @@ class DesktopContainer extends Component {
      componentDidMount() {
        this.props.landDogs([])
        getPetFinderToken().then((token) => {
+         this.props.setToken(token.access_token)
          getDogs(token.access_token)
          .then(data=>{
           this.props.landDogs(data.animals)
@@ -88,4 +89,4 @@ class DesktopContainer extends Component {
     })
   }
 
-  export default withRouter(connect(mapStatetoProps, { landDogs, landMoreDogs, filterDogs })(DesktopContainer));
+  export default withRouter(connect(mapStatetoProps, { setToken, landDogs, landMoreDogs, filterDogs })(DesktopContainer));

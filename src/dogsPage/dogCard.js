@@ -9,11 +9,7 @@ class DogCard extends Component {
 
    handleClick = (dog) => {
      postDog(dog)
-     console.log(dog)
-    //create or find the dog in db
-    //get the dogs id
-    //then push to that dogs page
-    //  this.props.history.push(`/dogs/${id}/`)
+     .then(data=> this.props.history.push(`/dogs/${data.id}/`))
    }
 
    render() {

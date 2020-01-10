@@ -10,6 +10,8 @@ import {
   } from 'semantic-ui-react'
   import {addToFavorites} from '../actions/fetches'
   import {profClick} from '../actions/allActions'
+  import '../stylesheets/dogPage.css';
+import OrgModal from './orgModal';
 
   
   
@@ -18,6 +20,7 @@ const HomepageHeading = (props,{ mobile }) => {
     addToFavorites(e)
     .then(() => profClick(props))
   }
+
   if(props.chosenDog){
     return(
     <Container text>
@@ -56,10 +59,10 @@ const HomepageHeading = (props,{ mobile }) => {
         onClick={(e)=>add(e)}>
           Add To Favorites
         </Button>
-        <Button data-id={ props.chosenDog.organization.id } 
-        onClick={()=>props.history.push(`/organizations/${props.chosenDog.organization.id}`)}>
-          View Organization - <i>{props.chosenDog.organization.name}</i>
-        </Button>
+        <OrgModal 
+        //get Org Info from API DB
+        //Render Org info to screen
+        />
       </Grid.Column>
     </Grid.Row>
   </Grid>

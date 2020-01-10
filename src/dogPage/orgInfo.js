@@ -8,7 +8,6 @@ import {
   } from 'semantic-ui-react'
 
 class ContactOrg extends Component {
-    
     render() {
         let dog=this.props.chosenDog
         if(this.props.chosenDog){
@@ -33,16 +32,16 @@ class ContactOrg extends Component {
                     <Grid.Row color='black' textAlign='center'>
                         <Grid.Column>
                             <Segment color='black' inverted>
-                            <p><b>Organization:</b></p> <p><b>{dog.organization.name}</b></p>
+                            {/* <p><b>Organization:</b></p> <p><b>{dog.organization.name}</b></p> */}
                             </Segment>
                         </Grid.Column>
                         <Grid.Column>
                           <Segment color='black' inverted>
-                            <p><b>Phone:</b></p> <p><b>{dog.organization.phone ? dog.organization.phone : 'N/A'}</b></p>
+                            {/* <p><b>Phone:</b></p> <p><b>{dog.organization.phone ? dog.organization.phone : 'N/A'}</b></p> */}
                           </Segment>
                         </Grid.Column>
                     </Grid.Row>
-                    <Grid.Row color='black' textAlign='center'>
+                    {/* <Grid.Row color='black' textAlign='center'>
                         <Grid.Column>
                             <Segment color='black' inverted>
                             <p><b>Website:</b></p> 
@@ -58,8 +57,8 @@ class ContactOrg extends Component {
                             <p><b>Email:</b></p> <p><a href={"mailto:" + dog.organization.email}>{dog.organization.email}</a></p>
                           </Segment>
                         </Grid.Column>
-                    </Grid.Row>
-                    <Grid.Row color='black' textAlign='center'>
+                    </Grid.Row> */}
+                    {/* <Grid.Row color='black' textAlign='center'>
                     <Grid.Column>
                           <Segment color='black' inverted>
                             <p><b>Location:</b></p> 
@@ -68,7 +67,7 @@ class ContactOrg extends Component {
                             {dog.organization.zip}</p>
                           </Segment>
                         </Grid.Column>
-                    </Grid.Row>
+                    </Grid.Row> */}
                 </Grid>
               </Container>
             </div>

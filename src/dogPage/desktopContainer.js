@@ -8,11 +8,30 @@ import {
   import {getWidth} from '../actions/allActions'
   import { withRouter } from 'react-router-dom'
   import NavBar from '../navBar'
+  import { fetchOrg, getPetFinderToken } from '../actions/fetches'
+  import {connect} from 'react-redux'
 
 
 class DesktopContainer extends Component {
     state = {}
   
+    componentDidMount() {
+        if(this.props.apiToken){
+        fetchOrg(this.props.chosenDog.api_org_id, this.props.apiToken)
+        .then(data => {
+            console.log('got response', data)
+        })}
+        else {
+            getPetFinderToken()
+            .then( token =>{
+                fetchOrg(this.props.chosenDog.api_org_id, token.access_token)
+                .then(data => {
+                    console.log('got response', data)
+                })
+            })
+        }
+    }
+
     hideFixedMenu = () => this.setState({ fixed: false })
     showFixedMenu = () => this.setState({ fixed: true })
   
@@ -42,5 +61,11 @@ class DesktopContainer extends Component {
       )
     }
   }
+  const mapStatetoProps = state => {
+    return ({
+      chosenDog: state.chosenDog,
+      apiToken: state.apiToken
+    })
+ }
 
-  export default withRouter(DesktopContainer);
+  export default withRouter(connect(mapStatetoProps)(DesktopContainer));

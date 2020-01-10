@@ -9,7 +9,6 @@ import {
 class DogPics extends Component {
     render() {
         let dog=this.props.chosenDog
-        console.log('dog', dog)
         if(this.props.chosenDog){
         return (
             <Grid.Row>
