@@ -3,18 +3,23 @@ import { withRouter } from 'react-router-dom';
 import { Card, Icon } from 'semantic-ui-react';
 import '../stylesheets/dogsPage.css';
 import noPhoto from '../images/noPhoto.png'
+import {postDog} from '../actions/fetches'
 
 class DogCard extends Component {
 
-   handleClick = (id) => {
-     this.props.history.push(`/dogs/${id}/`)
+   handleClick = (dog) => {
+     postDog(dog)
+     console.log(dog)
+    //create or find the dog in db
+    //get the dogs id
+    //then push to that dogs page
+    //  this.props.history.push(`/dogs/${id}/`)
    }
 
    render() {
-     console.log(this.props.dog)
       return(
       <Card
-      onClick={() => this.handleClick(this.props.dog.id)}
+      onClick={() => this.handleClick(this.props.dog)}
       >
       <img id='dogcard-image' alt='Doggo' src={this.props.dog.photos[0] ? this.props.dog.photos[0].medium :noPhoto} />
       <Card.Content>
