@@ -4,7 +4,7 @@ import { Card, Segment, Header, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { clickOrg } from '../actions/reducerActions'
 // import { findDog } from '../actions/fetches'
-import '../stylesheets/landingPage.css';
+import '../stylesheets/dogsPage.css';
 import noPhotoPic from '../images/no-photo-business.jpg'
 
 

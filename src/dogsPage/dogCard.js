@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Card, Icon } from 'semantic-ui-react';
-import '../stylesheets/landingPage.css';
+import '../stylesheets/dogsPage.css';
 import noPhoto from '../images/noPhoto.png'
 
 class DogCard extends Component {
@@ -29,7 +29,7 @@ class DogCard extends Component {
       </Card.Content>
       <Card.Content extra>
           <Icon name='user' />
-          Location: {this.props.dog.location}
+          Location: {this.props.dog.contact.address.city}
       </Card.Content>
     </Card>
       )

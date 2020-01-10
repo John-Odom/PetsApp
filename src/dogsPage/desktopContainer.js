@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Responsive,Segment, Visibility, Card, Search, Dropdown} from 'semantic-ui-react'
+import { Responsive,Segment, Visibility, Card, Search} from 'semantic-ui-react'
 import {getWidth,filterPups} from '../actions/allActions'
 import { withRouter } from 'react-router-dom'
 import NavBar from '../navBar'

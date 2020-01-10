@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../stylesheets/landingPage.css';
+import '../stylesheets/dogsPage.css';
 import {findOrg} from '../actions/fetches';
 import {clickOrg} from '../actions/reducerActions';
 import { connect } from 'react-redux';
