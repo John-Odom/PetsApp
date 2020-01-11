@@ -91,7 +91,7 @@ export const getAuthToken = (user) => {
    
 export const getDogs = (accessToken) => {
       let page=1
-      return fetch('https://api.petfinder.com/v2/animals?location=atlanta, GA&distance=20&type=dog&limit=100&page='+page, {
+      return fetch('https://api.petfinder.com/v2/animals?location=atlanta, GA&distance=20&type=dog&status=adoptable&limit=100&page='+page, {
        method: "GET",
        headers: {
          "Content-Type": "application/json",

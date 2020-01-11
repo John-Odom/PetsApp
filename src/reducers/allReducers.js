@@ -5,7 +5,8 @@ let initialState = {
     chosenDog: null,
     chosenOrg: null,
     apiToken: null,
-    userDogs: []
+    userDogs: [],
+    cityOptions: {location:'', adoptionStatus:'', size: '', gender: null, age: ''}
   }
 
   export default (state=initialState, action) => {

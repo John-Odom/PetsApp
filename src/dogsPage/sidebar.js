@@ -1,116 +1,229 @@
-import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import {
-  Button,
-  Grid,
-  Icon,
-  Image,
-  Menu,
-  Segment,
-  Sidebar,
-} from 'semantic-ui-react'
+import {Menu,Sidebar, Dropdown, Header, Checkbox, Form, Button, Grid} from 'semantic-ui-react'
+import {cityOptions} from './sidebarCities'
 
-const HorizontalSidebar = ({ animation, direction, visible }) => (
-  <Sidebar
-    as={Segment}
-    animation={animation}
-    direction={direction}
-    visible={visible}
-  >
-    <Grid textAlign='center'>
-      <Grid columns={3} divided>
-        <Grid.Column>
-          <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />
-        </Grid.Column>
-        <Grid.Column>
-          <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />
-        </Grid.Column>
-        <Grid.Column>
-          <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />
-        </Grid.Column>
+class VerticalSidebar extends Component {
+    state={
+        Location:null,
+        // status:null,
+        sizes:[],
+        genders:[],
+        ages:[]
+    }
+    handleStatusChange = (e, { status }) => this.setState({ status })
+    handleCheckbox = (e, { size, target } ) => {
+        if(target.includes(size)){ 
+            const remove = (items,index) => {
+                return [...items.slice(0,index),
+                        ...items.slice(index+1,items.length)];
+              };
+              const removed = remove(target, target.indexOf(size))
+              this.setState({sizes:removed})
+        }
+        else{ 
+           this.setState({sizes: [...target, size]})
+        }
+    }
+    handleGenderChange = (e, { gender }) => {
+        if(this.state.genders.includes(gender)){ 
+            const remove = (items,index) => {
+                return [...items.slice(0,index),
+                        ...items.slice(index+1,items.length)];
+              };
+              const removed = remove(this.state.genders, this.state.genders.indexOf(gender))
+              this.setState({genders:removed})
+        }
+        else{ 
+           this.setState({genders: [...this.state.genders, gender]})
+        }
+    }
+    handleAgeChange = (e, { age }) => {
+        if(this.state.ages.includes(age)){ 
+            const remove = (items,index) => {
+                return [...items.slice(0,index),
+                        ...items.slice(index+1,items.length)];
+              };
+              const removed = remove(this.state.ages, this.state.ages.indexOf(age))
+              this.setState({ages:removed})
+        }
+        else{ 
+           this.setState({ages: [...this.state.ages, age]})
+        }
+    }
+
+  render(){
+      console.log(this.state)
+    return(
+    <Sidebar as={Menu} animation={this.props.animation} icon='labeled' inverted
+      vertical visible={this.props.visible} width='wide'
+    >
+      <Header style={{ fontSize: '200%', color: 'white', paddingTop: '1em' }} >
+          Filter By:
+      </Header>
+    <Menu.Item as='a'>
+      <p>Location</p>
+      <Dropdown
+    button
+    className='icon'
+    floating
+    labeled
+    options={cityOptions}
+    search
+    placeholder='Select City'
+  />
+    </Menu.Item>
+    <Menu.Item as='a'>
+      <p>Adoption Status</p>
+      <Form>
+        <Grid columns={2}>
+        <Grid.Row>
+            <Grid.Column>
+            <Form.Field><Checkbox
+            radio
+            label='Adoptable'
+            name='checkboxRadioGroup'
+            status='adoptable'
+            checked={this.state.status === 'adoptable'}
+            onChange={this.handleStatusChange}
+          /></Form.Field>  
+          </Grid.Column>
+            <Grid.Column>
+                <Form.Field><Checkbox
+            style={{color:'white'}}
+            radio
+            label='Adopted'
+            name='checkboxRadioGroup'
+            status='adopted'
+            checked={this.state.status === 'adopted'}
+            onChange={this.handleStatusChange}
+          /></Form.Field>   
+            </Grid.Column>
+        </Grid.Row>
+          <Grid.Row>
+          <Grid.Column>
+              <Form.Field>
+              <Checkbox
+            radio
+            label='Found'
+            name='checkboxRadioGroup'
+            status='found'
+            checked={this.state.status === 'found'}
+            onChange={this.handleStatusChange}
+          />
+                  </Form.Field>
+                  </Grid.Column>
+            </Grid.Row>
+        <Form.Field>
+          
+        </Form.Field>
+        </Grid>
+        
+      </Form>
+    </Menu.Item>
+    <Menu.Item as='a'>
+      <p>Size</p>
+      <Grid columns={2}>
+        <Grid.Row>
+            <Grid.Column>
+                <Checkbox 
+                label='Small'
+                size='small'
+                target={this.state.sizes}
+                onChange={this.handleCheckbox}
+                />
+                </Grid.Column>
+            <Grid.Column>
+                <Checkbox 
+                label='Medium'
+                size='medium'
+                target={this.state.sizes}
+                onChange={this.handleCheckbox}
+                />
+                </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+            <Grid.Column>
+                <Checkbox 
+                label='Large' 
+                size='large'
+                target={this.state.sizes}
+                onChange={this.handleCheckbox}
+                />
+                </Grid.Column>
+            <Grid.Column>
+                <Checkbox 
+                label='X-Large' 
+                size='x-large'
+                target={this.state.sizes}
+                onChange={this.handleCheckbox}
+                />
+                </Grid.Column>
+        </Grid.Row>
       </Grid>
-    </Grid>
+    </Menu.Item>
+    <Menu.Item as='a'>
+      <p>Gender</p>
+      <Grid columns={3}>
+        <Grid.Row>
+            <Grid.Column><Checkbox 
+                label='Female'
+                gender='female'
+                target={this.state.genders}
+                onChange={this.handleGenderChange}
+                /></Grid.Column>
+            <Grid.Column><Checkbox 
+                label='Male'
+                gender='male'
+                target={this.state.genders}
+                onChange={this.handleGenderChange}
+                /></Grid.Column>
+            <Grid.Column><Checkbox 
+                label='Unknown'
+                gender='unknown'
+                target={this.state.genders}
+                onChange={this.handleGenderChange}
+                /></Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </Menu.Item>
+    <Menu.Item as='a'>
+      <p>Age</p>
+      <Grid columns={2}>
+        <Grid.Row>
+            <Grid.Column><Checkbox 
+                label='Baby'
+                age='baby'
+                target={this.state.ages}
+                onChange={this.handleAgeChange}
+                /></Grid.Column>
+            <Grid.Column><Checkbox 
+                label='Young'
+                age='young'
+                target={this.state.ages}
+                onChange={this.handleAgeChange}
+                /></Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+            <Grid.Column><Checkbox 
+                label='Adult'
+                age='adult'
+                target={this.state.ages}
+                onChange={this.handleAgeChange}
+                /></Grid.Column>
+            <Grid.Column><Checkbox 
+                label='Senior'
+                age='senior'
+                target={this.state.ages}
+                onChange={this.handleAgeChange}
+                /></Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </Menu.Item>
+    <Menu.Item as='a'>
+    <Button>Submit</Button>
+    </Menu.Item>
   </Sidebar>
-)
+)}
+    }
 
-HorizontalSidebar.propTypes = {
-  animation: PropTypes.string,
-  direction: PropTypes.string,
-  visible: PropTypes.bool,
-}
-
-const VerticalSidebar = ({ animation, direction, visible }) => (
-  <Sidebar
-    as={Menu}
-    animation={animation}
-    direction={direction}
-    icon='labeled'
-    inverted
-    vertical
-    visible={visible}
-    width='thin'
-  >
-    <Menu.Item as='a'>
-      <Icon name='home' />
-      Home
-    </Menu.Item>
-    <Menu.Item as='a'>
-      <Icon name='gamepad' />
-      Games
-    </Menu.Item>
-    <Menu.Item as='a'>
-      <Icon name='camera' />
-      Channels
-    </Menu.Item>
-  </Sidebar>
-)
-
-VerticalSidebar.propTypes = {
-  animation: PropTypes.string,
-  direction: PropTypes.string,
-  visible: PropTypes.bool,
-}
-
-export default class SidebarExampleTransitions extends Component {
-  state = {
-    animation: 'overlay',
-    direction: 'left',
-    visible: false,
-  }
-
-  handleAnimationChange = (animation) => () =>
-    this.setState((prevState) => ({ animation, visible: !prevState.visible }))
-
-  handleDirectionChange = (direction) => () =>
-    this.setState({ direction, visible: false })
-
-  render() {
-    const { animation, dimmed, direction, visible } = this.state
-    const vertical = direction === 'bottom' || direction === 'top'
-
-    return (
-      <div>
-        <Button
-          disabled={vertical}
-          onClick={this.handleAnimationChange('slide out')}
-        >
-          Slide Out
-        </Button>
-
-        <Sidebar.Pushable as={Segment}>
-          {<VerticalSidebar
-              animation={animation}
-              direction={direction}
-              visible={visible}
-            />}
-
-          <Sidebar.Pusher dimmed={dimmed && visible}>
-            <Segment basic>
-              <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-            </Segment>
-          </Sidebar.Pusher>
-        </Sidebar.Pushable>
-      </div>
-    )
-  }
-}
+export default VerticalSidebar

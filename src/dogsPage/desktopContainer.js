@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Responsive,Segment, Visibility, Card, Search} from 'semantic-ui-react'
+import { Responsive,Segment, Visibility, Card, Button, Sidebar} from 'semantic-ui-react'
 import {getWidth,filterPups} from '../actions/allActions'
 import { withRouter } from 'react-router-dom'
 import NavBar from '../navBar'
@@ -9,13 +9,19 @@ import {
 import DogCard from './dogCard'
 import { connect } from 'react-redux';
 import { setToken, landDogs, landMoreDogs, filterDogs } from '../actions/reducerActions'
-import Sidebar from './sidebar'
+import VerticalSidebar from './sidebar'
+import {cityOptions} from './sidebarCities'
 
 class DesktopContainer extends Component {
         state = {
-           search: ''
+           search: '',
+          animation: 'overlay',
+          visible: true,
         }
-  
+      
+        handleAnimationChange = (animation) => () =>
+          this.setState((prevState) => ({ animation, visible: !prevState.visible }))
+      
      componentDidMount() {
        getPetFinderToken().then((token) => {
          this.props.setToken(token.access_token)
@@ -24,7 +30,6 @@ class DesktopContainer extends Component {
           this.props.landDogs(data.animals)
          })
       })
-      
      }
   
     hideFixedMenu = () => this.setState({ fixed: false })
@@ -44,6 +49,9 @@ class DesktopContainer extends Component {
     // ]
   
     render() {
+      const animation= this.state.animation
+      const visible = this.state.visible
+      
       const mapDogs = filterPups(this.props.landingDogs, this.state.search).map((dog) => 
       <DogCard 
          key={dog.id}
@@ -67,10 +75,20 @@ class DesktopContainer extends Component {
               vertical
             >
               <NavBar history={this.props.history}/>
-              <Search onSearchChange={(e)=>this.getSearchValue(e.target.value)} 
-                showNoResults={false} value={this.props.searchBar} id="dogs-page-searchbar"/>
-                <Sidebar />
+              <Button onClick={this.handleAnimationChange('overlay')}>
+                Filter
+              </Button>
+              {/* <Search onSearchChange={(e)=>this.getSearchValue(e.target.value)} 
+                showNoResults={false} value={this.props.searchBar} id="dogs-page-searchbar"/> */}
+              <Sidebar />
+              <Sidebar.Pushable as={Segment}>
+        <VerticalSidebar animation={animation} visible={visible}/>
+          <Sidebar.Pusher>
+            <Segment basic>
               <Card.Group itemsPerRow={4}> {mapDogs ? mapDogs : null} </Card.Group>
+              </Segment>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
             </Segment>
           </Visibility>
   
