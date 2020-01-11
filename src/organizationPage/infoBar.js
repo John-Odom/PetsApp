@@ -13,15 +13,15 @@ const InfoBar = (props) => {
         <Grid.Column>
           <Segment color='black' inverted>
             <p><b>Website:</b></p> 
-            <p><b><a href={props.chosenOrg ? props.chosenOrg.website: null}>
-              {props.chosenOrg && props.chosenOrg.website ? props.chosenOrg.website : 'N/A'}
+            <p><b><a href={props.chosenOrg.website}>
+              {props.chosenOrg.website ? props.chosenOrg.website : 'N/A'}
             </a></b></p>
           </Segment>
         </Grid.Column>
         <Grid.Column>
           <Segment color='black' inverted>
             <p><b>Phone:</b></p> 
-            <p><b>{props.chosenOrg && props.chosenOrg.phone ? props.chosenOrg.phone : 'N/A'}</b></p>
+            <p><b>{props.chosenOrg.phone ? props.chosenOrg.phone : 'N/A'}</b></p>
           </Segment>
         </Grid.Column>
       </Grid.Row>
@@ -29,13 +29,14 @@ const InfoBar = (props) => {
         <Grid.Column>
           <Segment color='black' inverted>
             <p><b>Email:</b></p> 
-            <p><b>{props.chosenOrg && props.chosenOrg.email ? props.chosenOrg.email : 'N/A'}</b></p>
+            <p><b>{props.chosenOrg.email ? props.chosenOrg.email : 'N/A'}</b></p>
           </Segment>
         </Grid.Column>
         <Grid.Column>
           <Segment color='black' inverted>
           <p><b>Address:</b> </p> 
-          <p><b>{props.chosenOrg && props.chosenOrg.street ? props.chosenOrg.street : 'N/A'}</b></p>
+          <p><b>{props.chosenOrg.address.address1}</b></p>
+          <p><b>{props.chosenOrg.address.city}, {props.chosenOrg.address.state} {props.chosenOrg.address.postcode}</b></p>
           </Segment>
         </Grid.Column>
         </Grid.Row>

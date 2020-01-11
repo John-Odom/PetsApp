@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { Card } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { landDogs } from '../actions/reducerActions'
 import DogCard from '../dogsPage/dogCard'
-
+import '../stylesheets/profilePage.css'
 class UsersDogs extends Component {
 
    render() {
-    //    console.log(this.props.currentUser.user.dogs)
-      const mapDogs = this.props.landingDogs.map((dog) => 
-      <DogCard 
+       console.log(this.props.currentUser.user.dogs)
+      const mapDogs = this.props.userDogs.map((dog) => 
+         <DogCard 
          key={dog.id}
          dogId={dog.id}
          dog={dog}
@@ -26,8 +25,8 @@ class UsersDogs extends Component {
 const mapStatetoProps = state => {
    return ({
      currentUser: state.currentUser,
-     landingDogs: state.landingDogs
+     userDogs: state.userDogs
    })
 }
 
-export default connect(mapStatetoProps, { landDogs})(UsersDogs);
+export default connect(mapStatetoProps)(UsersDogs);

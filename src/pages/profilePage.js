@@ -1,6 +1,6 @@
 import React from 'react'
 import {fetchProfile,getUsersDogs} from '../actions/fetches' 
-import { landDogs, setCurrentUser} from '../actions/reducerActions' 
+import { userDogs, setCurrentUser} from '../actions/reducerActions' 
 import PropTypes from 'prop-types'
 import { Container, Grid, Segment} from 'semantic-ui-react'
 import MobileContainer from '../profilePage/mobileContainer'
@@ -8,6 +8,7 @@ import HomepageHeading from '../profilePage/homePageHeading'
 import DesktopContainer from '../profilePage/desktopContainer'
 import {connect} from 'react-redux'
 import UsersDogs from '../profilePage/usersDogs'
+import '../stylesheets/profilePage.css'
 
 HomepageHeading.propTypes = {mobile: PropTypes.bool}
 DesktopContainer.propTypes = {children: PropTypes.node}
@@ -25,20 +26,14 @@ ResponsiveContainer.propTypes = {children: PropTypes.node}
 
 class Profile extends React.Component {
 
-state={
-    dogs:[]
-}
-
 componentDidMount () {
-    let user=null
     fetchProfile().then(data => {
-        user=data
         this.props.setCurrentUser(data)
-        getUsersDogs(user.user.id).then(data => this.props.landDogs(data.dogs))
+        getUsersDogs(this.props.currentUser.user.id).then(data => {
+          this.props.userDogs(data.dogs)
+        })
     })
-
   }
-
   render() {
       if(this.props.currentUser){
         return(
@@ -65,8 +60,9 @@ componentDidMount () {
 const mapStatetoProps = state => {
     return ({
       currentUser : state.currentUser,
-      landingDogs : state.landingDogs
+      landingDogs : state.landingDogs,
+      userDogs: state.userDogs
     })
  }
 
-export default connect(mapStatetoProps, {landDogs, setCurrentUser})(Profile)
+export default connect(mapStatetoProps, {userDogs, setCurrentUser})(Profile)

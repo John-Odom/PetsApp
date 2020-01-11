@@ -11,6 +11,12 @@ export const setCurrentUser = (user) => {
       data
    }
 } 
+export const userDogs = (data) => {
+   return {
+      type: 'USER_DOGS',
+      data
+   }
+} 
  export const landMoreDogs = (data) => {
    return {
       type: 'LAND_MORE_DOGS',
@@ -30,12 +36,6 @@ export const clickDog = (data) => {
       data
    }
 }
-export const clickOrg = (data) => {
-   return {
-      type: 'CLICK_ORG',
-      data
-   }
-}
 export const toggleFilter = (source) => {
    return {
       type: 'TOGGLE_FILTER',
@@ -49,6 +49,27 @@ export const setToken = (source) => {
       source   
    }
 } 
+
+export const setOrg = (source) =>{
+   return {
+      type: 'SET_ORG',
+      source   
+   }
+}
+
+export const landOrgs = (source) =>{
+   return {
+      type: 'LAND_ORGS',
+      source   
+   }
+}
+
+export const landingOrgs = (source) =>{
+   return {
+      type: 'LANDING_ORGS',
+      source   
+   }
+}
 
 
 

@@ -9,6 +9,7 @@ import {
 import DogCard from './dogCard'
 import { connect } from 'react-redux';
 import { setToken, landDogs, landMoreDogs, filterDogs } from '../actions/reducerActions'
+import Sidebar from './sidebar'
 
 class DesktopContainer extends Component {
         state = {
@@ -16,7 +17,6 @@ class DesktopContainer extends Component {
         }
   
      componentDidMount() {
-       this.props.landDogs([])
        getPetFinderToken().then((token) => {
          this.props.setToken(token.access_token)
          getDogs(token.access_token)
@@ -69,7 +69,7 @@ class DesktopContainer extends Component {
               <NavBar history={this.props.history}/>
               <Search onSearchChange={(e)=>this.getSearchValue(e.target.value)} 
                 showNoResults={false} value={this.props.searchBar} id="dogs-page-searchbar"/>
-              {/* <Dropdown clearable options={this.dropdownOptions} selection /> */}
+                <Sidebar />
               <Card.Group itemsPerRow={4}> {mapDogs ? mapDogs : null} </Card.Group>
             </Segment>
           </Visibility>

@@ -12,13 +12,16 @@ import {
   import {profClick} from '../actions/allActions'
   import '../stylesheets/dogPage.css';
 import OrgModal from './orgModal';
+import noPhoto from '../images/noDogPic.gif';
 
   
   
 const HomepageHeading = (props,{ mobile }) => {
   const add = (e) => {
-    addToFavorites(e)
-    .then(() => profClick(props))
+    addToFavorites(e, props.chosenDog)
+    .then((data) => {
+    profClick(props)
+  })
   }
 
   if(props.chosenDog){
@@ -34,7 +37,7 @@ const HomepageHeading = (props,{ mobile }) => {
           marginTop: mobile ? '.75em' : '1.5em',
         }}
       />
-      <img id="dog-page-image" alt="DOGGO" src={props.chosenDog.image} />
+      <img id="dog-page-image" alt="DOGGO" src={props.chosenDog.photos[0] ? props.chosenDog.photos[0].medium : noPhoto} />
       <Grid columns='equal' divided inverted padded>
     <Grid.Row color='black' textAlign='center'>
       <Grid.Column>
@@ -44,7 +47,7 @@ const HomepageHeading = (props,{ mobile }) => {
       </Grid.Column>
       <Grid.Column>
         <Segment color='black' inverted>
-          <p><b>Breed:</b></p> {props.chosenDog.breed }
+          <p><b>Primary Breed:</b></p> {props.chosenDog.breeds.primary }
         </Segment>
       </Grid.Column>
       <Grid.Column>

@@ -4,12 +4,17 @@ import { Card, Icon } from 'semantic-ui-react';
 import '../stylesheets/dogsPage.css';
 import noPhoto from '../images/noPhoto.png'
 import {postDog} from '../actions/fetches'
+import {connect} from 'react-redux'
+import {clickDog} from '../actions/reducerActions'
 
 class DogCard extends Component {
 
    handleClick = (dog) => {
      postDog(dog)
-     .then(data=> this.props.history.push(`/dogs/${data.id}/`))
+     .then(data=> {
+      this.props.clickDog(dog)
+       this.props.history.push(`/dogs/${data.id}/`)
+      })
    }
 
    render() {
@@ -37,4 +42,5 @@ class DogCard extends Component {
    }
 } 
 
-export default withRouter(DogCard);
+
+export default withRouter(connect(null, {clickDog})(DogCard));

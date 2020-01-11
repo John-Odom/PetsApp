@@ -2,7 +2,7 @@ const LOCAL = 'http://localhost:3000';
 const PETFINDERTOKEN = 'https://api.petfinder.com/v2/oauth2/token'
 let API_TOKEN = null
 
-export const addToFavorites = (e, props) =>{
+export const addToFavorites = (e, dog) =>{
    return fetch(LOCAL+'/favorites', {
       method: "POST",
        headers: {
@@ -11,7 +11,8 @@ export const addToFavorites = (e, props) =>{
        },
        body: JSON.stringify({
           dog_id:e.target.dataset.id,
-          user_id: localStorage.user_id
+          user_id: localStorage.user_id,
+          api_dog_id: dog.api_dog_id
        })
    })
    .then(res =>  res.json())
@@ -26,6 +27,21 @@ export const addToFavorites = (e, props) =>{
        },
        body: JSON.stringify({
           dog
+       })
+   })
+   .then(res =>  res.json())
+ }
+
+ export const postOrg = (org) =>{
+    console.log('in org fetch', org)
+   return fetch(LOCAL+'/organizations', {
+      method: "POST",
+       headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+       },
+       body: JSON.stringify({
+          org
        })
    })
    .then(res =>  res.json())
@@ -85,12 +101,26 @@ export const getDogs = (accessToken) => {
     }).then(res=>res.json())
 } 
 
- export const getOrgsDogs = () => {
-   return fetch(`${LOCAL}/organizations/`).then(res => res.json())
+ export const getOrgs = (accessToken) => {
+   return fetch('https://api.petfinder.com/v2/organizations?location=atlanta, GA&distance=20&limit=100&', {
+       method: "GET",
+       headers: {
+         "Content-Type": "application/json",
+         "Accept": "application/json",
+         "Authorization": `Bearer ${accessToken}`
+       }
+   }) .then(res => res.json())
 } 
 
- export const getOrgs = () => {
-   return fetch(`${LOCAL}/organizations`).then(res => res.json())
+export const getOrg = (id, accessToken) => {
+   return fetch('https://api.petfinder.com/v2/organizations/' + id, {
+       method: "GET",
+       headers: {
+         "Content-Type": "application/json",
+         "Accept": "application/json",
+         "Authorization": `Bearer ${accessToken}`
+       }
+   }) .then(res => res.json())
 } 
 
  export const findDog = (dogId) => {
@@ -127,7 +157,6 @@ export const getUsersDogs = (userId) => {
 } 
 
 export const fetchOrg = (id, accessToken) => {
-   console.log(id, accessToken)
    return fetch(`https://api.petfinder.com/v2/organizations/${id}`, {
       method: "GET",
       headers: {

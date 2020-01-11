@@ -13,13 +13,13 @@ class DogPics extends Component {
         return (
             <Grid.Row>
             <Grid.Column width={5}>
-            <Image bordered rounded size='large' src={dog.image2} />
+            <Image bordered rounded size='large' src={dog.photos[1] ? dog.photos[1].medium : dog.image} />
             </Grid.Column>
             <Grid.Column width={5}>
-            <Image bordered rounded size='large' src={dog.image3 ? dog.image3 : dog.image} />
+            <Image bordered rounded size='large' src={dog.photos[2] ? dog.photos[2].medium : dog.image} />
             </Grid.Column>
             <Grid.Column width={5}>
-             <Image bordered rounded size='large' src={dog.image4 ? dog.image4 : dog.image} />
+             <Image bordered rounded size='large' src={dog.photos[3] ? dog.photos[3].medium : dog.image} />
             </Grid.Column>
           </Grid.Row>
         );

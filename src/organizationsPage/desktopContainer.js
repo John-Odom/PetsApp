@@ -8,20 +8,29 @@ import {
   import {getWidth} from '../actions/allActions'
   import { withRouter } from 'react-router-dom'
   import NavBar from '../navBar'
-  import {getOrgs} from '../actions/fetches'
+  import {getOrgs, getPetFinderToken} from '../actions/fetches'
   import OrgCard from './orgCard'
+  import {connect} from 'react-redux'
+  import {landOrgs} from '../actions/reducerActions'
+
 
 
 class DesktopContainer extends Component {
-    state = {
-        orgs : null
+
+    findOrgs = (token) =>{
+      getOrgs(token)
+        .then(orgs => {
+            this.props.landOrgs(orgs.organizations)
+        })
     }
 
     componentDidMount(){
-        getOrgs()
-        .then(orgs => {
-            this.setState({orgs})
-        })
+      if(this.props.apiToken){
+        this.findOrgs(this.props.apiToken)
+      } else {
+        getPetFinderToken()
+        .then( token => this.findOrgs(token.access_token))
+      }
     }
   
     hideFixedMenu = () => this.setState({ fixed: false })
@@ -29,17 +38,17 @@ class DesktopContainer extends Component {
   
     render() {
         let mapOrgs
-        if(this.state.orgs){
-            mapOrgs = this.state.orgs.map((org) => 
+        if(this.props.landingOrgs){
+            mapOrgs = this.props.landingOrgs.map((org) => 
             <OrgCard 
               key={org.id}
               dogId={org.id}
               org={org}
-            />)}
-  
-
+            />)
+        }
       const { children } = this.props
-    if(this.state.orgs){
+    if(this.props.landingOrgs){
+      console.log(this.props.landingOrgs)
       return (
         <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
           <Visibility
@@ -69,4 +78,12 @@ class DesktopContainer extends Component {
     }
   }
 
-  export default withRouter(DesktopContainer);
+  const mapStatetoProps = state => {
+    return ({
+      apiToken: state.apiToken,
+      landingOrgs : state.landingOrgs
+    })
+ }
+
+
+  export default withRouter( connect(mapStatetoProps,{landOrgs})(DesktopContainer));

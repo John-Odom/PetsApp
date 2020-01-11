@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../stylesheets/dogsPage.css';
-import {findOrg} from '../actions/fetches';
-import {clickOrg} from '../actions/reducerActions';
+import {findOrg, fetchOrg, getOrg, getAuthToken, getPetFinderToken} from '../actions/fetches';
+import {setOrg} from '../actions/reducerActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {
@@ -40,12 +40,20 @@ import {
 
 class organizationPage extends Component {
 
-     componentDidMount () {
-        const orgId = this.props.match.params.id
+     componentDidMount () { 
+      const orgId = this.props.match.params.id
+       if(this.props.chosenOrg){
         findOrg(orgId)
-        .then((org) => {
-           this.props.clickOrg(org);
+       }
+       else {
+        findOrg(orgId).then((org) => {
+           getPetFinderToken().then(token=>{
+            getOrg(org.apiid, token.access_token).then(data=>{
+              this.props.setOrg(data.organization)
+            })
+           })
          })
+       }
       }
     
     render(){
@@ -77,4 +85,4 @@ const mapStatetoProps = state => {
   })
 }
 
-export default withRouter(connect(mapStatetoProps, {clickOrg} )(organizationPage));
+export default withRouter(connect(mapStatetoProps, {setOrg} )(organizationPage));

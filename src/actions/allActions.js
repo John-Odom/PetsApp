@@ -7,9 +7,7 @@
   export const homeClick = (obj) => {
     obj.props.history.push('/dogs')
   } 
-  export const faveClick = (obj) => {
-    obj.props.history.push('/favorites')
-  } 
+  
   export const profClick = (obj) => {
     obj.history.push('/profile')
   } 

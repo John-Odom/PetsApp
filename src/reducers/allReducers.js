@@ -1,14 +1,15 @@
 let initialState = {
     currentUser: null,
     landingDogs: [],
+    landingOrgs: [],
     chosenDog: null,
     chosenOrg: null,
     apiToken: null,
+    userDogs: []
   }
 
   export default (state=initialState, action) => {
     switch (action.type) {
-  
           case 'SET_CURRENT_USER':
             return {
              ...state,
@@ -19,6 +20,11 @@ let initialState = {
             ...state, 
             landingDogs: action.data
             }  
+            case 'USER_DOGS':
+            return {
+            ...state, 
+            userDogs: action.data
+            } 
             case 'FILTER_DOGS':
             return {
             ...state, 
@@ -49,7 +55,16 @@ let initialState = {
             ...state,
             apiToken: action.source
           }
-          
+          case 'SET_ORG':
+            return {
+              ...state,
+              chosenOrg: action.source
+            }
+          case 'LAND_ORGS':
+            return {
+              ...state,
+              landingOrgs: action.source
+            }
       default:
         return state;
       }

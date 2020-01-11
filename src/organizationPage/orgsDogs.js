@@ -7,16 +7,16 @@ import DogCard from '../dogsPage/dogCard'
 class OrgsDogs extends Component {
 
    render() {
-      const mapDogs = this.props.chosenOrg.dogs.map((dog) => 
-      <DogCard 
-         key={dog.id}
-         dogId={dog.id}
-         dog={dog}
-         />)
+      // const mapDogs = this.props.chosenOrg.dogs.map((dog) => 
+      // <DogCard 
+      //    key={dog.id}
+      //    dogId={dog.id}
+      //    dog={dog}
+      //    />)
 
       return(
          <Card.Group itemsPerRow={4}>
-            {mapDogs}
+            {/* {mapDogs} */}
          </Card.Group>
       )
    }

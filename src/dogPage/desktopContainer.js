@@ -10,25 +10,27 @@ import {
   import NavBar from '../navBar'
   import { fetchOrg, getPetFinderToken } from '../actions/fetches'
   import {connect} from 'react-redux'
+  import {setOrg} from '../actions/reducerActions'
+
 
 
 class DesktopContainer extends Component {
     state = {}
   
+    findDog = (token) =>{
+      fetchOrg(this.props.chosenDog.organization_id, token)
+      .then(data => {
+          this.props.setOrg(data)
+      })
+    }
+
     componentDidMount() {
         if(this.props.apiToken){
-        fetchOrg(this.props.chosenDog.api_org_id, this.props.apiToken)
-        .then(data => {
-            console.log('got response', data)
-        })}
+          this.findDog(this.props.apiToken)
+        }
         else {
             getPetFinderToken()
-            .then( token =>{
-                fetchOrg(this.props.chosenDog.api_org_id, token.access_token)
-                .then(data => {
-                    console.log('got response', data)
-                })
-            })
+            .then( token => this.findDog(token.access_token))
         }
     }
 
@@ -55,7 +57,6 @@ class DesktopContainer extends Component {
               <HomepageHeading />
             </Segment>
           </Visibility>
-  
           {children}
         </Responsive>
       )
@@ -68,4 +69,4 @@ class DesktopContainer extends Component {
     })
  }
 
-  export default withRouter(connect(mapStatetoProps)(DesktopContainer));
+  export default withRouter(connect(mapStatetoProps, {setOrg})(DesktopContainer));

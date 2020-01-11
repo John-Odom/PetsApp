@@ -10,8 +10,6 @@ import dogsPage from './pages/dogsPage';
 import OrganizationsPage from './pages/organizationsPage';
 import OrganizationPage from './pages/organizationPage';
 import DogPage from './pages/dogPage';
-import FavoritesPage from './pages/favoritesPage';
-
 
 
 class App extends Component {
@@ -27,7 +25,6 @@ class App extends Component {
           {/* <Route exact path='/loading' component={LoadingPage} /> */}
           <Route exact path='/dogs/:id' component={DogPage} />
           <Route exact path='/organizations/:id' component={OrganizationPage} />
-          <Route exact path='/favorites' component={FavoritesPage} />
           <Redirect to='/signup' />
       </Switch>
     )
