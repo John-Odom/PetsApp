@@ -41,4 +41,6 @@
    width: 25%;
  }
 
- 
+.ui.segment.pushable {
+   min-height: 100vh;
+ }
