@@ -1,16 +1,21 @@
 import React, { Component } from 'react'
 import {Menu,Sidebar, Dropdown, Header, Checkbox, Form, Button, Grid} from 'semantic-ui-react'
 import {cityOptions} from './sidebarCities'
+import {handleSearchSubmit} from '../actions/allActions'
+import{connect} from 'react-redux'
 
 class VerticalSidebar extends Component {
     state={
-        Location:null,
-        // status:null,
+        city:null,
+        status:'adoptable',
         sizes:[],
         genders:[],
         ages:[]
     }
     handleStatusChange = (e, { status }) => this.setState({ status })
+    
+    handleCityChange = (e, {value}) => this.setState({ city:value })
+   
     handleCheckbox = (e, { size, target } ) => {
         if(target.includes(size)){ 
             const remove = (items,index) => {
@@ -52,7 +57,6 @@ class VerticalSidebar extends Component {
     }
 
   render(){
-      console.log(this.state)
     return(
     <Sidebar as={Menu} animation={this.props.animation} icon='labeled' inverted
       vertical visible={this.props.visible} width='wide'
@@ -69,6 +73,7 @@ class VerticalSidebar extends Component {
     labeled
     options={cityOptions}
     search
+    onChange={this.handleCityChange}
     placeholder='Select City'
   />
     </Menu.Item>
@@ -153,7 +158,7 @@ class VerticalSidebar extends Component {
             <Grid.Column>
                 <Checkbox 
                 label='X-Large' 
-                size='x-large'
+                size='Extra large'
                 target={this.state.sizes}
                 onChange={this.handleCheckbox}
                 />
@@ -163,7 +168,7 @@ class VerticalSidebar extends Component {
     </Menu.Item>
     <Menu.Item as='a'>
       <p>Gender</p>
-      <Grid columns={3}>
+      <Grid columns={2}>
         <Grid.Row>
             <Grid.Column><Checkbox 
                 label='Female'
@@ -174,12 +179,6 @@ class VerticalSidebar extends Component {
             <Grid.Column><Checkbox 
                 label='Male'
                 gender='male'
-                target={this.state.genders}
-                onChange={this.handleGenderChange}
-                /></Grid.Column>
-            <Grid.Column><Checkbox 
-                label='Unknown'
-                gender='unknown'
                 target={this.state.genders}
                 onChange={this.handleGenderChange}
                 /></Grid.Column>
@@ -220,10 +219,18 @@ class VerticalSidebar extends Component {
       </Grid>
     </Menu.Item>
     <Menu.Item as='a'>
-    <Button>Submit</Button>
+    <Button
+      onClick={(e)=>handleSearchSubmit(this.state, this.props.apiToken)}
+    >Submit</Button>
     </Menu.Item>
   </Sidebar>
 )}
     }
 
-export default VerticalSidebar
+    const mapStatetoProps = state => {
+      return ({
+        apiToken: state.apiToken
+      })
+   }
+
+export default connect(mapStatetoProps)(VerticalSidebar)

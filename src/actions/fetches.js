@@ -1,3 +1,5 @@
+import { access } from "fs";
+
 const LOCAL = 'http://localhost:3000';
 const PETFINDERTOKEN = 'https://api.petfinder.com/v2/oauth2/token'
 let API_TOKEN = null
@@ -33,7 +35,6 @@ export const addToFavorites = (e, dog) =>{
  }
 
  export const postOrg = (org) =>{
-    console.log('in org fetch', org)
    return fetch(LOCAL+'/organizations', {
       method: "POST",
        headers: {
@@ -91,7 +92,7 @@ export const getAuthToken = (user) => {
    
 export const getDogs = (accessToken) => {
       let page=1
-      return fetch('https://api.petfinder.com/v2/animals?location=atlanta, GA&distance=20&type=dog&status=adoptable&limit=100&page='+page, {
+      return fetch('https://api.petfinder.com/v2/animals?location=atlanta, GA&distance=20&type=dog&status=adoptable&limit=20&page='+page, {
        method: "GET",
        headers: {
          "Content-Type": "application/json",
@@ -109,7 +110,7 @@ export const getDogs = (accessToken) => {
          "Accept": "application/json",
          "Authorization": `Bearer ${accessToken}`
        }
-   }) .then(res => res.json())
+   }).then(res => res.json())
 } 
 
 export const getOrg = (id, accessToken) => {
@@ -120,7 +121,7 @@ export const getOrg = (id, accessToken) => {
          "Accept": "application/json",
          "Authorization": `Bearer ${accessToken}`
        }
-   }) .then(res => res.json())
+   }).then(res => res.json())
 } 
 
  export const findDog = (dogId) => {
@@ -166,4 +167,29 @@ export const fetchOrg = (id, accessToken) => {
       }
    })
    .then(res=> res.json())
+}
+
+export const orgsDogs = (link, accessToken) =>{
+   console.log(link)
+   return fetch(`https://api.petfinder.com${link}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": `Bearer ${accessToken}`
+      }
+   })
+   .then(res=> res.json())
+}
+
+export const allFiltersPresent = (params, accessToken) =>{
+   console.log(params.sizes)
+   return fetch(`https://api.petfinder.com/v2/animals?location=${params.city}&distance=20&type=dog&status=${params.status}&limit=20&size=${params.sizes}&gender=${params.genders}&age=${params.ages}&page=1`, {
+          method: "GET",
+          headers: {
+             "Content-Type": "application/json",
+             "Accept": "application/json",
+             "Authorization": `Bearer ${accessToken}`
+          }
+       }).then(res=>res.json())
 }

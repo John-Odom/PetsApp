@@ -10,7 +10,6 @@ import DogCard from './dogCard'
 import { connect } from 'react-redux';
 import { setToken, landDogs, landMoreDogs, filterDogs } from '../actions/reducerActions'
 import VerticalSidebar from './sidebar'
-import {cityOptions} from './sidebarCities'
 
 class DesktopContainer extends Component {
         state = {

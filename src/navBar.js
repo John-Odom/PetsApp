@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {logout, homeClick, faveClick, profClick, orgsClick} from './actions/allActions'
+import {logout, homeClick, profClick, orgsClick} from './actions/allActions'
 import {
     Button,
     Container,

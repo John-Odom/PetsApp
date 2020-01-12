@@ -11,7 +11,7 @@ import {
   import {getOrgs, getPetFinderToken} from '../actions/fetches'
   import OrgCard from './orgCard'
   import {connect} from 'react-redux'
-  import {landOrgs} from '../actions/reducerActions'
+  import {landOrgs, setToken} from '../actions/reducerActions'
 
 
 
@@ -29,7 +29,10 @@ class DesktopContainer extends Component {
         this.findOrgs(this.props.apiToken)
       } else {
         getPetFinderToken()
-        .then( token => this.findOrgs(token.access_token))
+        .then( token => {
+          this.findOrgs(token.access_token)
+          this.props.setToken(token.access_token)
+        })
       }
     }
   
@@ -48,7 +51,6 @@ class DesktopContainer extends Component {
         }
       const { children } = this.props
     if(this.props.landingOrgs){
-      console.log(this.props.landingOrgs)
       return (
         <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
           <Visibility
@@ -86,4 +88,4 @@ class DesktopContainer extends Component {
  }
 
 
-  export default withRouter( connect(mapStatetoProps,{landOrgs})(DesktopContainer));
+  export default withRouter( connect(mapStatetoProps,{landOrgs, setToken})(DesktopContainer));

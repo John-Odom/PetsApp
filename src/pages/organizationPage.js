@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../stylesheets/dogsPage.css';
-import {findOrg, fetchOrg, getOrg, getAuthToken, getPetFinderToken} from '../actions/fetches';
+import {findOrg, getOrg, getPetFinderToken} from '../actions/fetches';
 import {setOrg} from '../actions/reducerActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';

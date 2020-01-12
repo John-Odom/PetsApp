@@ -1,11 +1,11 @@
-const cities=['New York, NY','Los Angeles, CA','Chicago, IL',  'Dallas, TX','Houston, TX', 'Washington, DC', 
-'Miami, FL',  'Philadelphia, PA', 'Atlanta, GA', 'Boston, MA', 'Phoenix, AZ', 
-'San Francisco, CA', 'Riverside, CA', 'Detroit, MI',
-'Seattle, WA', 'Minneapolis, MN', 'San Diego, CA', 'Tampa, FL', 'Denver, CO',
- 'St Louis, MO', 'Baltimore, MD',
-'Orlando, FL', 'Charlotte, NC', 'San Antonio, TX', 'Portland, OR', 
-'Sacramento, CA', 'Pittsburgh, PA', 'Las Vegas, NV',
-'Cincinnati, OH', 'Austin, TX']
+// const cities=['New York, NY','Los Angeles, CA','Chicago, IL',  'Dallas, TX','Houston, TX', 'Washington, DC', 
+// 'Miami, FL',  'Philadelphia, PA', 'Atlanta, GA', 'Boston, MA', 'Phoenix, AZ', 
+// 'San Francisco, CA', 'Riverside, CA', 'Detroit, MI',
+// 'Seattle, WA', 'Minneapolis, MN', 'San Diego, CA', 'Tampa, FL', 'Denver, CO',
+//  'St Louis, MO', 'Baltimore, MD',
+// 'Orlando, FL', 'Charlotte, NC', 'San Antonio, TX', 'Portland, OR', 
+// 'Sacramento, CA', 'Pittsburgh, PA', 'Las Vegas, NV',
+// 'Cincinnati, OH', 'Austin, TX']
 
 export const cityOptions = [
     { key: 'New York, NY', text: 'New York, NY', value: 'New York, NY' },
