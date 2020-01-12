@@ -1,6 +1,5 @@
   import {Responsive} from 'semantic-ui-react'
   import {allFiltersPresent} from './fetches'
-import { access } from 'fs'
   
   export const logout = (obj) => {
     localStorage.clear()
@@ -36,14 +35,10 @@ import { access } from 'fs'
   export const handleSearchSubmit = ( params, accessToken) =>{
    
     let result=null
-    // const allSizes= 'small,medium,large,extra large'
-    // const allGenders= 'male,female'
-    // const allAges= 'baby,young,adult,senior'
     if(!params.city && params.status) {
-       console.log('error')
+       alert('error')
     } else {
       result = allFiltersPresent(params, accessToken)
-       .then(console.log)
     }
     return result
  }

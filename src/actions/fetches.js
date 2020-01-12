@@ -1,4 +1,3 @@
-import { access } from "fs";
 
 const LOCAL = 'http://localhost:3000';
 const PETFINDERTOKEN = 'https://api.petfinder.com/v2/oauth2/token'

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Menu,Sidebar, Dropdown, Header, Checkbox, Form, Button, Grid} from 'semantic-ui-react'
 import {cityOptions} from './sidebarCities'
 import {handleSearchSubmit} from '../actions/allActions'
+import {landDogs} from '../actions/reducerActions'
 import{connect} from 'react-redux'
 
 class VerticalSidebar extends Component {
@@ -220,7 +221,11 @@ class VerticalSidebar extends Component {
     </Menu.Item>
     <Menu.Item as='a'>
     <Button
-      onClick={(e)=>handleSearchSubmit(this.state, this.props.apiToken)}
+      onClick={(e)=>handleSearchSubmit(this.state, this.props.apiToken)
+        .then(data=>{
+          console.log(data)
+          this.props.landDogs(data.animals)
+        })}
     >Submit</Button>
     </Menu.Item>
   </Sidebar>
@@ -233,4 +238,4 @@ class VerticalSidebar extends Component {
       })
    }
 
-export default connect(mapStatetoProps)(VerticalSidebar)
+export default connect(mapStatetoProps, {landDogs})(VerticalSidebar)
