@@ -17,6 +17,42 @@ export const userDogs = (data) => {
       data
    }
 } 
+export const genderChange = (data) => {
+   return {
+      type: 'GENDER_CHANGE',
+      data
+   }
+} 
+export const ageChange = (data) => {
+   return {
+      type: 'AGE_CHANGE',
+      data
+   }
+} 
+export const breedChange = (data) => {
+   return {
+      type: 'BREED_CHANGE',
+      data
+   }
+} 
+export const statusChange = (data) => {
+   return {
+      type: 'STATUS_CHANGE',
+      data
+   }
+} 
+export const cityChange = (data) => {
+   return {
+      type: 'CITY_CHANGE',
+      data
+   }
+} 
+export const sizeChange = (data) => {
+   return {
+      type: 'SIZE_CHANGE',
+      data
+   }
+} 
  export const landMoreDogs = (data) => {
    return {
       type: 'LAND_MORE_DOGS',

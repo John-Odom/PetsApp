@@ -6,7 +6,6 @@ import '../stylesheets/profilePage.css'
 class UsersDogs extends Component {
 
    render() {
-       console.log(this.props.currentUser.user.dogs)
       const mapDogs = this.props.userDogs.map((dog) => 
          <DogCard 
          key={dog.id}

@@ -6,11 +6,46 @@ let initialState = {
     chosenOrg: null,
     apiToken: null,
     userDogs: [],
-    cityOptions: {location:'', adoptionStatus:'', size: '', gender: null, age: ''}
+    city:null, 
+    status:'adoptable', 
+    sizes: [], 
+    genders: [], 
+    ages: [], 
+    breeds:[]
   }
 
   export default (state=initialState, action) => {
     switch (action.type) {
+            case 'GENDER_CHANGE':
+            return {
+            ...state, 
+            genders: action.data
+            }  
+            case 'AGE_CHANGE':
+            return {
+            ...state, 
+            ages: action.data
+            }  
+            case 'BREED_CHANGE':
+            return {
+            ...state, 
+            breeds: action.data
+            }  
+            case 'STATUS_CHANGE':
+            return {
+            ...state, 
+            status: action.data
+            }  
+            case 'CITY_CHANGE':
+            return {
+            ...state, 
+            city: action.data
+            }  
+            case 'SIZE_CHANGE':
+            return {
+            ...state, 
+            sizes: action.data
+            }  
           case 'SET_CURRENT_USER':
             return {
              ...state,
@@ -26,15 +61,10 @@ let initialState = {
             ...state, 
             userDogs: action.data
             } 
-            // case 'FILTER_DOGS':
-            // return {
-            // ...state, 
-            // landingDogs: action.data
-            // }  
           case 'LAND_MORE_DOGS':
             return {
             ...state,
-            landingDogs: [...state.landingDogs, ...action.data]
+            landingDogs: [...state.landingDogs, ...action.data.animals]
             } 
           case 'CLICK_DOG':
             return {

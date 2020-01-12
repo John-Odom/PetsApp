@@ -19,10 +19,7 @@ class DesktopContainer extends Component {
   
     findDog = (token) =>{
       fetchOrg(this.props.chosenDog.organization_id, token)
-      .then(data => {
-        console.log(data)
-          this.props.setOrg(data.organization)
-      })
+      .then(data => this.props.setOrg(data.organization))
     }
 
     componentDidMount() {

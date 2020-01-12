@@ -1,7 +1,7 @@
-import React from 'react';
+// import React, {Component} from 'react';
+import React, { useEffect, Component } from "react";
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux'
+import { withRouter, useLocation } from 'react-router-dom';
 import DesktopContainer from '../dogsPage/dogsPageContainer'
 import MobileContainer from '../dogsPage/mobileContainer'
 
@@ -24,7 +24,8 @@ ResponsiveContainer.propTypes = {
   children: PropTypes.node,
 }
 
-const dogsPage = () => (
-  <ResponsiveContainer />
-)
-export default withRouter(dogsPage);
+const DogsPage = () => {
+    return (<ResponsiveContainer />)
+  }
+
+export default withRouter(DogsPage);

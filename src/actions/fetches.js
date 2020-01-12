@@ -89,9 +89,8 @@ export const getAuthToken = (user) => {
    }).then(res => res.json())
 }
    
-export const getDogs = (accessToken) => {
-      let page=1
-      return fetch('https://api.petfinder.com/v2/animals?location=atlanta, GA&distance=20&type=dog&status=adoptable&limit=12&page='+page, {
+export const getDogs = (accessToken, page=1) => {
+      return fetch('https://api.petfinder.com/v2/animals?location=atlanta, GA&distance=20&type=dog&status=adoptable&limit=20&page='+page, {
        method: "GET",
        headers: {
          "Content-Type": "application/json",
@@ -169,7 +168,6 @@ export const fetchOrg = (id, accessToken) => {
 }
 
 export const orgsDogs = (link, accessToken) =>{
-   console.log('link', link)
    return fetch(`https://api.petfinder.com${link}&type=dog`, {
       method: "GET",
       headers: {
@@ -181,19 +179,12 @@ export const orgsDogs = (link, accessToken) =>{
    .then(res=> res.json())
 }
 
-export const allFiltersPresent = (params, accessToken) =>{
-   return fetch(`https://api.petfinder.com/v2/animals?location=${params.city}&distance=20&type=dog&status=${params.status}&limit=20&size=${params.sizes}&gender=${params.genders}&age=${params.ages}&breed=${params.breeds}&page=1`, {
-          method: "GET",
-          headers: {
-             "Content-Type": "application/json",
-             "Accept": "application/json",
-             "Authorization": `Bearer ${accessToken}`
-          }
-       }).then(res=>res.json())
-}
-export const noCityInFilter = (params, accessToken) =>{
-   console.log('got here')
-   return fetch(`https://api.petfinder.com/v2/animals?type=dog&status=${params.status}&limit=20&size=${params.sizes}&gender=${params.genders}&age=${params.ages}&breed=${params.breeds}&page=1`, {
+export const handleSearchSubmit = (params, accessToken) =>{
+   let link=null
+   params.city ? link = `https://api.petfinder.com/v2/animals?location=${params.city}&distance=20&type=dog&status=${params.status}&limit=20&size=${params.sizes}&gender=${params.genders}&age=${params.ages}&breed=${params.breeds}&page=1`
+   : link= `https://api.petfinder.com/v2/animals?type=dog&status=${params.status}&limit=20&size=${params.sizes}&gender=${params.genders}&age=${params.ages}&breed=${params.breeds}&page=1`
+console.log(link)
+   return fetch(link, {
           method: "GET",
           headers: {
              "Content-Type": "application/json",

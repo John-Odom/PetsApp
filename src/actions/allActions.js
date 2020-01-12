@@ -1,5 +1,6 @@
   import {Responsive} from 'semantic-ui-react'
   import {allFiltersPresent, noCityInFilter} from './fetches'
+import { handleSearch } from './reducerActions'
   
   export const logout = (obj) => {
     localStorage.clear()
@@ -25,22 +26,14 @@
   }
   
 
-  export const filterPups = (dogs, searchValue) => {
+   export const filterPups = (dogs, searchValue) => {
     let filteredDogs = dogs.filter (dog => {
        return dog.name.toLowerCase().startsWith(searchValue.toLowerCase())
     })
     return filteredDogs
   }
 
-  export const handleSearchSubmit = ( params, accessToken) =>{
-    let result=null
-    if(!params.city) {
-       result = noCityInFilter(params, accessToken)
-    } else {
-      result = allFiltersPresent(params, accessToken)
-    }
-    return result
- }
+  
 
 
  

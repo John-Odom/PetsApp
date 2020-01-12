@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {Menu,Sidebar, Dropdown, Header, Checkbox, Form, Button, Grid} from 'semantic-ui-react'
 import {cityOptions} from './sidebarCities'
-import {handleSearchSubmit} from '../actions/allActions'
-import {landDogs} from '../actions/reducerActions'
+import {handleSearchSubmit} from '../actions/fetches'
+import {landDogs, breedChange, genderChange, ageChange, statusChange, cityChange, sizeChange} from '../actions/reducerActions'
 import{connect} from 'react-redux'
 import {getBreeds} from '../actions/fetches'
 
@@ -69,6 +69,15 @@ class VerticalSidebar extends Component {
     }
     handleBreedChange = (e, { value }) => {
       this.setState({breeds:value})
+    }
+    handleSearchResults = (data) =>{
+      this.props.landDogs(data.animals)
+      this.props.breedChange(this.state.breeds)
+      this.props.genderChange(this.state.genders)
+      this.props.ageChange(this.state.ages)
+      this.props.statusChange(this.state.status)
+      this.props.cityChange(this.state.city)
+      this.props.sizeChange(this.state.sizes)
     }
 
   render(){
@@ -265,7 +274,7 @@ class VerticalSidebar extends Component {
       onClick={(e)=> {
         handleSearchSubmit(this.state, this.props.apiToken)
           .then(data=> {
-            this.props.landDogs(data.animals)
+            this.handleSearchResults(data)
           })
         }
       }
@@ -282,4 +291,4 @@ class VerticalSidebar extends Component {
       })
    }
 
-export default connect(mapStatetoProps, {landDogs})(VerticalSidebar)
+export default connect(mapStatetoProps, {landDogs, breedChange, genderChange, ageChange, statusChange, cityChange, sizeChange})(VerticalSidebar)

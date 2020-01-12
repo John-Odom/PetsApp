@@ -12,7 +12,6 @@ import {postOrg}from '../actions/fetches'
 class OrgCard extends Component {
 
 handleClick = (org) => {
-    // console.log(org)
     postOrg(org)
     .then(data => {
       this.props.setOrg(org)

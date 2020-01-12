@@ -86,10 +86,7 @@ class DesktopContainer extends Component {
     <Button
       onClick={(e)=> {
         getOrgs(this.props.apiToken, this.state.city)
-          .then(data=> {
-            console.log(data)
-            this.props.landOrgs(data.organizations)
-          })
+          .then(data=> this.props.landOrgs(data.organizations))
         }
       }
     > Submit
