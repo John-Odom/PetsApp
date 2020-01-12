@@ -27,4 +27,4 @@ ResponsiveContainer.propTypes = {
 const dogsPage = () => (
   <ResponsiveContainer />
 )
-export default withRouter(connect(null, null )(dogsPage))
+export default withRouter(dogsPage);

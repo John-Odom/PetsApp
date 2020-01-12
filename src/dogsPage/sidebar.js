@@ -18,6 +18,12 @@ class VerticalSidebar extends Component {
         breeds: []
     }
 
+    componentDidMount (){
+      // had a difficult time changing the font color in css, so reverted to finding the 
+      // text on the dom and updating once rendered
+      document.querySelectorAll('label').forEach(label =>label.style.color="white")
+    }
+
     handleStatusChange = (e, { status }) => this.setState({ status })
     
     handleCityChange = (e, {value}) => this.setState({ city:value })
@@ -171,7 +177,7 @@ class VerticalSidebar extends Component {
                 </Grid.Column>
             <Grid.Column>
                 <Checkbox 
-                label='Medium'
+                label={'Medium'}
                 size='medium'
                 target={this.state.sizes}
                 onChange={this.handleCheckbox}
@@ -202,18 +208,22 @@ class VerticalSidebar extends Component {
       <p>Gender</p>
       <Grid columns={2}>
         <Grid.Row>
-            <Grid.Column><Checkbox 
+            <Grid.Column>
+              <Checkbox 
                 label='Female'
                 gender='female'
                 target={this.state.genders}
                 onChange={this.handleGenderChange}
-                /></Grid.Column>
-            <Grid.Column><Checkbox 
+              />
+              </Grid.Column>
+            <Grid.Column>
+              <Checkbox 
                 label='Male'
                 gender='male'
                 target={this.state.genders}
                 onChange={this.handleGenderChange}
-                /></Grid.Column>
+              />
+            </Grid.Column>
         </Grid.Row>
       </Grid>
     </Menu.Item>

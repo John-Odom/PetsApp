@@ -101,8 +101,8 @@ export const getDogs = (accessToken) => {
     }).then(res=>res.json())
 } 
 
- export const getOrgs = (accessToken) => {
-   return fetch('https://api.petfinder.com/v2/organizations?location=atlanta, GA&distance=20&limit=100&', {
+ export const getOrgs = (accessToken, city='atlanta, GA') => {
+   return fetch(`https://api.petfinder.com/v2/organizations?location=${city}&distance=20&limit=20&page=1`, {
        method: "GET",
        headers: {
          "Content-Type": "application/json",
@@ -169,8 +169,8 @@ export const fetchOrg = (id, accessToken) => {
 }
 
 export const orgsDogs = (link, accessToken) =>{
-   console.log(link)
-   return fetch(`https://api.petfinder.com${link}`, {
+   console.log('link', link)
+   return fetch(`https://api.petfinder.com${link}&type=dog`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -213,3 +213,4 @@ export const getBreeds = (accessToken) => {
           }
        }).then(res=>res.json())
 }
+

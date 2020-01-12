@@ -1,3 +1,6 @@
+/* *{
+   background-color: blue;
+} */
 #landing-page {
     width: 100%;
     height: auto;
@@ -44,3 +47,9 @@
 .ui.segment.pushable {
    min-height: 100vh;
  }
+
+ /* .ui.inverted.vertical.labeled.icon.ui.overlay.left.wide.sidebar.menu{
+    border:5px solid black;
+    border-radius: 25%;
+    background-color: white;
+ } */

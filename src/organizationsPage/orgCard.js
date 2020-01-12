@@ -40,12 +40,12 @@ handleClick = (org) => {
             }}
         />
         <Divider clearing />
-        <p><b>{this.props.org.city}, {this.props.org.state}</b></p>
+        <p><b>{this.props.org.address.city}, {this.props.org.address.state}</b></p>
        </Segment>  
       </Card>
       )
    }
-} 
+}
 
 export default withRouter(connect(null, {setOrg})(OrgCard));
 

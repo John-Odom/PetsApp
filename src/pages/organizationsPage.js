@@ -2,15 +2,10 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
-import {
-  Button,
-  Container,
-  Header,
-  Icon,
-  // Responsive,
-} from 'semantic-ui-react'
-import DesktopContainer from '../organizationsPage/desktopContainer'
+import {Button, Container, Header, Icon} from 'semantic-ui-react'
+import DesktopContainer from '../organizationsPage/orgsPageContainer'
 import MobileContainer from '../organizationsPage/mobileContainer'
+import '../stylesheets/orgsPage.css'
 
 const OrgsHeading = ({ mobile }) => (
   <Container text>

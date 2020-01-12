@@ -3,7 +3,7 @@ import {
     Responsive,
     Segment,
     Visibility,
-    Card
+    Card, Menu, Dropdown, Button
   } from 'semantic-ui-react'
   import {getWidth} from '../actions/allActions'
   import { withRouter } from 'react-router-dom'
@@ -12,10 +12,14 @@ import {
   import OrgCard from './orgCard'
   import {connect} from 'react-redux'
   import {landOrgs, setToken} from '../actions/reducerActions'
-
+  import {cityOptions} from '../dogsPage/sidebarCities'
 
 
 class DesktopContainer extends Component {
+
+  state = {
+    city: null
+  }
 
     findOrgs = (token) =>{
       getOrgs(token)
@@ -35,6 +39,8 @@ class DesktopContainer extends Component {
         })
       }
     }
+
+    handleCityChange = (e, {value}) => this.setState({ city:value })
   
     hideFixedMenu = () => this.setState({ fixed: false })
     showFixedMenu = () => this.setState({ fixed: true })
@@ -65,6 +71,30 @@ class DesktopContainer extends Component {
               vertical
             >
               <NavBar history={this.props.history}/>
+              <div className='menu'> <Menu.Item  as='a'>
+      <Dropdown
+    button
+    className='icon'
+    floating
+    labeled
+    options={cityOptions}
+    search
+    onChange={this.handleCityChange}
+    placeholder='Select City'
+  />
+    </Menu.Item>
+    <Button
+      onClick={(e)=> {
+        getOrgs(this.props.apiToken, this.state.city)
+          .then(data=> {
+            console.log(data)
+            this.props.landOrgs(data.organizations)
+          })
+        }
+      }
+    > Submit
+    </Button>
+    </div>
               <Card.Group itemsPerRow={4}>
                 {mapOrgs ? mapOrgs : null}
               </Card.Group>

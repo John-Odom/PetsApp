@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../stylesheets/dogsPage.css';
 import {findOrg, getOrg, getPetFinderToken} from '../actions/fetches';
-import {setOrg} from '../actions/reducerActions';
+import {setOrg, setToken} from '../actions/reducerActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {
@@ -12,7 +12,7 @@ import {
   import PropTypes from 'prop-types'
   import MobileContainer from '../organizationPage/mobileContainer'
   import HomepageHeading from '../organizationPage/homePageHeading'
-  import DesktopContainer from '../organizationPage/desktopContainer'
+  import DesktopContainer from '../organizationPage/orgPageContainer'
   import OrgsDogs from '../organizationPage/orgsDogs'
 
   HomepageHeading.propTypes = {
@@ -48,9 +48,8 @@ class organizationPage extends Component {
        else {
         findOrg(orgId).then((org) => {
            getPetFinderToken().then(token=>{
-            getOrg(org.apiid, token.access_token).then(data=>{
-              this.props.setOrg(data.organization)
-            })
+             this.props.setToken(token.access_token)
+            getOrg(org.apiid, token.access_token).then(data=> this.props.setOrg(data.organization))
            })
          })
        }
@@ -85,4 +84,4 @@ const mapStatetoProps = state => {
   })
 }
 
-export default withRouter(connect(mapStatetoProps, {setOrg} )(organizationPage));
+export default withRouter(connect(mapStatetoProps, {setOrg, setToken} )(organizationPage));
