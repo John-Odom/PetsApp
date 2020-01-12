@@ -33,7 +33,6 @@
   }
 
   export const handleSearchSubmit = ( params, accessToken) =>{
-   
     let result=null
     if(!params.city && params.status) {
        alert('error')

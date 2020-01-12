@@ -4,6 +4,7 @@ import {cityOptions} from './sidebarCities'
 import {handleSearchSubmit} from '../actions/allActions'
 import {landDogs} from '../actions/reducerActions'
 import{connect} from 'react-redux'
+import {getBreeds} from '../actions/fetches'
 
 class VerticalSidebar extends Component {
     state={
@@ -11,8 +12,12 @@ class VerticalSidebar extends Component {
         status:'adoptable',
         sizes:[],
         genders:[],
-        ages:[]
+        ages:[],
+        breedOptions:[],
+        loaded:false,
+        breeds: []
     }
+
     handleStatusChange = (e, { status }) => this.setState({ status })
     
     handleCityChange = (e, {value}) => this.setState({ city:value })
@@ -56,8 +61,21 @@ class VerticalSidebar extends Component {
            this.setState({ages: [...this.state.ages, age]})
         }
     }
+    handleBreedChange = (e, { value }) => {
+      this.setState({breeds:value})
+    }
 
   render(){
+    if(this.props.apiToken && !this.state.loaded){
+      getBreeds(this.props.apiToken).then(data=>{
+        let breedOptions = data.breeds.map(element => {
+          return ({ key: element.name, text: element.name, value: element.name })
+        });
+        breedOptions.unshift({key: null, text: null, value: null})
+        this.setState({loaded: true, breedOptions})
+      })
+    }
+
     return(
     <Sidebar as={Menu} animation={this.props.animation} icon='labeled' inverted
       vertical visible={this.props.visible} width='wide'
@@ -125,6 +143,19 @@ class VerticalSidebar extends Component {
         </Grid>
         
       </Form>
+    </Menu.Item>
+    <Menu.Item as='a'>
+      <p>Breed - type to search</p>
+      <Dropdown
+    fluid
+    multiple
+    search
+    selection
+    options={this.state.breedOptions}
+    // search
+    onChange={this.handleBreedChange}
+    placeholder='Search Breeds'
+  />
     </Menu.Item>
     <Menu.Item as='a'>
       <p>Size</p>
@@ -223,7 +254,6 @@ class VerticalSidebar extends Component {
     <Button
       onClick={(e)=>handleSearchSubmit(this.state, this.props.apiToken)
         .then(data=>{
-          console.log(data)
           this.props.landDogs(data.animals)
         })}
     >Submit</Button>

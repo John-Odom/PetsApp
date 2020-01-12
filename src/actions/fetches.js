@@ -182,8 +182,19 @@ export const orgsDogs = (link, accessToken) =>{
 }
 
 export const allFiltersPresent = (params, accessToken) =>{
-   console.log(params.sizes)
-   return fetch(`https://api.petfinder.com/v2/animals?location=${params.city}&distance=20&type=dog&status=${params.status}&limit=20&size=${params.sizes}&gender=${params.genders}&age=${params.ages}&page=1`, {
+   console.log('got here')
+   return fetch(`https://api.petfinder.com/v2/animals?location=${params.city}&distance=20&type=dog&status=${params.status}&limit=20&size=${params.sizes}&gender=${params.genders}&age=${params.ages}&breed=${params.breeds}&page=1`, {
+          method: "GET",
+          headers: {
+             "Content-Type": "application/json",
+             "Accept": "application/json",
+             "Authorization": `Bearer ${accessToken}`
+          }
+       }).then(res=>res.json())
+}
+
+export const getBreeds = (accessToken) => {
+   return fetch(`https://api.petfinder.com/v2/types/dog/breeds`, {
           method: "GET",
           headers: {
              "Content-Type": "application/json",

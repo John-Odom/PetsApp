@@ -3,19 +3,18 @@ import { Responsive,Segment, Visibility, Card, Button, Sidebar} from 'semantic-u
 import {getWidth,filterPups} from '../actions/allActions'
 import { withRouter } from 'react-router-dom'
 import NavBar from '../navBar'
-import {
-  getDogs,
-   getPetFinderToken} from '../actions/fetches'
+import {getDogs,getPetFinderToken} from '../actions/fetches'
 import DogCard from './dogCard'
 import { connect } from 'react-redux';
 import { setToken, landDogs, landMoreDogs, filterDogs } from '../actions/reducerActions'
 import VerticalSidebar from './sidebar'
+import '../stylesheets/dogPage.css'
 
 class DesktopContainer extends Component {
         state = {
            search: '',
           animation: 'overlay',
-          visible: true,
+          visible:false
         }
       
         handleAnimationChange = (animation) => () =>
