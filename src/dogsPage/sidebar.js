@@ -252,11 +252,15 @@ class VerticalSidebar extends Component {
     </Menu.Item>
     <Menu.Item as='a'>
     <Button
-      onClick={(e)=>handleSearchSubmit(this.state, this.props.apiToken)
-        .then(data=>{
-          this.props.landDogs(data.animals)
-        })}
-    >Submit</Button>
+      onClick={(e)=> {
+        handleSearchSubmit(this.state, this.props.apiToken)
+          .then(data=> {
+            this.props.landDogs(data.animals)
+          })
+        }
+      }
+    > Submit
+    </Button>
     </Menu.Item>
   </Sidebar>
 )}

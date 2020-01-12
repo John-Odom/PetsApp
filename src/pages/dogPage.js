@@ -9,7 +9,7 @@ import React, { Component } from 'react'
 import { Container, Grid, Segment} from 'semantic-ui-react'
 import MobileContainer from '../dogPage/mobileContainer'
 import HomepageHeading from '../dogPage/homePageHeading'
-import DesktopContainer from '../dogPage/desktopContainer'
+import DesktopContainer from '../dogPage/dogPageContainer'
 
 HomepageHeading.propTypes = {mobile: PropTypes.bool}
 DesktopContainer.propTypes = {children: PropTypes.node}

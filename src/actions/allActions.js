@@ -1,5 +1,5 @@
   import {Responsive} from 'semantic-ui-react'
-  import {allFiltersPresent} from './fetches'
+  import {allFiltersPresent, noCityInFilter} from './fetches'
   
   export const logout = (obj) => {
     localStorage.clear()
@@ -34,8 +34,8 @@
 
   export const handleSearchSubmit = ( params, accessToken) =>{
     let result=null
-    if(!params.city && params.status) {
-       alert('error')
+    if(!params.city) {
+       result = noCityInFilter(params, accessToken)
     } else {
       result = allFiltersPresent(params, accessToken)
     }

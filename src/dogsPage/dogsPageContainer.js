@@ -6,7 +6,7 @@ import NavBar from '../navBar'
 import {getDogs,getPetFinderToken} from '../actions/fetches'
 import DogCard from './dogCard'
 import { connect } from 'react-redux';
-import { setToken, landDogs, landMoreDogs, filterDogs } from '../actions/reducerActions'
+import { setToken, landDogs, landMoreDogs } from '../actions/reducerActions'
 import VerticalSidebar from './sidebar'
 import '../stylesheets/dogPage.css'
 
@@ -21,13 +21,12 @@ class DesktopContainer extends Component {
           this.setState((prevState) => ({ animation, visible: !prevState.visible }))
       
      componentDidMount() {
-       getPetFinderToken().then((token) => {
-         this.props.setToken(token.access_token)
-         getDogs(token.access_token)
-         .then(data=>{
-          this.props.landDogs(data.animals)
-         })
-      })
+       if(!this.props.apiToken){
+         getPetFinderToken().then((token) => {
+           this.props.setToken(token.access_token)
+           getDogs(token.access_token).then(data=>this.props.landDogs(data.animals))
+        })
+      }
      }
   
     hideFixedMenu = () => this.setState({ fixed: false })
@@ -39,12 +38,6 @@ class DesktopContainer extends Component {
     }
 
     dogBreeds = []
-
-    // dropdownOptions = [
-    //   { key: 1, text: 'Choice 1', value: 1 },
-    //   { key: 2, text: 'Choice 2', value: 2 },
-    //   { key: 3, text: 'Choice 3', value: 3 },
-    // ]
   
     render() {
       const animation= this.state.animation
@@ -102,7 +95,8 @@ class DesktopContainer extends Component {
   const mapStatetoProps = state => {
     return ({
       landingDogs: state.landingDogs,
+      apiToken: state.apiToken
     })
   }
 
-  export default withRouter(connect(mapStatetoProps, { setToken, landDogs, landMoreDogs, filterDogs })(DesktopContainer));
+  export default withRouter(connect(mapStatetoProps, { setToken, landDogs, landMoreDogs })(DesktopContainer));

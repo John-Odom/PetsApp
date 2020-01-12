@@ -26,11 +26,11 @@ let initialState = {
             ...state, 
             userDogs: action.data
             } 
-            case 'FILTER_DOGS':
-            return {
-            ...state, 
-            landingDogs: action.data
-            }  
+            // case 'FILTER_DOGS':
+            // return {
+            // ...state, 
+            // landingDogs: action.data
+            // }  
           case 'LAND_MORE_DOGS':
             return {
             ...state,

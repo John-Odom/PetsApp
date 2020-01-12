@@ -23,12 +23,12 @@ export const userDogs = (data) => {
       data
    }
 }
-export const filterDogs = (data) => {
-   return {
-      type: 'FILTER_DOGS',
-      data
-   }
-} 
+// export const filterDogs = (data) => {
+//    return {
+//       type: 'FILTER_DOGS',
+//       data
+//    }
+// } 
 
 export const clickDog = (data) => {
    return {

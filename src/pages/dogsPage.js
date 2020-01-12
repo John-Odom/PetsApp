@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
-import DesktopContainer from '../dogsPage/desktopContainer'
+import DesktopContainer from '../dogsPage/dogsPageContainer'
 import MobileContainer from '../dogsPage/mobileContainer'
 
 DesktopContainer.propTypes = {

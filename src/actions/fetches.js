@@ -91,7 +91,7 @@ export const getAuthToken = (user) => {
    
 export const getDogs = (accessToken) => {
       let page=1
-      return fetch('https://api.petfinder.com/v2/animals?location=atlanta, GA&distance=20&type=dog&status=adoptable&limit=20&page='+page, {
+      return fetch('https://api.petfinder.com/v2/animals?location=atlanta, GA&distance=20&type=dog&status=adoptable&limit=12&page='+page, {
        method: "GET",
        headers: {
          "Content-Type": "application/json",
@@ -182,8 +182,18 @@ export const orgsDogs = (link, accessToken) =>{
 }
 
 export const allFiltersPresent = (params, accessToken) =>{
-   console.log('got here')
    return fetch(`https://api.petfinder.com/v2/animals?location=${params.city}&distance=20&type=dog&status=${params.status}&limit=20&size=${params.sizes}&gender=${params.genders}&age=${params.ages}&breed=${params.breeds}&page=1`, {
+          method: "GET",
+          headers: {
+             "Content-Type": "application/json",
+             "Accept": "application/json",
+             "Authorization": `Bearer ${accessToken}`
+          }
+       }).then(res=>res.json())
+}
+export const noCityInFilter = (params, accessToken) =>{
+   console.log('got here')
+   return fetch(`https://api.petfinder.com/v2/animals?type=dog&status=${params.status}&limit=20&size=${params.sizes}&gender=${params.genders}&age=${params.ages}&breed=${params.breeds}&page=1`, {
           method: "GET",
           headers: {
              "Content-Type": "application/json",
