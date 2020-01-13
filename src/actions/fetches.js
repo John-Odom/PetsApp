@@ -4,7 +4,6 @@ const PETFINDERTOKEN = 'https://api.petfinder.com/v2/oauth2/token'
 let API_TOKEN = null
 
 export const addToFavorites = (e, dog) =>{
-   console.log('added!', e.target.dataset.id, dog )
    return fetch(LOCAL+'/favorites', {
       method: "POST",
        headers: {
@@ -102,7 +101,6 @@ export const getDogs = (accessToken, page=1, city='atlanta, GA') => {
 } 
 
  export const getOrgs = (accessToken, city='atlanta, GA', page=1) => {
-    console.log(page)
    return fetch(`https://api.petfinder.com/v2/organizations?location=${city}&distance=20&limit=20&page=`+page, {
        method: "GET",
        headers: {
@@ -185,7 +183,6 @@ export const handleSearchSubmit = (params, accessToken) =>{
    let link=null
    params.city ? link = `https://api.petfinder.com/v2/animals?location=${params.city}&distance=20&type=dog&status=${params.status}&limit=20&size=${params.sizes}&gender=${params.genders}&age=${params.ages}&breed=${params.breeds}&page=1`
    : link= `https://api.petfinder.com/v2/animals?type=dog&status=${params.status}&limit=20&size=${params.sizes}&gender=${params.genders}&age=${params.ages}&breed=${params.breeds}&page=1`
-console.log(link)
    return fetch(link, {
           method: "GET",
           headers: {

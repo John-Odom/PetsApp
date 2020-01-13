@@ -1,6 +1,6 @@
 import React from 'react'
-import {fetchProfile,getUsersDogs} from '../actions/fetches' 
-import { userDogs, setCurrentUser} from '../actions/reducerActions' 
+import {fetchProfile, getPetFinderToken} from '../actions/fetches' 
+import { setCurrentUser, setToken} from '../actions/reducerActions' 
 import PropTypes from 'prop-types'
 import { Container, Grid, Segment} from 'semantic-ui-react'
 import MobileContainer from '../profilePage/mobileContainer'
@@ -27,13 +27,13 @@ ResponsiveContainer.propTypes = {children: PropTypes.node}
 class Profile extends React.Component {
 
 componentDidMount () {
-    fetchProfile().then(data => {
-        this.props.setCurrentUser(data)
-        getUsersDogs(this.props.currentUser.user.id).then(data => {
-          this.props.userDogs(data.dogs)
-        })
+    fetchProfile().then(user => {
+        this.props.setCurrentUser(user)
     })
-  }
+    if(!this.props.apiToken) {
+      getPetFinderToken().then( token => this.props.setToken(token.access_token))
+    }
+}
   render() {
       if(this.props.currentUser){
         return(
@@ -53,7 +53,7 @@ componentDidMount () {
               </Segment>
             </ResponsiveContainer>
         )
-  } else  {return null}
+  } else return null
 }
 }
 
@@ -61,8 +61,8 @@ const mapStatetoProps = state => {
     return ({
       currentUser : state.currentUser,
       landingDogs : state.landingDogs,
-      userDogs: state.userDogs
+      apiToken: state.apiToken
     })
  }
 
-export default connect(mapStatetoProps, {userDogs, setCurrentUser})(Profile)
+export default connect(mapStatetoProps, { setCurrentUser, setToken})(Profile)

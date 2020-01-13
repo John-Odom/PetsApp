@@ -62,10 +62,8 @@ class DesktopContainer extends Component {
     } 
 
 onPaginatedSearch = () => {
-  console.log(this.state.page)
    this.setState({page: this.state.page+1, loaded:!this.state.loaded})
    getOrgs(this.props.apiToken, this.props.city, this.state.page).then(data=>{
-     console.log(data)
        this.props.landMoreOrgs(data)
        this.setState({loaded:!this.state.loaded})
    })

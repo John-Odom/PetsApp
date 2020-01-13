@@ -11,12 +11,7 @@ export const setCurrentUser = (user) => {
       data
    }
 } 
-export const userDogs = (data) => {
-   return {
-      type: 'USER_DOGS',
-      data
-   }
-} 
+
 export const genderChange = (data) => {
    return {
       type: 'GENDER_CHANGE',

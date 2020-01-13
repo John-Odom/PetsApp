@@ -5,7 +5,6 @@ let initialState = {
     chosenDog: null,
     chosenOrg: null,
     apiToken: null,
-    userDogs: [],
     city:null, 
     status:'adoptable', 
     sizes: [], 
@@ -56,13 +55,7 @@ let initialState = {
             ...state, 
             landingDogs: action.data
             }  
-            case 'USER_DOGS':
-            return {
-            ...state, 
-            userDogs: action.data
-            } 
           case 'LAND_MORE_DOGS':
-            console.log(action)
             return {
             ...state,
             landingDogs: [...state.landingDogs, ...action.data.animals]
@@ -98,7 +91,6 @@ let initialState = {
               landingOrgs: action.source
             }
             case 'LAND_MORE_ORGS':
-              console.log(action)
             return {
               ...state,
               landingOrgs: [...state.landingOrgs, ...action.source.organizations]

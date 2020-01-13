@@ -6,12 +6,10 @@ import { connect } from 'react-redux';
 class DogCarousel extends React.Component {
   render() {
       const dog = this.props.chosenDog
-      console.log(dog)
 
       const mapPhotos =() =>{
         let photos = []
         for(let i=0; i<dog.photos.length; i++){
-            console.log(dog.photos[i])
             photos.push(<Slide index={i} key={i}><Image src={dog.photos[i].large}/></Slide>)
         }
         return photos
@@ -23,13 +21,10 @@ class DogCarousel extends React.Component {
         naturalSlideHeight={125}
         totalSlides={dog.photos.length}
       >
-        <Slider
-        className = 'carousel-slider'
-        >
-            <ButtonBack className='back-button'>Back</ButtonBack>
+        <Slider className='carousel-slider'> 
             {mapPhotos()}
         </Slider>
-        
+        <ButtonBack className='back-button'>Back</ButtonBack>
         <ButtonNext>Next</ButtonNext>
       </CarouselProvider>
     );

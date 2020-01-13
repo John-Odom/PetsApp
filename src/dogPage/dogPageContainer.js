@@ -4,36 +4,18 @@ import {
     Segment,
     Visibility,
   } from 'semantic-ui-react'
-  import HomepageHeading from './homePageHeading'
+  import HomepageHeading from './dogPageHeading'
   import {getWidth} from '../actions/allActions'
   import { withRouter } from 'react-router-dom'
   import NavBar from '../navBar'
-  import { fetchOrg, getPetFinderToken } from '../actions/fetches'
   import {connect} from 'react-redux'
   import {setOrg, setToken} from '../actions/reducerActions'
 
 
 
 class DogPageContainer extends Component {
-    state = {}
-  
-    findDog = (token) =>{
-      fetchOrg(this.props.chosenDog.organization_id, token)
-      .then(data => this.props.setOrg(data.organization))
-    }
 
-    componentDidMount() {
-        if(this.props.apiToken){
-          this.findDog(this.props.apiToken)
-        }
-        else {
-            getPetFinderToken()
-            .then( token => {
-              this.props.setToken(token.access_token)
-              this.findDog(token.access_token)
-            })
-        }
-    }
+
 
     hideFixedMenu = () => this.setState({ fixed: false })
     showFixedMenu = () => this.setState({ fixed: true })

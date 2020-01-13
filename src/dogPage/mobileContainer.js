@@ -8,7 +8,7 @@ import {
     Segment,
     Sidebar,
   } from 'semantic-ui-react'
-  import HomepageHeading from './homePageHeading'
+  import HomepageHeading from './dogPageHeading'
   import {getWidth} from '../actions/allActions'
 
 export default class MobileContainer extends Component {

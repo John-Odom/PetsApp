@@ -6,12 +6,7 @@ import '../stylesheets/profilePage.css'
 class UsersDogs extends Component {
 
    render() {
-      const mapDogs = this.props.userDogs.map((dog) => 
-         <DogCard 
-         key={dog.id}
-         dogId={dog.id}
-         dog={dog}
-         />)
+      const mapDogs = this.props.currentUser.dogs.map((dog) => <DogCard key={dog.id} dog={dog}/>)
 
       return(
          <Card.Group itemsPerRow={4}>
@@ -24,7 +19,6 @@ class UsersDogs extends Component {
 const mapStatetoProps = state => {
    return ({
      currentUser: state.currentUser,
-     userDogs: state.userDogs
    })
 }
 
