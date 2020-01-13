@@ -10,11 +10,11 @@ import {
   import NavBar from '../navBar'
   import { fetchOrg, getPetFinderToken } from '../actions/fetches'
   import {connect} from 'react-redux'
-  import {setOrg} from '../actions/reducerActions'
+  import {setOrg, setToken} from '../actions/reducerActions'
 
 
 
-class DesktopContainer extends Component {
+class DogPageContainer extends Component {
     state = {}
   
     findDog = (token) =>{
@@ -28,7 +28,10 @@ class DesktopContainer extends Component {
         }
         else {
             getPetFinderToken()
-            .then( token => this.findDog(token.access_token))
+            .then( token => {
+              this.props.setToken(token.access_token)
+              this.findDog(token.access_token)
+            })
         }
     }
 
@@ -37,7 +40,7 @@ class DesktopContainer extends Component {
   
     render() {
       const { children } = this.props
-  
+      if(this.props.chosenDog){
       return (
         <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
           <Visibility
@@ -57,7 +60,7 @@ class DesktopContainer extends Component {
           </Visibility>
           {children}
         </Responsive>
-      )
+      )} else return null;
     }
   }
   const mapStatetoProps = state => {
@@ -67,4 +70,4 @@ class DesktopContainer extends Component {
     })
  }
 
-  export default withRouter(connect(mapStatetoProps, {setOrg})(DesktopContainer));
+  export default withRouter(connect(mapStatetoProps, {setOrg, setToken})(DogPageContainer));

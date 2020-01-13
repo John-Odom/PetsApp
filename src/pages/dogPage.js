@@ -2,7 +2,9 @@ import { withRouter } from 'react-router-dom';
 import {findDog} from '../actions/fetches';
 import {clickDog} from '../actions/reducerActions';
 import { connect } from 'react-redux';
-import DogPics from '../dogPage/dogPics'
+// import FourPictureCarousel from '../dogPage/fourPictureCarousel'
+// import DogPics from '../dogPage/dogPics'
+import DogCarousel from '../dogPage/dogCarousel'
 import '../stylesheets/dogPage.css';
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
@@ -37,7 +39,9 @@ class DogPage extends Component {
          <ResponsiveContainer>
            <Segment style={{ padding: '8em 0em' }} vertical>
              <Grid container stackable verticalAlign='middle'> 
-               <DogPics />
+               {/* <DogPics /> */}
+               {/* <DogCarousel /> */}
+               {/* <FourPictureCarousel /> */}
                <Grid.Row>
                   <Grid.Column textAlign='center'>
                      <Container text>

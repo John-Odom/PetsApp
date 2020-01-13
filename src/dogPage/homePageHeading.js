@@ -13,6 +13,7 @@ import {
   import '../stylesheets/dogPage.css';
 import OrgModal from './orgModal';
 import noPhoto from '../images/noDogPic.gif';
+import DogCarousel from './dogCarousel';
 
   
   
@@ -37,7 +38,8 @@ const HomepageHeading = (props,{ mobile }) => {
           marginTop: mobile ? '.75em' : '1.5em',
         }}
       />
-      <img id="dog-page-image" alt="DOGGO" src={props.chosenDog.photos[0] ? props.chosenDog.photos[0].medium : noPhoto} />
+      {/* <img id="dog-page-image" alt="DOGGO" src={props.chosenDog.photos[0] ? props.chosenDog.photos[0].medium : noPhoto} /> */}
+      <DogCarousel />
       <Grid columns='equal' divided inverted padded>
     <Grid.Row color='black' textAlign='center'>
       <Grid.Column>

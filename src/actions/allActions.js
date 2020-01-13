@@ -1,6 +1,6 @@
   import {Responsive} from 'semantic-ui-react'
-  import {allFiltersPresent, noCityInFilter} from './fetches'
-import { handleSearch } from './reducerActions'
+//   import {allFiltersPresent, noCityInFilter} from './fetches'
+// import { handleSearch } from './reducerActions'
   
   export const logout = (obj) => {
     localStorage.clear()
