@@ -43,3 +43,8 @@
  .ui.card{
    width: 25%;
  }
+
+ .ui.inverted.vertical.center.aligned.segment{ 
+    min-height: 100vh; 
+    padding: 1em 0em;
+}

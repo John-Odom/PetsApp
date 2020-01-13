@@ -11,41 +11,78 @@ import {
   import {getOrgs, getPetFinderToken} from '../actions/fetches'
   import OrgCard from './orgCard'
   import {connect} from 'react-redux'
-  import {landOrgs, setToken} from '../actions/reducerActions'
+  import {landOrgs,landMoreOrgs, setToken, cityChange} from '../actions/reducerActions'
   import {cityOptions} from '../dogsPage/sidebarCities'
 
 
 class DesktopContainer extends Component {
 
   state = {
-    city: null
+    city: null,
+    loaded: false,
+    page: 1
   }
 
-    findOrgs = (token) =>{
-      getOrgs(token)
+    findOrgs = (token, city='atlanta, GA') =>{
+      getOrgs(token, city)
         .then(orgs => {
             this.props.landOrgs(orgs.organizations)
         })
     }
 
     componentDidMount(){
-      if(this.props.apiToken){
+      if(this.props.apiToken && this.props.city){
+        this.findOrgs(this.props.apiToken, this.props.city)
+      } 
+      else if (this.props.apiToken){
         this.findOrgs(this.props.apiToken)
-      } else {
+      }
+      else {
         getPetFinderToken()
         .then( token => {
           this.findOrgs(token.access_token)
           this.props.setToken(token.access_token)
         })
       }
+      window.addEventListener('scroll', this.onScroll, false);
+      this.setState({loaded:true})
+      this.props.cityChange('atlanta, GA')
     }
 
-    handleCityChange = (e, {value}) => this.setState({ city:value })
+    componentWillUnmount() {
+      window.removeEventListener('scroll', this.onScroll, false);
+      window.scrollTo(0, 0)
+   }
+   onScroll = () => {
+      let doc = document.body
+      let docHeight = Math.max( doc.scrollHeight, doc.offsetHeight, doc.clientHeight )
+      if ((window.innerHeight + window.scrollY) >= (docHeight) && this.state.loaded){
+        {this.onPaginatedSearch()}
+      }
+    } 
+
+onPaginatedSearch = () => {
+  console.log(this.state.page)
+   this.setState({page: this.state.page+1, loaded:!this.state.loaded})
+   getOrgs(this.props.apiToken, this.props.city, this.state.page).then(data=>{
+     console.log(data)
+       this.props.landMoreOrgs(data)
+       this.setState({loaded:!this.state.loaded})
+   })
+}
+
+    handleCityChange = (e, {value}) => {
+      this.setState({ city:value })
+      this.props.cityChange(value)
+    }
   
     hideFixedMenu = () => this.setState({ fixed: false })
     showFixedMenu = () => this.setState({ fixed: true })
   
     render() {
+      window.addEventListener('beforeunload', function (e) {
+        window.scroll(0,0)
+      });
         let mapOrgs
         if(this.props.landingOrgs){
             mapOrgs = this.props.landingOrgs.map((org) => 
@@ -110,9 +147,10 @@ class DesktopContainer extends Component {
   const mapStatetoProps = state => {
     return ({
       apiToken: state.apiToken,
-      landingOrgs : state.landingOrgs
+      landingOrgs : state.landingOrgs,
+      city: state.city
     })
  }
 
 
-  export default withRouter( connect(mapStatetoProps,{landOrgs, setToken})(DesktopContainer));
+  export default withRouter( connect(mapStatetoProps,{landOrgs, landMoreOrgs, setToken, cityChange})(DesktopContainer));

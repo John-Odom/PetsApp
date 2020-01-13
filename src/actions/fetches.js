@@ -4,6 +4,7 @@ const PETFINDERTOKEN = 'https://api.petfinder.com/v2/oauth2/token'
 let API_TOKEN = null
 
 export const addToFavorites = (e, dog) =>{
+   console.log('added!', e.target.dataset.id, dog )
    return fetch(LOCAL+'/favorites', {
       method: "POST",
        headers: {
@@ -89,8 +90,8 @@ export const getAuthToken = (user) => {
    }).then(res => res.json())
 }
    
-export const getDogs = (accessToken, page=1) => {
-      return fetch('https://api.petfinder.com/v2/animals?location=atlanta, GA&distance=20&type=dog&status=adoptable&limit=20&page='+page, {
+export const getDogs = (accessToken, page=1, city='atlanta, GA') => {
+      return fetch(`https://api.petfinder.com/v2/animals?location=${city}&distance=20&type=dog&status=adoptable&limit=20&page=`+page, {
        method: "GET",
        headers: {
          "Content-Type": "application/json",
@@ -100,8 +101,9 @@ export const getDogs = (accessToken, page=1) => {
     }).then(res=>res.json())
 } 
 
- export const getOrgs = (accessToken, city='atlanta, GA') => {
-   return fetch(`https://api.petfinder.com/v2/organizations?location=${city}&distance=20&limit=20&page=1`, {
+ export const getOrgs = (accessToken, city='atlanta, GA', page=1) => {
+    console.log(page)
+   return fetch(`https://api.petfinder.com/v2/organizations?location=${city}&distance=20&limit=20&page=`+page, {
        method: "GET",
        headers: {
          "Content-Type": "application/json",

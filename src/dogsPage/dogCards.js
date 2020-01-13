@@ -5,7 +5,7 @@ import {filterPups} from '../actions/allActions'
 import {  Segment, Card, Button, Sidebar} from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
-import {  landDogs, landMoreDogs } from '../actions/reducerActions'
+import {  landDogs,cityChange, landMoreDogs } from '../actions/reducerActions'
 import { getDogs } from '../actions/fetches';
 
 class DogCards extends Component {
@@ -23,6 +23,7 @@ class DogCards extends Component {
     componentDidMount() {
         window.addEventListener('scroll', this.onScroll, false);
         this.setState({loaded:true})
+        this.props.cityChange('atlanta, GA')
      }
     
      componentWillUnmount() {
@@ -33,7 +34,6 @@ class DogCards extends Component {
      onScroll = () => {
          let docHeight = Math.max( document.body.scrollHeight, document.body.offsetHeight, 
             document.body.clientHeight )
-
         if ((window.innerHeight + window.scrollY) >= (docHeight) && this.state.loaded){
            {this.onPaginatedSearch()}
         }
@@ -41,25 +41,17 @@ class DogCards extends Component {
   
      onPaginatedSearch = () => {
         this.setState({page: this.state.page + 1, loaded:!this.state.loaded})
-        getDogs(this.props.apiToken, this.state.page).then(data=>{
+        getDogs(this.props.apiToken, this.state.page, this.props.city).then(data=>{
             this.props.landMoreDogs(data)
             this.setState({loaded:!this.state.loaded})
         })
-        //    if (this.props.filter === 'all') {
-        //       return landMoreDogs(this.state.start)
-        //       .then((data) => {this.props.landMoreDogs(data.results)})
-        //    } 
-        //    else {
-        //       return getMoreFilteredMovies(this.state.start, this.props.filter)
-        //       .then((data) => {this.props.landMoreMovies(data.results)})
-        //    }
-        }
+    }
 
     render(){
         const animation= this.state.animation
         const visible = this.state.visible
         const mapDogs = filterPups(this.props.landingDogs, this.state.search).map((dog) => 
-            <DogCard key={dog.id} dog={dog}/>
+            <DogCard key={dog.id} dog={dog} />
         )
         window.addEventListener('beforeunload', function (e) {
             window.scroll(0,0)
@@ -72,7 +64,7 @@ class DogCards extends Component {
                 </Button>
                 <Sidebar />
                 <Sidebar.Pushable as={Segment}>
-                    <VerticalSidebar animation={animation} visible={visible}/>
+                    <VerticalSidebar handleAnimationChange={this.handleAnimationChange} animation={animation} visible={visible}/>
                     <Sidebar.Pusher>
                         <Segment basic>
                             <Card.Group itemsPerRow={4}> {mapDogs} </Card.Group>
@@ -86,8 +78,9 @@ class DogCards extends Component {
 const mapStatetoProps = state => {
     return ({
       landingDogs: state.landingDogs,
-      apiToken: state.apiToken
+      apiToken: state.apiToken,
+      city: state.city
     })
   }
 
-export default withRouter(connect(mapStatetoProps, { landDogs, landMoreDogs })(DogCards));
+export default withRouter(connect(mapStatetoProps, { landDogs, cityChange, landMoreDogs })(DogCards));

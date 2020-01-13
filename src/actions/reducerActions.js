@@ -99,6 +99,12 @@ export const landOrgs = (source) =>{
       source   
    }
 }
+export const landMoreOrgs = (source) =>{
+   return {
+      type: 'LAND_MORE_ORGS',
+      source   
+   }
+}
 
 export const landingOrgs = (source) =>{
    return {

@@ -62,6 +62,7 @@ let initialState = {
             userDogs: action.data
             } 
           case 'LAND_MORE_DOGS':
+            console.log(action)
             return {
             ...state,
             landingDogs: [...state.landingDogs, ...action.data.animals]
@@ -95,6 +96,12 @@ let initialState = {
             return {
               ...state,
               landingOrgs: action.source
+            }
+            case 'LAND_MORE_ORGS':
+              console.log(action)
+            return {
+              ...state,
+              landingOrgs: [...state.landingOrgs, ...action.source.organizations]
             }
       default:
         return state;

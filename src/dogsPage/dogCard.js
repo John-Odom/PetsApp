@@ -12,7 +12,7 @@ class DogCard extends Component {
    handleClick = (dog) => {
      postDog(dog)
      .then(data=> {
-      this.props.clickDog(dog)
+      this.props.clickDog(data)
        this.props.history.push(`/dogs/${data.id}/`)
       })
    }
