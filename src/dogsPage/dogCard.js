@@ -19,6 +19,13 @@ class DogCard extends Component {
 
    render() {
      let dog=this.props.dog
+     const locate = () =>{
+       if(dog.attributes){
+       return(`${dog.contact.address.city}, ${dog.contact.address.state}`)
+       } else {
+        return (`${dog.contact.address.split(", ")[2].slice(9, -1)}, ${dog.contact.address.split(", ")[3].slice(10, -1)}`)
+       }
+     }
       return(
       <Card
       onClick={() => this.handleClick(dog)}
@@ -36,7 +43,7 @@ class DogCard extends Component {
       </Card.Content>
       <Card.Content extra>
           <Icon name='user' />
-          Location: <b>{dog.contact.address.city}, {dog.contact.address.state}</b>
+          Location: <b>{locate()}</b>
       </Card.Content>
     </Card>
       )

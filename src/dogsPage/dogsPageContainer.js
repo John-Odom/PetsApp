@@ -7,6 +7,7 @@ import DogCards from './dogCards'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { setToken, landDogs } from '../actions/reducerActions'
+import DogsPageHeader from './dogsPageHeader'
 import '../stylesheets/dogPage.css'
 
 class DesktopContainer extends Component {
@@ -29,6 +30,7 @@ class DesktopContainer extends Component {
           <Visibility>
             <Segment inverted textAlign='center' vertical>
               <NavBar history={this.props.history}/>
+              <DogsPageHeader />
               <DogCards />
             </Segment>
           </Visibility>

@@ -161,7 +161,7 @@ class VerticalSidebar extends Component {
       </Form>
     </Menu.Item>
     <Menu.Item as='a'>
-      <p>Breed - type to search</p>
+      <p>Breed</p>
       <Dropdown
     fluid
     multiple

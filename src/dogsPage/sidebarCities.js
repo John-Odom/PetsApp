@@ -8,7 +8,7 @@
 // 'Cincinnati, OH', 'Austin, TX']
 
 export const cityOptions = [
-    { key: null, text: null, value: null },
+    { key: null, text: 'Select a City', value: null },
     { key: 'New York, NY', text: 'New York, NY', value: 'New York, NY' },
     { key: 'Los Angeles, CA', text: 'Los Angeles, CA', value: 'Los Angeles, CA' },
     { key: 'Chicago, IL', text: 'Chicago, IL', value: 'Chicago, IL' },

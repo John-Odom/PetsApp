@@ -12,10 +12,10 @@ import {
   import {profClick} from '../actions/allActions'
   import '../stylesheets/dogPage.css';
 import OrgModal from './orgModal';
-import DogCarousel from './dogCarousel';
+import DogCarousel from './imageCarousel';
 
   
-  
+
 const HomepageHeading = (props,{ mobile }) => {
   const add = (e) => {
     addToFavorites(e, props.chosenDog)
@@ -23,42 +23,53 @@ const HomepageHeading = (props,{ mobile }) => {
     profClick(props)
   })
   }
-
+  let dog = props.chosenDog
   if(props.chosenDog){
+    console.log(dog.contact.address.split(", ")[2].slice(9, -1))
     return(
     <Container text>
       <Header
         as='h1'
-        content={props.chosenDog.name }
+        content={dog.name }
         inverted
         style={{
-          fontSize: mobile ? '1em' : '2em',
-          fontWeight: 'normal',
+          // fontSize: mobile ? '1em' : '2em',
+          // fontWeight: 'normal',
           marginTop: mobile ? '.75em' : '1.5em',
         }}
       />
       <DogCarousel />
       <Grid columns='equal' divided inverted padded>
-    <Grid.Row color='black' textAlign='center'>
+      <Grid.Row color='black' textAlign='center'>
+        <Grid.Column>
+          <Segment color='black' inverted>
+            <p><b>Status:</b></p> {dog.status}
+          </Segment>
+        </Grid.Column>
+        <Grid.Column>
+          <Segment color='black' inverted>
+            <p><b>Location:</b></p> {dog.contact.address.split(", ")[2].slice(9, -1)}, {dog.contact.address.split(", ")[3].slice(10, -1)}
+          </Segment>
+        </Grid.Column>
+        <Grid.Column>
+          <Segment color='black' inverted>
+            <p><b>Age:</b></p> {dog.age}
+          </Segment>
+        </Grid.Column>
+        <Grid.Column>
+          <Segment color='black' inverted>
+            <p><b>Primary Breed:</b></p> {dog.breeds.primary }
+          </Segment>
+        </Grid.Column>
+        <Grid.Column>
+          <Segment color='black' inverted>
+          <p><b>Size:</b> </p> {dog.size }
+          </Segment>
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
       <Grid.Column>
-        <Segment color='black' inverted>
-          <p><b>Age:</b></p> {props.chosenDog.age}
-        </Segment>
-      </Grid.Column>
-      <Grid.Column>
-        <Segment color='black' inverted>
-          <p><b>Primary Breed:</b></p> {props.chosenDog.breeds.primary }
-        </Segment>
-      </Grid.Column>
-      <Grid.Column>
-        <Segment color='black' inverted>
-        <p><b>Size:</b> </p> {props.chosenDog.size }
-        </Segment>
-      </Grid.Column>
-    </Grid.Row>
-    <Grid.Row>
-      <Grid.Column>
-        <Button data-id={props.chosenDog.id } 
+        <Button data-id={dog.id } 
         onClick={(e)=>add(e)}>
           Add To Favorites
         </Button>

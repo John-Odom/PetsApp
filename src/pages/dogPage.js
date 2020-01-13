@@ -2,9 +2,6 @@ import { withRouter } from 'react-router-dom';
 import {findDog, fetchOrg, getPetFinderToken} from '../actions/fetches';
 import {clickDog, setToken, setOrg} from '../actions/reducerActions';
 import { connect } from 'react-redux';
-// import FourPictureCarousel from '../dogPage/fourPictureCarousel'
-// import DogPics from '../dogPage/dogPics'
-import DogCarousel from '../dogPage/dogCarousel'
 import '../stylesheets/dogPage.css';
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
@@ -12,6 +9,7 @@ import { Container, Grid, Segment} from 'semantic-ui-react'
 import MobileContainer from '../dogPage/mobileContainer'
 import HomepageHeading from '../dogPage/dogPageHeading'
 import DesktopContainer from '../dogPage/dogPageContainer'
+// import 'https://fonts.googleapis.com/css?family=Raleway&display=swap'
 HomepageHeading.propTypes = {mobile: PropTypes.bool}
 DesktopContainer.propTypes = {children: PropTypes.node}
 MobileContainer.propTypes = {children: PropTypes.node}

@@ -17,6 +17,7 @@ class DogCards extends Component {
         page:1
       }
     handleAnimationChange = (animation) => () =>{
+        window.scrollTo(0,200);
         this.setState((prevState) => ({ animation, visible: !prevState.visible }))
     }
 
@@ -55,13 +56,15 @@ class DogCards extends Component {
         )
         window.addEventListener('beforeunload', function (e) {
             window.scroll(0,0)
-          });
+        });
         
         return (
             <Segment>
-                <Button onClick={this.handleAnimationChange('overlay')}>
-                    Filter
-                </Button>
+                <div className='filter-div'>
+                    <Button className='filter-button' secondary onClick={this.handleAnimationChange('overlay')}>
+                        Filter Dogs
+                    </Button>
+                </div>
                 <Sidebar />
                 <Sidebar.Pushable as={Segment}>
                     <VerticalSidebar handleAnimationChange={this.handleAnimationChange} animation={animation} visible={visible}/>

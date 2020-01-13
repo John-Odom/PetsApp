@@ -1,10 +1,20 @@
 /* *{
    background-color: blue;
+   font-family: 'Raleway', sans-serif;
 } */
 #landing-page {
     width: 100%;
     height: auto;
     padding: 0px 3em 3em 3em;
+    position: relative;
+ }
+ .filter-div{
+    height:6vh;
+    width:100%;
+ }
+ .filter-button{ 
+   position: absolute;
+   left: 10vw;
  }
  
  #landing-container {

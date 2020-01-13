@@ -1,21 +1,35 @@
 /* *{
   background-color: blue;
+  font-family: 'Raleway', sans-serif;
 } */
 
-#dog-page-image{
+/* #dog-page-image{
     border: solid white 3px;
     border-radius: 8px;
-  }
+  } */
 
-.carousel-slider{
+.image-container{
   margin:auto;
   border: 5px solid white;
-  border-radius: 5%; 
   width: 25vw;
 }
-
-.back-button{
-  z-index:2;
-  width:10vw;
-  opacity:1;
+.slider-wrapper.axis-horizontal {
+  border: 5px solid white;
+  border-radius: 15%;
 }
+
+/* .next-button {
+    background-color: #4CAF50; /* Green */
+    /* border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px; */
+/* } */
+
+/* .back-button{
+  width:10vw;
+  opacity:.4;
+} */
