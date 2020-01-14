@@ -26,28 +26,26 @@ class DogCard extends Component {
         return (`${dog.contact.address.split(", ")[2].slice(9, -1)}, ${dog.contact.address.split(", ")[3].slice(10, -1)}`)
        }
      }
-      return(
-      <Card
-      onClick={() => this.handleClick(dog)}
-      >
-      <img id='dogcard-image' alt='Doggo' src={dog.photos[0] ? dog.photos[0].medium :noPhoto} />
-      <Card.Content>
-        <Card.Header>{dog.name}</Card.Header>
-        <Card.Meta>
-            <span className='date'><b>Age:</b> {dog.age}</span> | 
-            <span className='date'> <b>Breed:</b> {dog.breeds.primary}</span>
-        </Card.Meta>
-        <Card.Description>
-          {dog.bio}
-        </Card.Description>
-      </Card.Content>
-      <Card.Content extra>
-          <Icon name='user' />
-          Location: <b>{locate()}</b>
-      </Card.Content>
-    </Card>
-      )
-   }
+    return(
+      <Card onClick={() => this.handleClick(dog)}> 
+        <img id='dogcard-image' alt='Doggo' src={dog.photos[0] ? dog.photos[0].medium :noPhoto} />
+        <Card.Content>
+          <Card.Header>{dog.name}</Card.Header>
+          <Card.Meta>
+              <span className='date'><b>Age:</b> {dog.age}</span> | 
+              <span className='date'> <b>Breed:</b> {dog.breeds.primary}</span>
+          </Card.Meta>
+          <Card.Description>
+            {dog.bio}
+          </Card.Description>
+        </Card.Content>
+        <Card.Content extra>
+            <Icon name='user' />
+            Location: <b>{locate()}</b>
+        </Card.Content>
+      </Card>
+    )
+  }
 } 
 
 

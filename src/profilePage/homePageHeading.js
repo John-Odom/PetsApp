@@ -8,7 +8,7 @@ import {
   
   
 const HomepageHeading = (props,{ mobile }) => {
-  if(props.currentUser){
+  if(props.currentUser){ 
     return(
     <Container text>
       <Header
@@ -16,6 +16,7 @@ const HomepageHeading = (props,{ mobile }) => {
         content={props.currentUser.user.username + "'s Favorites"}
         inverted
         style={{
+          color:'#80CAB1',
           fontSize: mobile ? '1em' : '2em',
           fontWeight: 'normal',
           marginTop: mobile ? '.75em' : '1.5em',

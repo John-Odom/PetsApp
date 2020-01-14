@@ -63,6 +63,11 @@ const HomepageHeading = (props,{ mobile }) => {
         </Grid.Column>
         <Grid.Column>
           <Segment color='black' inverted>
+            <p><b>Secondary Breed:</b></p> {dog.breeds.secondary ? dog.breeds.secondary: 'N/A' }
+          </Segment>
+        </Grid.Column>
+        <Grid.Column>
+          <Segment color='black' inverted>
           <p><b>Size:</b> </p> {dog.size }
           </Segment>
         </Grid.Column>

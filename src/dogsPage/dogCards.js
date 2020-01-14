@@ -17,14 +17,14 @@ class DogCards extends Component {
         page:1
       }
     handleAnimationChange = (animation) => () =>{
-        window.scrollTo(0,200);
+        window.scrollTo(0,270);
         this.setState((prevState) => ({ animation, visible: !prevState.visible }))
     }
 
     componentDidMount() {
         window.addEventListener('scroll', this.onScroll, false);
         this.setState({loaded:true})
-        this.props.cityChange('atlanta, GA')
+        // this.props.cityChange('Atlanta, GA')
      }
     
      componentWillUnmount() {
@@ -33,8 +33,8 @@ class DogCards extends Component {
      }
     
      onScroll = () => {
-         let docHeight = Math.max( document.body.scrollHeight, document.body.offsetHeight, 
-            document.body.clientHeight )
+         const body = document.body
+         let docHeight = Math.max( body.scrollHeight, body.offsetHeight, body.clientHeight )
         if ((window.innerHeight + window.scrollY) >= (docHeight) && this.state.loaded){
            {this.onPaginatedSearch()}
         }
@@ -49,14 +49,11 @@ class DogCards extends Component {
     }
 
     render(){
-        const animation= this.state.animation
-        const visible = this.state.visible
+
         const mapDogs = filterPups(this.props.landingDogs, this.state.search).map((dog) => 
             <DogCard key={dog.id} dog={dog} />
         )
-        window.addEventListener('beforeunload', function (e) {
-            window.scroll(0,0)
-        });
+        window.addEventListener('beforeunload', () => window.scroll(0,0));
         
         return (
             <Segment>
@@ -64,10 +61,11 @@ class DogCards extends Component {
                     <Button className='filter-button' secondary onClick={this.handleAnimationChange('overlay')}>
                         Filter Dogs
                     </Button>
+                    <p style={{fontSize:'5vh'}}
+                    >Dogs from {this.props.city ? this.props.city : 'all over the USA'}</p>
                 </div>
-                <Sidebar />
                 <Sidebar.Pushable as={Segment}>
-                    <VerticalSidebar handleAnimationChange={this.handleAnimationChange} animation={animation} visible={visible}/>
+                    <VerticalSidebar handleAnimationChange={this.handleAnimationChange} animation={this.state.animation} visible={this.state.visible}/>
                     <Sidebar.Pusher>
                         <Segment basic>
                             <Card.Group itemsPerRow={4}> {mapDogs} </Card.Group>
