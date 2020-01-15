@@ -9,47 +9,26 @@ import {
   import { withRouter } from 'react-router-dom'
   import NavBar from '../navBar'
   import {connect} from 'react-redux'
-  import {setOrg, setToken} from '../actions/reducerActions'
-
 
 
 class DogPageContainer extends Component {
-
-
-
-    hideFixedMenu = () => this.setState({ fixed: false })
-    showFixedMenu = () => this.setState({ fixed: true })
   
     render() {
-      const { children } = this.props
       if(this.props.chosenDog){
       return (
         <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
-          <Visibility
-            once={false}
-            onBottomPassed={this.showFixedMenu}
-            onBottomPassedReverse={this.hideFixedMenu}
-          >
-            <Segment
-              inverted
-              textAlign='center'
-              style={{ minHeight: 700, padding: '1em 0em' }}
-              vertical
-            >
+          <Visibility>
+            <Segment className='dog-page-container' inverted vertical>
               <NavBar history={this.props.history}/>
               <HomepageHeading />
             </Segment>
           </Visibility>
-          {children}
         </Responsive>
       )} else return null;
     }
   }
   const mapStatetoProps = state => {
-    return ({
-      chosenDog: state.chosenDog,
-      apiToken: state.apiToken
-    })
+    return {chosenDog: state.chosenDog}
  }
 
-  export default withRouter(connect(mapStatetoProps, {setOrg, setToken})(DogPageContainer));
+  export default withRouter(connect(mapStatetoProps)(DogPageContainer));

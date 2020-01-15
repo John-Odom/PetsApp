@@ -6,3 +6,8 @@
     width: 100%;
     min-height: 10vh;
 }
+.orgs-page-container {
+    text-align:center; 
+    min-height:1000; 
+    padding:1em 0em; 
+}

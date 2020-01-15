@@ -9,7 +9,6 @@ import { Container, Grid, Segment} from 'semantic-ui-react'
 import MobileContainer from '../dogPage/mobileContainer'
 import HomepageHeading from '../dogPage/dogPageHeading'
 import DesktopContainer from '../dogPage/dogPageContainer'
-// import 'https://fonts.googleapis.com/css?family=Raleway&display=swap'
 HomepageHeading.propTypes = {mobile: PropTypes.bool}
 DesktopContainer.propTypes = {children: PropTypes.node}
 MobileContainer.propTypes = {children: PropTypes.node}
@@ -20,7 +19,6 @@ const ResponsiveContainer = ({ children }) => (
     <MobileContainer>{children}</MobileContainer>
   </div>
 )
-ResponsiveContainer.propTypes = {children: PropTypes.node}
 
 class DogPage extends Component {
    

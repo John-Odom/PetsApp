@@ -71,7 +71,6 @@ class VerticalSidebar extends Component {
       this.setState({breeds:value})
     }
     handleSearchResults = (data) =>{
-      
       this.props.landDogs(data.animals)
       this.props.breedChange(this.state.breeds)
       this.props.genderChange(this.state.genders)

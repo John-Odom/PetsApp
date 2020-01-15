@@ -1,21 +1,60 @@
-/* *{
-  background-color: blue;
-  font-family: 'Raleway', sans-serif;
-} */
+head, body{
+  background-color: #1b1c1d;
+  height:100%;
+  width: 100%;
+}
 
 /* #dog-page-image{
     border: solid white 3px;
     border-radius: 8px;
   } */
+.ui.text.container {
+  margin-top: 1vh;
+}
+
+  .ui.text.container p {
+    color:#80CAB1;
+  }
+  .ui.text.container > p:first-child{
+    font-size: 5vh;
+  }
+
+  .dog-page-container{
+    min-height: 1000;
+    text-align:center;
+     padding: 1em 0em;
+  }
 
 .image-container{
   margin:auto;
   border: 5px solid white;
-  width: 40vw;
+  max-width: 40vw;
+  max-height: 45vh;
+  /* object-fit: cover; */
+}
+.dog-page-img{
+  max-width: 40vw;
+  max-height: 50vh;
+  object-fit: contain;
 }
 .slider-wrapper.axis-horizontal {
-  border: 5px solid white;
+  border: 5px solid violet;
   border-radius: 15%;
+}
+
+.thumbs-wrapper.axis-vertical{
+  margin:0;
+}
+.thumbs.animated{
+  margin:0;
+}
+.ui.large.inverted.pointing.secondary.menu{
+  margin:0;
+}
+
+.ui.black.inverted.segment{
+  padding:0;
+  color: black;
 }
 
 /* .next-button {

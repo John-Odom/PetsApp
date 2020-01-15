@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
-import {
-    Responsive,
-    Segment,
-    Visibility,
-    Card, Menu, Dropdown, Button
-  } from 'semantic-ui-react'
-  import {getWidth} from '../actions/allActions'
-  import { withRouter } from 'react-router-dom'
-  import NavBar from '../navBar'
-  import {getOrgs, getPetFinderToken} from '../actions/fetches'
-  import OrgCard from './orgCard'
-  import {connect} from 'react-redux'
-  import {landOrgs,landMoreOrgs, setToken, cityChange} from '../actions/reducerActions'
-  import {cityOptions} from '../dogsPage/sidebarCities'
-
+import {Responsive,Segment,Visibility,Card, Menu, Dropdown, Button} from 'semantic-ui-react'
+import {getWidth} from '../actions/allActions'
+import { withRouter } from 'react-router-dom'
+import NavBar from '../navBar'
+import {getOrgs, getPetFinderToken} from '../actions/fetches'
+import OrgCard from './orgCard'
+import {connect} from 'react-redux'
+import {landOrgs,landMoreOrgs, setToken, cityChange} from '../actions/reducerActions'
+import {cityOptions} from '../dogsPage/sidebarCities'
 
 class DesktopContainer extends Component {
 
@@ -22,12 +16,9 @@ class DesktopContainer extends Component {
     loaded: false,
     page: 1
   }
-
-    findOrgs = (token, city='atlanta, GA') =>{
-      getOrgs(token, city)
-        .then(orgs => {
-            this.props.landOrgs(orgs.organizations)
-        })
+  
+    findOrgs = (token, city=null) =>{
+      getOrgs(token, city).then(orgs => this.props.landOrgs(orgs.organizations))
     }
 
     componentDidMount(){
@@ -45,15 +36,16 @@ class DesktopContainer extends Component {
         })
       }
       window.addEventListener('scroll', this.onScroll, false);
+      window.addEventListener('beforeunload', ()=> window.scroll(0,0));
       this.setState({loaded:true})
-      this.props.cityChange('atlanta, GA')
     }
 
     componentWillUnmount() {
       window.removeEventListener('scroll', this.onScroll, false);
       window.scrollTo(0, 0)
-   }
-   onScroll = () => {
+    }
+
+    onScroll = () => {
       let doc = document.body
       let docHeight = Math.max( doc.scrollHeight, doc.offsetHeight, doc.clientHeight )
       if ((window.innerHeight + window.scrollY) >= (docHeight) && this.state.loaded){
@@ -61,86 +53,56 @@ class DesktopContainer extends Component {
       }
     } 
 
-onPaginatedSearch = () => {
-   this.setState({page: this.state.page+1, loaded:!this.state.loaded})
-   getOrgs(this.props.apiToken, this.props.city, this.state.page).then(data=>{
-       this.props.landMoreOrgs(data)
-       this.setState({loaded:!this.state.loaded})
-   })
-}
+  onPaginatedSearch = () => {
+     this.setState({page: this.state.page+1, loaded:!this.state.loaded})
+     getOrgs(this.props.apiToken, this.props.city, this.state.page).then(data=>{
+         this.props.landMoreOrgs(data)
+         this.setState({loaded:!this.state.loaded})
+     })
+  }
 
     handleCityChange = (e, {value}) => {
       this.setState({ city:value })
       this.props.cityChange(value)
+    }
+
+    handleCitySubmit = () =>{
+      getOrgs(this.props.apiToken, this.state.city)
+        .then(data=> this.props.landOrgs(data.organizations))
     }
   
     hideFixedMenu = () => this.setState({ fixed: false })
     showFixedMenu = () => this.setState({ fixed: true })
   
     render() {
-      window.addEventListener('beforeunload', function (e) {
-        window.scroll(0,0)
-      });
-        let mapOrgs
-        if(this.props.landingOrgs){
-            mapOrgs = this.props.landingOrgs.map((org) => 
-            <OrgCard 
-              key={org.id}
-              dogId={org.id}
-              org={org}
-            />)
-        }
-      const { children } = this.props
-    if(this.props.landingOrgs){
+      let orgs=this.props.landingOrgs
+
+    if(orgs){
+      let mapOrgs = orgs.map((org) => <OrgCard key={org.id} org={org}/>)
       return (
         <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
-          <Visibility
-            once={false}
-            onBottomPassed={this.showFixedMenu}
-            onBottomPassedReverse={this.hideFixedMenu}
-          >
-            <Segment
-              inverted
-              textAlign='center'
-              style={{ minHeight: 1000, padding: '1em 0em' }}
-              vertical
-            >
+          <Visibility>
+            <Segment inverted className='orgs-page-container' vertical>
               <NavBar history={this.props.history}/>
-              <div className='menu'> <Menu.Item  as='a'>
-      <Dropdown
-    button
-    className='icon'
-    floating
-    labeled
-    options={cityOptions}
-    search
-    onChange={this.handleCityChange}
-    placeholder='Select City'
-  />
-    </Menu.Item>
-    <Button
-      onClick={(e)=> {
-        getOrgs(this.props.apiToken, this.state.city)
-          .then(data=> this.props.landOrgs(data.organizations))
-        }
-      }
-    > Submit
-    </Button>
-    </div>
+              <div className='menu'> 
+                <Menu.Item  as='a'>
+                  <Dropdown button className='icon' floating labeled options={cityOptions} 
+                    search onChange={this.handleCityChange} placeholder='Select City'/>
+                </Menu.Item>
+                <Button onClick={()=> this.handleCitySubmit()}> Submit  </Button>
+              </div>
               <Card.Group itemsPerRow={4}>
-                {mapOrgs ? mapOrgs : null}
+                {mapOrgs && mapOrgs }
               </Card.Group>
             </Segment>
           </Visibility>
-  
-          {children}
         </Responsive>
       )
     } else{
         return null
     }
-    }
   }
+}
 
   const mapStatetoProps = state => {
     return ({
@@ -149,6 +111,5 @@ onPaginatedSearch = () => {
       city: state.city
     })
  }
-
 
   export default withRouter( connect(mapStatetoProps,{landOrgs, landMoreOrgs, setToken, cityChange})(DesktopContainer));

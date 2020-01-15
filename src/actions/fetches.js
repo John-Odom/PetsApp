@@ -1,6 +1,8 @@
 
 const LOCAL = 'http://localhost:3000';
 const PETFINDERTOKEN = 'https://api.petfinder.com/v2/oauth2/token'
+const PETFINDERANIMALS = 'https://api.petfinder.com/v2/animals'
+const PETFINDERORGS = 'https://api.petfinder.com/v2/organizations'
 let API_TOKEN = null
 
 export const addToFavorites = (e, dog) =>{
@@ -89,8 +91,11 @@ export const getAuthToken = (user) => {
    }).then(res => res.json())
 }
    
-export const getDogs = (accessToken, page=1, city='atlanta, GA') => {
-      return fetch(`https://api.petfinder.com/v2/animals?location=${city}&distance=20&type=dog&status=adoptable&limit=20&page=`+page, {
+export const getDogs = (accessToken, page=1, city) => {
+   let link = null
+   city ? link = `${PETFINDERANIMALS}?location=${city}&distance=20&type=dog&status=adoptable&limit=20&page=`+page 
+   : link= `${PETFINDERANIMALS}?type=dog&status=adoptable&limit=20&page=1`
+      return fetch(link, {
        method: "GET",
        headers: {
          "Content-Type": "application/json",
@@ -100,8 +105,11 @@ export const getDogs = (accessToken, page=1, city='atlanta, GA') => {
     }).then(res=>res.json())
 } 
 
- export const getOrgs = (accessToken, city='atlanta, GA', page=1) => {
-   return fetch(`https://api.petfinder.com/v2/organizations?location=${city}&distance=20&limit=20&page=`+page, {
+ export const getOrgs = (accessToken, city, page=1) => {
+    let link = null
+    city ? link=`${PETFINDERORGS}?location=${city}&distance=20&limit=20&page=`+page
+    : link=`${PETFINDERORGS}?limit=20&page=`+page
+   return fetch(link, {
        method: "GET",
        headers: {
          "Content-Type": "application/json",
@@ -112,7 +120,7 @@ export const getDogs = (accessToken, page=1, city='atlanta, GA') => {
 } 
 
 export const getOrg = (id, accessToken) => {
-   return fetch('https://api.petfinder.com/v2/organizations/' + id, {
+   return fetch('${PETFINDERORGS}/' + id, {
        method: "GET",
        headers: {
          "Content-Type": "application/json",
@@ -132,7 +140,7 @@ export const getOrg = (id, accessToken) => {
 } 
 
  export const findDogInApi = (dog) =>{
-    return fetch('https://api.petfinder.com/v2/animals/' + dog.api_dog_id, {
+    return fetch('${PETFINDERANIMALS}/' + dog.api_dog_id, {
       method: "GET",
       headers:{
          'Authorization' : 'Bearer ' + API_TOKEN
@@ -156,7 +164,7 @@ export const getUsersDogs = (userId) => {
 } 
 
 export const fetchOrg = (id, accessToken) => {
-   return fetch(`https://api.petfinder.com/v2/organizations/${id}`, {
+   return fetch(`${PETFINDERORGS}/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -181,8 +189,8 @@ export const orgsDogs = (link, accessToken) =>{
 
 export const handleSearchSubmit = (params, accessToken) =>{
    let link=null
-   params.city ? link = `https://api.petfinder.com/v2/animals?location=${params.city}&distance=20&type=dog&status=${params.status}&limit=20&size=${params.sizes}&gender=${params.genders}&age=${params.ages}&breed=${params.breeds}&page=1`
-   : link= `https://api.petfinder.com/v2/animals?type=dog&status=${params.status}&limit=20&size=${params.sizes}&gender=${params.genders}&age=${params.ages}&breed=${params.breeds}&page=1`
+   params.city ? link = `${PETFINDERANIMALS}?location=${params.city}&distance=20&type=dog&status=${params.status}&limit=20&size=${params.sizes}&gender=${params.genders}&age=${params.ages}&breed=${params.breeds}&page=1`
+   : link= `${PETFINDERANIMALS}?type=dog&status=${params.status}&limit=20&size=${params.sizes}&gender=${params.genders}&age=${params.ages}&breed=${params.breeds}&page=1`
    return fetch(link, {
           method: "GET",
           headers: {

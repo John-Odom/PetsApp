@@ -21,7 +21,7 @@ const HomepageHeading = (props,{ mobile }) => {
           marginTop: mobile ? '.75em' : '1.5em',
         }}
       />
-      <img id="orgCard" style={{ maxHeight: 300, maxWidth: 300 }} alt={props.chosenOrg ? props.chosenOrg.name: null} 
+      <img id="orgCard" style={{ maxHeight: 300, maxWidth: 300 }} alt={props.chosenOrg && props.chosenOrg.name} 
         src={props.chosenOrg.photos.length>0 ? props.chosenOrg.photos[0].medium : noPhoto} 
       />
         <InfoBar />

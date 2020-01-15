@@ -12,7 +12,7 @@ class navBar extends Component {
         const { fixed } = this.state
         return (
             <Menu
-                fixed={fixed ? 'top' : null}
+                fixed={fixed && 'top'}
                 inverted={!fixed}
                 pointing={!fixed}
                 secondary={!fixed}

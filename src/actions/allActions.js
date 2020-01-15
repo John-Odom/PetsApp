@@ -33,6 +33,14 @@
     return filteredDogs
   }
 
+  export const locate = (dog) =>{
+    if(dog.attributes){
+    return(`${dog.contact.address.city}, ${dog.contact.address.state}`)
+    } else {
+     return (`${dog.contact.address.split(", ")[2].slice(9, -1)}, ${dog.contact.address.split(", ")[3].slice(10, -1)}`)
+    }
+  }
+
   
 
 

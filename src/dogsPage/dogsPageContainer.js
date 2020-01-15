@@ -12,18 +12,18 @@ import '../stylesheets/dogPage.css'
 
 class DesktopContainer extends Component {
       
-     componentDidMount() {
-       if(!this.props.landingDogs.length>0){
-       if(!this.props.apiToken){
-         getPetFinderToken().then((token) => {
-           this.props.setToken(token.access_token)
-           getDogs(token.access_token).then(data=>this.props.landDogs(data.animals))
+  componentDidMount() {
+    if(!this.props.landingDogs.length>0){
+      if(!this.props.apiToken){
+        getPetFinderToken().then((token) => {
+          this.props.setToken(token.access_token)
+          getDogs(token.access_token).then(data=>this.props.landDogs(data.animals))
         })
       } else getDogs(this.props.apiToken).then(data=>this.props.landDogs(data.animals))
-     }
     }
+  }
   
-    render() {
+  render() {
     if(this.props.landingDogs){
       return (
         <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
@@ -37,8 +37,8 @@ class DesktopContainer extends Component {
         </Responsive>
       )
     } else return null
-    }
   }
+}
 
   const mapStatetoProps = state => {
     return ({

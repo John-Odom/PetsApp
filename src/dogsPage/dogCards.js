@@ -63,6 +63,7 @@ class DogCards extends Component {
                     </Button>
                     <p style={{fontSize:'5vh'}}
                     >Dogs from {this.props.city ? this.props.city : 'all over the USA'}</p>
+                    
                 </div>
                 <Sidebar.Pushable as={Segment}>
                     <VerticalSidebar handleAnimationChange={this.handleAnimationChange} animation={this.state.animation} visible={this.state.visible}/>

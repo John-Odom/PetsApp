@@ -58,3 +58,13 @@
     min-height: 100vh; 
     padding: 1em 0em;
 }
+.dogs-page-header p {
+   font-size:3vh;
+   margin:0;
+   padding:0;
+   color: #80CAB1;
+}
+
+.dogs-page-header > p:first-child{
+   font-size:10vh;
+}
